@@ -9,6 +9,7 @@ public class Set {
     private int setId;
     private int exerciseId;
     private int numberOfRepsToDO;
+    private int aditonalWeight;
 
     public Set(int exerciseId, int numberOfRepsToDO) {
         this.exerciseId = exerciseId;

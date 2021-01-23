@@ -10,6 +10,7 @@ public class Exercise {
 
     private String name;
     private String type;
+    private boolean aditiona_weight;
 
     public Exercise(String name, String type) {
         this.name = name;
@@ -39,4 +40,5 @@ public class Exercise {
     public void setType(String type) {
         this.type = type;
     }
+
 }
