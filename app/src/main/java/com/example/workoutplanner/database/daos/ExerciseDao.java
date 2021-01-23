@@ -30,4 +30,6 @@ public interface ExerciseDao {
     @Query("DELETE FROM EXERCISE")
     void deleteAll();
 
+
+
 }

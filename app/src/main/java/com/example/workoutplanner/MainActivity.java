@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.workoutplanner.database.ViewModels.ExerciseViewModel;
 import com.example.workoutplanner.database.ViewModels.WorkoutSetViewModel;
 import com.example.workoutplanner.database.ViewModels.WorkoutViewModel;
 import com.example.workoutplanner.database.models.Workout;
@@ -40,6 +41,9 @@ public class MainActivity extends AppCompatActivity {
         final WorkoutAdapter adapter = new WorkoutAdapter();
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        ExerciseViewModel evm= ViewModelProviders.of(this).get(ExerciseViewModel.class);
+        Log.d("MainActivity", evm.getExercises().getValue()+"");
 
 
         WorkoutSetViewModel ws = ViewModelProviders.of(this).get(WorkoutSetViewModel.class);

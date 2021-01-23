@@ -1,7 +1,6 @@
 package com.example.workoutplanner.database;
 
 import android.content.Context;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.room.Database;
@@ -24,8 +23,11 @@ import java.util.concurrent.Executors;
 @Database(entities = {Exercise.class, Set.class, Workout.class, WorkoutSet.class}, version = 1, exportSchema = false)
 public abstract class PlannerDatabase extends RoomDatabase {
     public abstract ExerciseDao exerciseDao();
+
     public abstract SetDao setDao();
+
     public abstract WorkOutDao workOutDao();
+
     public abstract WorkoutSetDao workoutSetDao();
 
     private static volatile PlannerDatabase INSTANCE;
@@ -37,19 +39,23 @@ public abstract class PlannerDatabase extends RoomDatabase {
         public void onOpen(@NonNull SupportSQLiteDatabase db) {
             super.onOpen(db);
             databaseWriteExecutor.execute(() -> {
-//                ExerciseDao dao = INSTANCE.exerciseDao();
-////                dao.deleteAll();
-//                Exercise e = new Exercise("Pompki", "Ramiona");
-//                dao.insertAll(e, e, e);
-//
-//                SetDao setDao = INSTANCE.setDao();
-////                setDao.deleteAll();
-//                Set s = new Set(1, 30);
-//                setDao.insertAll(s, s, s);
-//
+                ExerciseDao dao = INSTANCE.exerciseDao();
+                dao.deleteAll();
+                Exercise e = new Exercise("Pompki", "Ramiona");
+                dao.insertAll(e);
+                e = new Exercise("Pompki1", "Ramiona1");
+                dao.insertAll(e);
+                e = new Exercise("Pompki2", "Ramiona2");
+                dao.insertAll(e);
+
+                SetDao setDao = INSTANCE.setDao();
+                setDao.deleteAll();
+                Set s = new Set(1, 30);
+                setDao.insertAll(s, s, s);
+
                 WorkOutDao wd = INSTANCE.workOutDao();
-//                wd.deleteAll();
-//
+                wd.deleteAll();
+
                 Workout w = new Workout(1, "Test name");
                 wd.insertAll(w);
                 w = new Workout(2, "Test name2");

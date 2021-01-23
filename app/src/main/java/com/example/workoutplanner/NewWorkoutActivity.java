@@ -18,7 +18,6 @@ import android.widget.TextView;
 
 import com.example.workoutplanner.database.models.Exercise;
 import com.example.workoutplanner.database.models.Set;
-import com.example.workoutplanner.database.models.Workout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
@@ -32,6 +31,7 @@ public class NewWorkoutActivity extends AppCompatActivity implements AdapterView
     private int dayNum;
 
     private HashMap<Exercise, List<Set>> exerciseSetMap;
+    private int NEW_EXERCISE_SET_ACTIVITY_REQUEST_CODE = 21;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +44,6 @@ public class NewWorkoutActivity extends AppCompatActivity implements AdapterView
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         exerciseSetMap = new HashMap<>();
-
 
         daySpinner = (Spinner)findViewById(R.id.day_spinner);
         workout_name = findViewById(R.id.workout_name_editText);
@@ -59,8 +58,8 @@ public class NewWorkoutActivity extends AppCompatActivity implements AdapterView
         addWorkoutFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Intent intent = new Intent(MainActivity.this, NewWorkoutActivity.class);
-//                startActivityForResult(intent, NEW_BOOK_ACTIVITY_REQUEST_CODE);
+                Intent intent = new Intent(NewWorkoutActivity.this, NewExerciseSetActivity.class);
+                startActivityForResult(intent, NEW_EXERCISE_SET_ACTIVITY_REQUEST_CODE);
                 exerciseSetMap.put(new Exercise("test", "test"), null);
                 adapter.setExercises(new ArrayList<>(exerciseSetMap.keySet()));
             }
