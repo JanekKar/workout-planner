@@ -60,7 +60,7 @@ public class NewWorkoutActivity extends AppCompatActivity implements AdapterView
             public void onClick(View view) {
                 Intent intent = new Intent(NewWorkoutActivity.this, NewExerciseSetActivity.class);
                 startActivityForResult(intent, NEW_EXERCISE_SET_ACTIVITY_REQUEST_CODE);
-                exerciseSetMap.put(new Exercise("test", "test"), null);
+                exerciseSetMap.put(new Exercise("test", "test", false), null);
                 adapter.setExercises(new ArrayList<>(exerciseSetMap.keySet()));
             }
         });

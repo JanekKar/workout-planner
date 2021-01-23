@@ -11,9 +11,10 @@ public class Set {
     private int numberOfRepsToDO;
     private int aditonalWeight;
 
-    public Set(int exerciseId, int numberOfRepsToDO) {
+    public Set(int exerciseId, int numberOfRepsToDO, int aditonalWeight) {
         this.exerciseId = exerciseId;
         this.numberOfRepsToDO = numberOfRepsToDO;
+        this.aditonalWeight = aditonalWeight;
     }
 
     public int getSetId() {
@@ -38,5 +39,13 @@ public class Set {
 
     public void setNumberOfRepsToDO(int numberOfRepsToDO) {
         this.numberOfRepsToDO = numberOfRepsToDO;
+    }
+
+    public int getAditonalWeight() {
+        return aditonalWeight;
+    }
+
+    public void setAditonalWeight(int aditonalWeight) {
+        this.aditonalWeight = aditonalWeight;
     }
 }

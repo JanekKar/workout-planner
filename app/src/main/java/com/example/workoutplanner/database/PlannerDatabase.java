@@ -41,16 +41,16 @@ public abstract class PlannerDatabase extends RoomDatabase {
             databaseWriteExecutor.execute(() -> {
                 ExerciseDao dao = INSTANCE.exerciseDao();
                 dao.deleteAll();
-                Exercise e = new Exercise("Pompki", "Ramiona");
+                Exercise e = new Exercise("Pompki", "Ramiona", false);
                 dao.insertAll(e);
-                e = new Exercise("Pompki1", "Ramiona1");
+                e = new Exercise("Pompki1", "Ramiona1", false);
                 dao.insertAll(e);
-                e = new Exercise("Pompki2", "Ramiona2");
+                e = new Exercise("Pompki2", "Ramiona2", false);
                 dao.insertAll(e);
 
                 SetDao setDao = INSTANCE.setDao();
                 setDao.deleteAll();
-                Set s = new Set(1, 30);
+                Set s = new Set(1, 30, 0);
                 setDao.insertAll(s, s, s);
 
                 WorkOutDao wd = INSTANCE.workOutDao();

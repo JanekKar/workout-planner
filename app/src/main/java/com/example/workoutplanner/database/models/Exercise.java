@@ -12,9 +12,10 @@ public class Exercise {
     private String type;
     private boolean aditiona_weight;
 
-    public Exercise(String name, String type) {
+    public Exercise(String name, String type, boolean aditiona_weight) {
         this.name = name;
         this.type = type;
+        this.aditiona_weight = aditiona_weight;
     }
 
     public int getExerciseId() {
@@ -41,4 +42,11 @@ public class Exercise {
         this.type = type;
     }
 
+    public boolean isAditiona_weight() {
+        return aditiona_weight;
+    }
+
+    public void setAditiona_weight(boolean aditiona_weight) {
+        this.aditiona_weight = aditiona_weight;
+    }
 }
