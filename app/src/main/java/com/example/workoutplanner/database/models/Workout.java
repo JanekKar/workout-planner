@@ -13,11 +13,11 @@ public class Workout {
     @PrimaryKey(autoGenerate = true)
     private int id;
     private int weekDay;
-    private int setId;
+    private String name;
 
-    public Workout(int weekDay, int setId) {
+    public Workout(int weekDay, String name) {
         this.weekDay = weekDay;
-        this.setId = setId;
+        this.name = name;
     }
 
     public int getId() {
@@ -36,12 +36,12 @@ public class Workout {
         this.weekDay = weekDay;
     }
 
-    public int getSetId() {
-        return setId;
+    public String getName() {
+        return name;
     }
 
-    public void setSetId(int setId) {
-        this.setId = setId;
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override
@@ -49,7 +49,7 @@ public class Workout {
         return "Workout{" +
                 "id=" + id +
                 ", weekDay=" + weekDay +
-                ", setId=" + setId +
+                ", name='" + name + '\'' +
                 '}';
     }
 }

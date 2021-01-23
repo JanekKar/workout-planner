@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,11 +17,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.workoutplanner.database.WorkoutViewModel;
+import com.example.workoutplanner.database.ViewModels.WorkoutSetViewModel;
+import com.example.workoutplanner.database.ViewModels.WorkoutViewModel;
 import com.example.workoutplanner.database.models.Workout;
+import com.example.workoutplanner.database.models.WorkoutSet;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -36,11 +40,33 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
 
+        WorkoutSetViewModel ws = ViewModelProviders.of(this).get(WorkoutSetViewModel.class);
         WorkoutViewModel w =ViewModelProviders.of(this).get(WorkoutViewModel.class);
         w.getWorkouts().observe(this, new Observer<List<Workout>>() {
             @Override
             public void onChanged(List<Workout> workouts) {
                 adapter.setWorkouts(workouts);
+
+                List<Integer> numberOfExercises = new ArrayList<>();
+                for(Workout w: workouts){
+                    List<Integer> temp = ws.getAllExercises(w.getId()).getValue();
+                    if(temp!=null)
+                        numberOfExercises.add(temp.size());
+                    else
+                        numberOfExercises.add(0);
+                }
+                adapter.setExerciseList(numberOfExercises);
+
+
+            }
+        });
+
+
+
+        ws.getAllWorkoutsSets().observe(this, new Observer<List<WorkoutSet>>() {
+            @Override
+            public void onChanged(List<WorkoutSet> workoutSets) {
+
             }
         });
 
@@ -49,9 +75,8 @@ public class MainActivity extends AppCompatActivity {
         addWorkoutFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                //Intent intent = new Intent(MainActivity.this, EditBookActivity.class);
-                //startActivityForResult(intent, NEW_BOOK_ACTIVITY_REQUEST_CODE);
+//                Intent intent = new Intent(MainActivity.this, EditBookActivity.class);
+//                startActivityForResult(intent, NEW_BOOK_ACTIVITY_REQUEST_CODE);
             }
         });
 
@@ -83,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
     private class WorkoutHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener{
 
         private TextView dayTextView;
-        private TextView exerciseCountTextView;
+        private TextView nameTextView;
         private Workout workout;
 
         public WorkoutHolder(LayoutInflater inflater, ViewGroup parent) {
@@ -91,15 +116,15 @@ public class MainActivity extends AppCompatActivity {
             itemView.setOnClickListener(this);
             itemView.setOnLongClickListener(this);
 
-            dayTextView = itemView.findViewById(R.id.day_number);
-            exerciseCountTextView = itemView.findViewById(R.id.exerciseCount);
+            dayTextView = itemView.findViewById(R.id.workout_day);
+            nameTextView = itemView.findViewById(R.id.workout_name);
         }
 
-        public void bind(Workout workout){
+        public void bind(Workout workout,int num){
             this.workout = workout;
-            Log.d("MainActivity", workout.toString());
-            dayTextView.setText(workout.getWeekDay()+"");
-            exerciseCountTextView.setText(workout.getWeekDay()+"");
+
+            dayTextView.setText("Day: " + workout.getId());
+            nameTextView.setText("Number of sets: " + workout.getName());
         }
 
         @Override
@@ -116,6 +141,7 @@ public class MainActivity extends AppCompatActivity {
 
     private class WorkoutAdapter extends RecyclerView.Adapter<WorkoutHolder> {
         private List<Workout> workouts;
+        private List<Integer> numOfEx;
 
         @NonNull
         @Override
@@ -125,9 +151,10 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public void onBindViewHolder(@NonNull WorkoutHolder holder, int position) {
-            if(workouts != null){
+            if(workouts != null && numOfEx != null){
                 Workout workout = workouts.get(position);
-                holder.bind(workout);
+                int num = numOfEx.get(position);
+                holder.bind(workout, num);
             }else{
                 Log.d("MainActivity", "No workouts");
             }
@@ -146,5 +173,11 @@ public class MainActivity extends AppCompatActivity {
             this.workouts = workouts;
             notifyDataSetChanged();
         }
+
+        void setExerciseList(List<Integer> numberOfExercises){
+            this.numOfEx = numberOfExercises;
+            notifyDataSetChanged();
+        }
+
     }
 }

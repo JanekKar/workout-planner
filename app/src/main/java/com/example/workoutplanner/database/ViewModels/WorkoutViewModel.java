@@ -1,4 +1,4 @@
-package com.example.workoutplanner.database;
+package com.example.workoutplanner.database.ViewModels;
 
 import android.app.Application;
 
@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
+import com.example.workoutplanner.database.PlannerDatabase;
 import com.example.workoutplanner.database.models.Workout;
 
 import java.util.List;
