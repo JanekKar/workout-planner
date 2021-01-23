@@ -21,6 +21,9 @@ public interface ExerciseDao {
     @Delete
     void delete(Exercise exercise);
 
+    @Query("SELECT * FROM EXERCISE WHERE exerciseId=:id")
+    Exercise getExercise(int id);
+
     @Query("SELECT * FROM EXERCISE")
     LiveData<List<Exercise>> getAll();
 

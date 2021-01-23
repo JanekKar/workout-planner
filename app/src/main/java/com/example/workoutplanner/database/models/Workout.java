@@ -1,6 +1,8 @@
 package com.example.workoutplanner.database.models;
 
+import androidx.room.Embedded;
 import androidx.room.Entity;
+import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
 import java.util.List;
@@ -40,5 +42,14 @@ public class Workout {
 
     public void setSetId(int setId) {
         this.setId = setId;
+    }
+
+    @Override
+    public String toString() {
+        return "Workout{" +
+                "id=" + id +
+                ", weekDay=" + weekDay +
+                ", setId=" + setId +
+                '}';
     }
 }
