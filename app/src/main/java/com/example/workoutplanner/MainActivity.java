@@ -29,6 +29,8 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
+    private int NEW_BOOK_ACTIVITY_REQUEST_CODE = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,8 +77,8 @@ public class MainActivity extends AppCompatActivity {
         addWorkoutFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Intent intent = new Intent(MainActivity.this, EditBookActivity.class);
-//                startActivityForResult(intent, NEW_BOOK_ACTIVITY_REQUEST_CODE);
+                Intent intent = new Intent(MainActivity.this, NewWorkoutActivity.class);
+                startActivityForResult(intent, NEW_BOOK_ACTIVITY_REQUEST_CODE);
             }
         });
 
