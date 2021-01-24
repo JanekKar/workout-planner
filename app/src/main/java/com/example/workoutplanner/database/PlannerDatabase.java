@@ -17,11 +17,13 @@ import com.example.workoutplanner.database.models.Set;
 import com.example.workoutplanner.database.models.Workout;
 import com.example.workoutplanner.database.models.WorkoutSet;
 
+import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 @Database(entities = {Exercise.class, Set.class, Workout.class, WorkoutSet.class}, version = 1, exportSchema = false)
 public abstract class PlannerDatabase extends RoomDatabase {
+
     public abstract ExerciseDao exerciseDao();
 
     public abstract SetDao setDao();
@@ -32,7 +34,7 @@ public abstract class PlannerDatabase extends RoomDatabase {
 
     private static volatile PlannerDatabase INSTANCE;
     public static final int NUMBER_OF_THREADS = 4;
-    static final ExecutorService databaseWriteExecutor = Executors.newFixedThreadPool(NUMBER_OF_THREADS);
+    public static final ExecutorService databaseWriteExecutor = Executors.newFixedThreadPool(NUMBER_OF_THREADS);
 
     private static RoomDatabase.Callback sPlannerDatabaseCallback = new RoomDatabase.Callback() {
         @Override

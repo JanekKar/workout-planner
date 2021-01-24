@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey;
 @Entity
 public class Exercise {
     @PrimaryKey(autoGenerate = true)
-    private int exerciseId;
+    private long exerciseId;
 
     private String name;
     private String type;
@@ -18,11 +18,11 @@ public class Exercise {
         this.aditiona_weight = aditiona_weight;
     }
 
-    public int getExerciseId() {
+    public long getExerciseId() {
         return exerciseId;
     }
 
-    public void setExerciseId(int exerciseId) {
+    public void setExerciseId(long exerciseId) {
         this.exerciseId = exerciseId;
     }
 

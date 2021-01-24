@@ -22,7 +22,7 @@ public interface ExerciseDao {
     void delete(Exercise exercise);
 
     @Query("SELECT * FROM EXERCISE WHERE exerciseId=:id")
-    Exercise getExercise(int id);
+    Exercise getExercise(long id);
 
     @Query("SELECT * FROM EXERCISE")
     LiveData<List<Exercise>> getAll();

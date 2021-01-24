@@ -4,6 +4,6 @@ import androidx.room.Entity;
 
 @Entity(primaryKeys = {"exerciseID", "setId"})
 public class ExerciseSetCrossRef {
-    private int exerciseId;
-    private int setId;
+    private long exerciseId;
+    private long setId;
 }

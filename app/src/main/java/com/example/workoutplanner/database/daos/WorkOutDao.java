@@ -15,7 +15,10 @@ import java.util.List;
 @Dao
 public interface WorkOutDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insertAll(Workout... workouts);
+    long[] insertAll(Workout... workouts);
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    long insert(Workout workouts);
 
     @Delete
     void delete(Workout workout);
@@ -26,4 +29,6 @@ public interface WorkOutDao {
     @Query("DELETE FROM workout")
     void deleteAll();
 
+    @Query("SELECT * FROM workout WHERE id=(SELECT max(id) FROM workout)")
+    Workout getLast();
 }

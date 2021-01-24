@@ -32,8 +32,6 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     private int NEW_BOOK_ACTIVITY_REQUEST_CODE = 0;
-    private List<Exercise> exerciseList;
-    public static String EXERCISE_ARRAY_EXTRA = "EXERCISE_ARRAY_EXTRA";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
 
                 List<Integer> numberOfExercises = new ArrayList<>();
                 for(Workout w: workouts){
-                    List<Integer> temp = ws.getAllExercises(w.getId()).getValue();
+                    List<Long> temp = ws.getAllExercises(w.getId()).getValue();
                     if(temp!=null)
                         numberOfExercises.add(temp.size());
                     else
@@ -80,15 +78,14 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, NewWorkoutActivity.class);
                 startActivityForResult(intent, NEW_BOOK_ACTIVITY_REQUEST_CODE);
+                Workout ww = new Workout(0, "");
+                long id = w.addWorkout(ww);
+                Log.d("MainActivity", ww.getId()+"");
 
                 //TODO on result fail delete new workout, and all sets conected to it
             }
         });
 
-    }
-
-    private void setExerciseList(List<Exercise> exercises) {
-        this.exerciseList = exercises;
     }
 
     @Override

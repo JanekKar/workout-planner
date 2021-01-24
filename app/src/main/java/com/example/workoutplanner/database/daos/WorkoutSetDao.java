@@ -20,9 +20,9 @@ public interface WorkoutSetDao {
     LiveData<List<WorkoutSet>> getAll();
 
     @Query("SELECT * FROM workout_set where workoutId=:id")
-    LiveData<List<WorkoutSet>> getSets(int id);
+    LiveData<List<WorkoutSet>> getSets(long id);
 
     @Query("SELECT distinct e.exerciseId FROM workout_set ws, set_table st, exercise e WHERE ws.setId = st.setId and st.exerciseId = e.exerciseId and workoutId = :workoutId")
-    LiveData<List<Integer>> getExercises(int workoutId);
+    LiveData<List<Long>> getExercises(long workoutId);
 
 }

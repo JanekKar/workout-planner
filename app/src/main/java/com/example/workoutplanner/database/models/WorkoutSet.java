@@ -6,16 +6,16 @@ import androidx.room.ForeignKey;
 @Entity(tableName = "workout_set", primaryKeys = {"workoutId", "setId"})
 public class WorkoutSet {
     @ForeignKey(entity = Workout.class, parentColumns = {"workoutId"}, childColumns = {"id"}, onDelete = ForeignKey.CASCADE)
-    private int workoutId;
+    private long workoutId;
     @ForeignKey(entity = Set.class, parentColumns = {"setId"}, childColumns = {"setId"}, onDelete = ForeignKey.CASCADE)
-    private int setId;
+    private long setId;
 
-    public WorkoutSet(int workoutId, int setId) {
+    public WorkoutSet(long workoutId, long setId) {
         this.workoutId = workoutId;
         this.setId = setId;
     }
 
-    public int getWorkoutId() {
+    public long getWorkoutId() {
         return workoutId;
     }
 
@@ -23,11 +23,11 @@ public class WorkoutSet {
         this.workoutId = workoutId;
     }
 
-    public int getSetId() {
+    public long getSetId() {
         return setId;
     }
 
-    public void setSetId(int setId) {
+    public void setSetId(long setId) {
         this.setId = setId;
     }
 

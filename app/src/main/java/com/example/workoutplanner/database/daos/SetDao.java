@@ -23,7 +23,7 @@ public interface SetDao {
     LiveData<List<Set>> getAll();
 
     @Query("SELECT * FROM set_table WHERE setId=:id")
-    Set getSet(int id);
+    Set getSet(long id);
 
     @Query("DELETE FROM set_table")
     void deleteAll();

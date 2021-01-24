@@ -11,7 +11,7 @@ import java.util.List;
 @Entity(tableName = "workout")
 public class Workout {
     @PrimaryKey(autoGenerate = true)
-    private int id;
+    private long id;
     private int weekDay;
     private String name;
 
@@ -20,11 +20,11 @@ public class Workout {
         this.name = name;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 

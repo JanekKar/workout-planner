@@ -29,11 +29,12 @@ public class WorkoutSetViewModel extends AndroidViewModel {
     public LiveData<List<WorkoutSet>> getAllWorkoutsSets(){
         return workoutSets;
     }
-    public LiveData<List<WorkoutSet>> getAllSets(int workoutId){
+
+    public LiveData<List<WorkoutSet>> getAllSets(long workoutId){
         return PlannerDatabase.getDatabase(getApplication()).workoutSetDao().getSets(workoutId);
     }
 
-    public LiveData<List<Integer>> getAllExercises(int workoutId){
+    public LiveData<List<Long>> getAllExercises(long workoutId){
         return PlannerDatabase.getDatabase(getApplication()).workoutSetDao().getExercises(workoutId);
     }
 

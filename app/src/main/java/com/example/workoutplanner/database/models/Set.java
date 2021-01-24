@@ -6,30 +6,30 @@ import androidx.room.PrimaryKey;
 @Entity( tableName = "set_table")
 public class Set {
     @PrimaryKey(autoGenerate = true)
-    private int setId;
-    private int exerciseId;
+    private long setId;
+    private long exerciseId;
     private int numberOfRepsToDO;
     private int aditonalWeight;
 
-    public Set(int exerciseId, int numberOfRepsToDO, int aditonalWeight) {
+    public Set(long exerciseId, int numberOfRepsToDO, int aditonalWeight) {
         this.exerciseId = exerciseId;
         this.numberOfRepsToDO = numberOfRepsToDO;
         this.aditonalWeight = aditonalWeight;
     }
 
-    public int getSetId() {
+    public long getSetId() {
         return setId;
     }
 
-    public void setSetId(int setId) {
+    public void setSetId(long setId) {
         this.setId = setId;
     }
 
-    public int getExerciseId() {
+    public long getExerciseId() {
         return exerciseId;
     }
 
-    public void setExerciseId(int exerciseId) {
+    public void setExerciseId(long exerciseId) {
         this.exerciseId = exerciseId;
     }
 
