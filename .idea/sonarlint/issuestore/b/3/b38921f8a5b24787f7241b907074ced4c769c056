@@ -1,0 +1,10 @@
+
+K
+java:S30200".Pass "new String[0]" as argument to "toArray".(ÃƒçÔ8Á¡Ï‰ó.
+v
+java:S22930"YReplace the type specification in this constructor call with the diamond operator ("<>").(ÃƒçÔ8Á¡Ï‰ó.
+{
+java:S1450"^Remove the "exerciseSpinner" field and declare it as a local variable in the relevant methods.(àÝ²º8èÝŸ‰ó.
+@
+java:S1068"*Remove this unused "dayNum" private field.(Î¯€ô
+V	java:S110"<This class has 9 parents which is greater than 5 authorized.(žäŠÊýÿÿÿÿ

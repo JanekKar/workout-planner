@@ -1,0 +1,26 @@
+
+˜
+java:S1186‰"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(¡é††
+Q	java:S110"<This class has 9 parents which is greater than 5 authorized.(²Ú±
+C
+java:S1604Q"(Make this anonymous inner class a lambda(—¥É™üÿÿÿÿ
+~	java:S116!"iRename this field "NEW_BOOK_ACTIVITY_REQUEST_CODE" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ºªëÃ
+F
+java:S1068v"+Remove this unused "workout" private field.(½‡ç‡ıÿÿÿÿ
+V	java:S125j"<This block of commented-out lines of code should be removed.(Ù÷ñùÿÿÿÿ
+>
+java:S16043"(Make this anonymous inner class a lambda(íÎËÀ
+q
+java:S1450v"VRemove the "workout" field and declare it as a local variable in the relevant methods.(½‡ç‡ıÿÿÿÿ
+B
+java:S1481g"'Remove this unused "id" local variable.(ªÙğúÿÿÿÿ
+Q
+java:S1854g"6Remove this useless assignment to local variable "id".(ªÙğúÿÿÿÿ
+~
+java:S3252"gUse static access with "com.google.android.material.snackbar.BaseTransientBottomBar" for "LENGTH_LONG".(®®á–
+>
+java:S1604H"(Make this anonymous inner class a lambda(²™ğÔ
+A
+java:S1172"*Remove this unused method parameter "num".(‹ ±¶
+œ
+java:S1186J"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(¨ñ¢”ùÿÿÿÿ

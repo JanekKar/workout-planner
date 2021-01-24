@@ -41,37 +41,37 @@ public abstract class PlannerDatabase extends RoomDatabase {
         public void onOpen(@NonNull SupportSQLiteDatabase db) {
             super.onOpen(db);
             databaseWriteExecutor.execute(() -> {
-                ExerciseDao dao = INSTANCE.exerciseDao();
-                dao.deleteAll();
-                Exercise e = new Exercise("Pompki", "Ramiona", false);
-                dao.insertAll(e);
-                e = new Exercise("Pompki1", "Ramiona1", false);
-                dao.insertAll(e);
-                e = new Exercise("Pompki2", "Ramiona2", false);
-                dao.insertAll(e);
-
-                SetDao setDao = INSTANCE.setDao();
-                setDao.deleteAll();
-                Set s = new Set(1, 30, 0);
-                setDao.insertAll(s, s, s);
-
-                WorkOutDao wd = INSTANCE.workOutDao();
-                wd.deleteAll();
-
-                Workout w = new Workout(1, "Test name");
-                wd.insertAll(w);
-                w = new Workout(2, "Test name2");
-                wd.insertAll(w);
-                w = new Workout(3, "Test name3");
-                wd.insertAll(w);
-
-                WorkoutSetDao wsd = INSTANCE.workoutSetDao();
-                WorkoutSet ws = new WorkoutSet(2, 2);
-                wsd.insertAll(ws);
-                ws = new WorkoutSet(2, 3);
-                wsd.insertAll(ws);
-                ws = new WorkoutSet(2, 5);
-                wsd.insertAll(ws);
+//                ExerciseDao dao = INSTANCE.exerciseDao();
+//                dao.deleteAll();
+//                Exercise e = new Exercise("Pompki", "Ramiona", false);
+//                dao.insertAll(e);
+//                e = new Exercise("Pompki1", "Ramiona1", false);
+//                dao.insertAll(e);
+//                e = new Exercise("Pompki2", "Ramiona2", false);
+//                dao.insertAll(e);
+//
+//                SetDao setDao = INSTANCE.setDao();
+//                setDao.deleteAll();
+//                Set s = new Set(1, 30, 0);
+//                setDao.insertAll(s, s, s);
+//
+//                WorkOutDao wd = INSTANCE.workOutDao();
+//                wd.deleteAll();
+//
+//                Workout w = new Workout(1, "Test name");
+//                wd.insertAll(w);
+//                w = new Workout(2, "Test name2");
+//                wd.insertAll(w);
+//                w = new Workout(3, "Test name3");
+//                wd.insertAll(w);
+//
+//                WorkoutSetDao wsd = INSTANCE.workoutSetDao();
+//                WorkoutSet ws = new WorkoutSet(22, 2);
+//                wsd.insertAll(ws);
+//                ws = new WorkoutSet(22, 3);
+//                wsd.insertAll(ws);
+//                ws = new WorkoutSet(22, 5);
+//                wsd.insertAll(ws);
             });
         }
     };

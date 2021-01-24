@@ -32,6 +32,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     private int NEW_BOOK_ACTIVITY_REQUEST_CODE = 0;
+    public static String WORKOUT_ID_EXTRA = "WORKOUT_ID_EXTRA";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,9 +104,9 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-//        if (id == R.id.action_settings) {
-//            return true;
-//        }
+        if (id == R.id.exercise_list) {
+            Intent intent = new Intent(MainActivity.this, ExerciseListActivity.class);
+        }
 
         return super.onOptionsItemSelected(item);
     }
@@ -135,6 +136,9 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public void onClick(View v) {
+            Intent intent = new Intent(MainActivity.this, WorkoutActivity.class);
+            intent.putExtra(WORKOUT_ID_EXTRA, workout.getId());
+            startActivity(intent);
 
         }
 
