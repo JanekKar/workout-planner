@@ -48,4 +48,14 @@ public class Set {
     public void setAditonalWeight(int aditonalWeight) {
         this.aditonalWeight = aditonalWeight;
     }
+
+    @Override
+    public String toString() {
+        return "Set{" +
+                "setId=" + setId +
+                ", exerciseId=" + exerciseId +
+                ", numberOfRepsToDO=" + numberOfRepsToDO +
+                ", aditonalWeight=" + aditonalWeight +
+                '}';
+    }
 }

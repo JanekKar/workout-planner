@@ -80,6 +80,8 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, NewWorkoutActivity.class);
                 startActivityForResult(intent, NEW_BOOK_ACTIVITY_REQUEST_CODE);
+
+                //TODO on result fail delete new workout, and all sets conected to it
             }
         });
 
