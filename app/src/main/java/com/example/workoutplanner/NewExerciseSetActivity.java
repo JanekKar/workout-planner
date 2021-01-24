@@ -2,6 +2,7 @@ package com.example.workoutplanner;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -26,6 +27,7 @@ public class NewExerciseSetActivity extends AppCompatActivity {
     private Spinner exerciseSpinner;
     private int dayNum;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,21 +38,33 @@ public class NewExerciseSetActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        ExerciseViewModel evm = ViewModelProviders.of(this).get(ExerciseViewModel.class);
-        List<Exercise> exerciseList= evm.getExercises().getValue();
+        ExerciseViewModel evm= ViewModelProviders.of(this).get(ExerciseViewModel.class);
+        evm.getExercises().observe(this, new Observer<List<Exercise>>() {
+            @Override
+            public void onChanged(List<Exercise> exercises) {
+                Log.d("MainActivity",exercises.toString() );
+                setupExerciseSpinner(exercises);
+            }
+        });
+
+
+
+    }
+
+    public void setupExerciseSpinner(List<Exercise> exercises){
         List<String> exerciseNames = new ArrayList<>();
-        if(exerciseList != null){
-            for(Exercise e : exerciseList){
+        if(exercises != null){
+            for(Exercise e : exercises){
                 exerciseNames.add(e.getName());
             }
 
             exerciseSpinner = findViewById(R.id.exercise_spinner);
-            ArrayAdapter<String> exerciseAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, (String[]) exerciseNames.toArray());
+            ArrayAdapter<String> exerciseAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, exerciseNames);
             exerciseAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             exerciseSpinner.setAdapter(exerciseAdapter);
 
         }else{
-            Log.d("MainActivity", exerciseList+"");
+            Log.d("MainActivity", "No exercises found");
         }
     }
 

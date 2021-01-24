@@ -20,6 +20,7 @@ import android.widget.TextView;
 import com.example.workoutplanner.database.ViewModels.ExerciseViewModel;
 import com.example.workoutplanner.database.ViewModels.WorkoutSetViewModel;
 import com.example.workoutplanner.database.ViewModels.WorkoutViewModel;
+import com.example.workoutplanner.database.models.Exercise;
 import com.example.workoutplanner.database.models.Workout;
 import com.example.workoutplanner.database.models.WorkoutSet;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -31,6 +32,8 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     private int NEW_BOOK_ACTIVITY_REQUEST_CODE = 0;
+    private List<Exercise> exerciseList;
+    public static String EXERCISE_ARRAY_EXTRA = "EXERCISE_ARRAY_EXTRA";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,10 +44,6 @@ public class MainActivity extends AppCompatActivity {
         final WorkoutAdapter adapter = new WorkoutAdapter();
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-        ExerciseViewModel evm= ViewModelProviders.of(this).get(ExerciseViewModel.class);
-        Log.d("MainActivity", evm.getExercises().getValue()+"");
-
 
         WorkoutSetViewModel ws = ViewModelProviders.of(this).get(WorkoutSetViewModel.class);
         WorkoutViewModel w =ViewModelProviders.of(this).get(WorkoutViewModel.class);
@@ -62,8 +61,6 @@ public class MainActivity extends AppCompatActivity {
                         numberOfExercises.add(0);
                 }
                 adapter.setExerciseList(numberOfExercises);
-
-
             }
         });
 
@@ -86,6 +83,10 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void setExerciseList(List<Exercise> exercises) {
+        this.exerciseList = exercises;
     }
 
     @Override
