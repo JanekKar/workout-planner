@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -21,11 +22,17 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.workoutplanner.database.ViewModels.ExerciseViewModel;
+import com.example.workoutplanner.database.ViewModels.SetViewModel;
+import com.example.workoutplanner.database.ViewModels.WorkoutSetViewModel;
+import com.example.workoutplanner.database.ViewModels.WorkoutViewModel;
 import com.example.workoutplanner.database.models.Exercise;
 import com.example.workoutplanner.database.models.Set;
+import com.example.workoutplanner.database.models.Workout;
+import com.example.workoutplanner.database.models.WorkoutSet;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
@@ -33,11 +40,15 @@ public class NewWorkoutActivity extends AppCompatActivity implements AdapterView
 
     private Spinner daySpinner;
     private EditText workout_name;
-    private int dayNum;
+    private int weekDay;
 
     private HashMap<Exercise, List<Set>> exerciseSetMap;
     private int NEW_EXERCISE_SET_ACTIVITY_REQUEST_CODE = 21;
     private ExerciseAdapter adapter;
+    private Button saveButton;
+
+    public static long workoutID = -1;
+    public static long[] setsId = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +64,17 @@ public class NewWorkoutActivity extends AppCompatActivity implements AdapterView
 
         daySpinner = (Spinner) findViewById(R.id.day_spinner);
         workout_name = findViewById(R.id.workout_name_editText);
+        saveButton = findViewById(R.id.save_button);
+
+        saveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!exerciseSetMap.isEmpty()) {
+                    saveWorkout();
+                    saveSetsInWorkout();
+                }
+            }
+        });
 
         ArrayAdapter<CharSequence> spinnerAdapter = ArrayAdapter.createFromResource(this, R.array.days_of_week, android.R.layout.simple_spinner_dropdown_item);
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -66,11 +88,52 @@ public class NewWorkoutActivity extends AppCompatActivity implements AdapterView
             public void onClick(View view) {
                 Intent intent = new Intent(NewWorkoutActivity.this, NewExerciseSetActivity.class);
                 startActivityForResult(intent, NEW_EXERCISE_SET_ACTIVITY_REQUEST_CODE);
-                exerciseSetMap.put(new Exercise("", "", false), null);
-                adapter.setExercises(new ArrayList<>(exerciseSetMap.keySet()));
             }
         });
     }
+
+    private void saveWorkout() {
+        if (!workout_name.getText().toString().isEmpty()) {
+            workoutID = -1;
+            Workout w = new Workout(weekDay, workout_name.getText().toString());
+            WorkoutViewModel wvm = ViewModelProviders.of(this).get(WorkoutViewModel.class);
+            wvm.addWorkout(w);
+
+            // TODO Synchronizacja wontków - do poprawy jak bedzie czas
+            while (workoutID == -1) {
+            }
+        }
+    }
+
+    private void saveSetsInWorkout() {
+        Log.d("MainActivity", "Saving all sets in workout");
+        Log.d("MainActivity", exerciseSetMap + "");
+        setsId = null;
+        List<Set> setList = new ArrayList<>();
+        for (List<Set> list : exerciseSetMap.values()) {
+            setList.addAll(list);
+        }
+
+
+        Log.d("MainActivity", setList + "");
+
+        SetViewModel svm = ViewModelProviders.of(this).get(SetViewModel.class);
+        svm.addSets(setList);
+
+        while (setsId == null) {
+        }
+
+        Log.d("MainActivity", Arrays.toString(setsId));
+
+
+        WorkoutSetViewModel wsvm = ViewModelProviders.of(this).get(WorkoutSetViewModel.class);
+
+        for (long setId : setsId) {
+            wsvm.connectSetToWorkout(new WorkoutSet(workoutID, setId));
+        }
+
+    }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -96,15 +159,15 @@ public class NewWorkoutActivity extends AppCompatActivity implements AdapterView
     }
 
     private void addExerciseToList(Exercise e, List<Set> setList) {
-        Log.d("MainActivity", e+"");
-        Log.d("MainActivity", setList+"");
+        Log.d("MainActivity", e + "");
+        Log.d("MainActivity", setList + "");
         exerciseSetMap.put(e, setList);
         adapter.setExercises((new ArrayList<>(exerciseSetMap.keySet())));
     }
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        dayNum = position;
+        weekDay = position;
     }
 
     @Override

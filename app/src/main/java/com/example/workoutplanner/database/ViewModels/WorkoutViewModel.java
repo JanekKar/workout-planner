@@ -1,13 +1,15 @@
 package com.example.workoutplanner.database.ViewModels;
 
 import android.app.Application;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
+import com.example.workoutplanner.NewWorkoutActivity;
 import com.example.workoutplanner.database.PlannerDatabase;
-import com.example.workoutplanner.database.daos.WorkOutDao;
+import com.example.workoutplanner.database.daos.WorkoutDao;
 import com.example.workoutplanner.database.models.Workout;
 
 import java.util.List;
@@ -15,7 +17,7 @@ import java.util.List;
 public class WorkoutViewModel extends AndroidViewModel {
 
     private LiveData<List<Workout>> workouts;
-    private WorkOutDao workoutDao;
+    private WorkoutDao workoutDao;
 
 
     public WorkoutViewModel(@NonNull Application application) {
@@ -29,14 +31,15 @@ public class WorkoutViewModel extends AndroidViewModel {
         return workouts;
     }
 
-    public long addWorkout(Workout workout){
-        final long[] id = new long[1];
+    public void addWorkout(Workout workout){
         PlannerDatabase.databaseWriteExecutor.execute(() -> {
-            id[0] = workoutDao.insert(workout);
+            long test = workoutDao.insert(workout);
+            Log.d("MainActivity", test+"");
+
+            NewWorkoutActivity.workoutID = test;
         });
-        return id[0];
-//        PlannerDatabase.getDatabase(getApplication()).workOutDao().insertAll(workout);
     }
+
 
 
 }

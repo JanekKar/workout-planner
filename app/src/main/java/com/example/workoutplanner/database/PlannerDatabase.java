@@ -10,14 +10,13 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.example.workoutplanner.database.daos.ExerciseDao;
 import com.example.workoutplanner.database.daos.SetDao;
-import com.example.workoutplanner.database.daos.WorkOutDao;
+import com.example.workoutplanner.database.daos.WorkoutDao;
 import com.example.workoutplanner.database.daos.WorkoutSetDao;
 import com.example.workoutplanner.database.models.Exercise;
 import com.example.workoutplanner.database.models.Set;
 import com.example.workoutplanner.database.models.Workout;
 import com.example.workoutplanner.database.models.WorkoutSet;
 
-import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -28,7 +27,7 @@ public abstract class PlannerDatabase extends RoomDatabase {
 
     public abstract SetDao setDao();
 
-    public abstract WorkOutDao workOutDao();
+    public abstract WorkoutDao workOutDao();
 
     public abstract WorkoutSetDao workoutSetDao();
 

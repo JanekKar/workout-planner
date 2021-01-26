@@ -34,9 +34,7 @@ public class WorkoutActivity extends AppCompatActivity {
 
 
         WorkoutSetViewModel workoutSetViewModel = ViewModelProviders.of(this).get(WorkoutSetViewModel.class);
-
         WorkoutViewModel workoutViewModel = ViewModelProviders.of(this).get(WorkoutViewModel.class);
-
         LifecycleOwner owner = this;
 
         workoutViewModel.getWorkouts().observe(this, new Observer<List<Workout>>() {
@@ -56,7 +54,6 @@ public class WorkoutActivity extends AppCompatActivity {
                                 Log.d("MainActivity", workoutSets+"");
                             }
                         });
-
                     }
                 }
             }
@@ -64,6 +61,7 @@ public class WorkoutActivity extends AppCompatActivity {
 
 
     }
+
 
     public void ExerciseInSets(){
 

@@ -14,7 +14,10 @@ import java.util.List;
 @Dao
 public interface SetDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insertAll(Set... sets);
+    long[] insertAll(Set... sets);
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    long insert(Set sets);
 
     @Delete
     void delete(Set set);

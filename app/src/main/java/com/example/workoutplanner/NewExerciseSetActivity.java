@@ -1,12 +1,5 @@
 package com.example.workoutplanner;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -21,23 +14,25 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.workoutplanner.database.ViewModels.ExerciseViewModel;
-import com.example.workoutplanner.database.ViewModels.SetViewModel;
 import com.example.workoutplanner.database.models.Exercise;
 import com.example.workoutplanner.database.models.Set;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 public class NewExerciseSetActivity extends AppCompatActivity {
 
     private Spinner exerciseSpinner;
-    private int dayNum;
-
-    private String exerciseName;
 
     private ArrayList<Set> setList;
     private SetAdapter adapter;
@@ -55,12 +50,12 @@ public class NewExerciseSetActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         setList = new ArrayList<>();
-        setList.add(new Set(0,0,0));
-        setList.add(new Set(0,0,0));
-        setList.add(new Set(0,0,0));
+        setList.add(new Set(0, 0, 0));
+        setList.add(new Set(0, 0, 0));
+        setList.add(new Set(0, 0, 0));
         adapter.setSets(setList);
 
-        ExerciseViewModel evm= ViewModelProviders.of(this).get(ExerciseViewModel.class);
+        ExerciseViewModel evm = ViewModelProviders.of(this).get(ExerciseViewModel.class);
         evm.getExercises().observe(this, new Observer<List<Exercise>>() {
             @Override
             public void onChanged(List<Exercise> exercises) {
@@ -88,33 +83,31 @@ public class NewExerciseSetActivity extends AppCompatActivity {
 
     private void saveSets() {
 //        SetViewModel svm = ViewModelProviders.of(this).get(SetViewModel.class);
-        for (Set set : setList){
-            if(set.getNumberOfRepsToDO()!=0){
+        ArrayList<Set> toSave = new ArrayList<>();
+        for (Set set : setList) {
+            if (set.getNumberOfRepsToDO() != 0) {
                 set.setExerciseId(exerciseId);
-//                svm.addSet(set);
+                toSave.add(set);
             }
         }
 
         Intent replyIntent = new Intent();
-        replyIntent.putParcelableArrayListExtra("list_of_sets", setList);
+        replyIntent.putParcelableArrayListExtra("list_of_sets", toSave);
         setResult(RESULT_OK, replyIntent);
         finish();
     }
 
 
-
-    protected void deleteRow(Set s){
+    protected void deleteRow(Set s) {
         setList.remove(s);
         adapter.setSets(setList);
     }
 
 
-
-
-    public void setupExerciseSpinner(List<Exercise> exercises){
+    public void setupExerciseSpinner(List<Exercise> exercises) {
         List<String> exerciseNames = new ArrayList<>();
-        if(exercises != null){
-            for(Exercise e : exercises){
+        if (exercises != null) {
+            for (Exercise e : exercises) {
                 exerciseNames.add(e.getName());
             }
 
@@ -123,14 +116,13 @@ public class NewExerciseSetActivity extends AppCompatActivity {
             exerciseAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             exerciseSpinner.setAdapter(exerciseAdapter);
 
-        }else{
+        } else {
             Log.d("MainActivity", "No exercises found");
         }
 
         exerciseSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                exerciseName = exerciseNames.get(position);
                 exerciseId = exercises.get(position).getExerciseId();
             }
 
@@ -141,7 +133,7 @@ public class NewExerciseSetActivity extends AppCompatActivity {
         });
     }
 
-    private class SetHolder extends RecyclerView.ViewHolder{
+    private class SetHolder extends RecyclerView.ViewHolder {
 
         private EditText repsToDo;
         private EditText additionalWeight;
@@ -150,7 +142,6 @@ public class NewExerciseSetActivity extends AppCompatActivity {
 
         public SetHolder(LayoutInflater inflater, ViewGroup parent) {
             super(inflater.inflate(R.layout.set_list_item, parent, false));
-
 
 
             repsToDo = itemView.findViewById(R.id.reps_to_do_edit_text);
@@ -172,9 +163,9 @@ public class NewExerciseSetActivity extends AppCompatActivity {
 
                 @Override
                 public void onTextChanged(CharSequence s, int start, int before, int count) {
-                    if(!s.toString().equals(""))
+                    if (!s.toString().equals(""))
                         set.setNumberOfRepsToDO(Integer.parseInt(s.toString()));
-                    else{
+                    else {
                         set.setNumberOfRepsToDO(0);
                     }
                 }
@@ -192,9 +183,9 @@ public class NewExerciseSetActivity extends AppCompatActivity {
 
                 @Override
                 public void onTextChanged(CharSequence s, int start, int before, int count) {
-                    if(!s.toString().equals(""))
+                    if (!s.toString().equals(""))
                         set.setAdditionalWeight(Integer.parseInt(s.toString()));
-                    else{
+                    else {
                         set.setAdditionalWeight(0);
                     }
                 }
@@ -206,17 +197,17 @@ public class NewExerciseSetActivity extends AppCompatActivity {
             });
         }
 
-        public void bind(Set s){
+        public void bind(Set s) {
             this.set = s;
-            if(set.getNumberOfRepsToDO()!=0)
-                repsToDo.setText(s.getNumberOfRepsToDO()+"");
-            if(set.getAdditionalWeight()!=0){
-                additionalWeight.setText(s.getAdditionalWeight()+"");
+            if (set.getNumberOfRepsToDO() != 0)
+                repsToDo.setText(s.getNumberOfRepsToDO() + "");
+            if (set.getAdditionalWeight() != 0) {
+                additionalWeight.setText(s.getAdditionalWeight() + "");
             }
         }
     }
 
-    private class SetAdapter extends RecyclerView.Adapter<SetHolder>{
+    private class SetAdapter extends RecyclerView.Adapter<SetHolder> {
         private List<Set> sets;
 
         @NonNull
@@ -227,7 +218,7 @@ public class NewExerciseSetActivity extends AppCompatActivity {
 
         @Override
         public void onBindViewHolder(@NonNull SetHolder holder, int position) {
-            if(sets != null){
+            if (sets != null) {
                 Set s = sets.get(position);
                 holder.bind(s);
             }
@@ -235,13 +226,13 @@ public class NewExerciseSetActivity extends AppCompatActivity {
 
         @Override
         public int getItemCount() {
-             if(sets != null){
-                 return sets.size();
-             }
+            if (sets != null) {
+                return sets.size();
+            }
             return 0;
         }
 
-        public void setSets(List<Set> sets){
+        public void setSets(List<Set> sets) {
             this.sets = null;
             notifyDataSetChanged();
             this.sets = sets;

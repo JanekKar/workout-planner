@@ -13,7 +13,7 @@ import com.example.workoutplanner.database.models.Workout;
 import java.util.List;
 
 @Dao
-public interface WorkOutDao {
+public interface WorkoutDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     long[] insertAll(Workout... workouts);
 

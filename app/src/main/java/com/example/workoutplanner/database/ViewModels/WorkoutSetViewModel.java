@@ -9,6 +9,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Transformations;
 
 import com.example.workoutplanner.database.PlannerDatabase;
+import com.example.workoutplanner.database.daos.WorkoutSetDao;
 import com.example.workoutplanner.database.models.Exercise;
 import com.example.workoutplanner.database.models.Set;
 import com.example.workoutplanner.database.models.Workout;
@@ -19,10 +20,13 @@ import java.util.List;
 
 public class WorkoutSetViewModel extends AndroidViewModel {
     private LiveData<List<WorkoutSet>> workoutSets;
+    private WorkoutSetDao workoutSetDao;
 
     public WorkoutSetViewModel(@NonNull Application application) {
         super(application);
-        this.workoutSets = PlannerDatabase.getDatabase(application).workoutSetDao().getAll();
+        PlannerDatabase database = PlannerDatabase.getDatabase(application);
+        this.workoutSets = database.workoutSetDao().getAll();
+        this.workoutSetDao = database.workoutSetDao();
     }
 
 
@@ -36,6 +40,12 @@ public class WorkoutSetViewModel extends AndroidViewModel {
 
     public LiveData<List<Long>> getAllExercises(long workoutId){
         return PlannerDatabase.getDatabase(getApplication()).workoutSetDao().getExercises(workoutId);
+    }
+
+    public void connectSetToWorkout(WorkoutSet ws){
+        PlannerDatabase.databaseWriteExecutor.execute(()->{
+            workoutSetDao.insertAll(ws);
+        });
     }
 
 

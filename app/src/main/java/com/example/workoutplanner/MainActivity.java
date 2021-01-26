@@ -79,11 +79,6 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, NewWorkoutActivity.class);
                 startActivityForResult(intent, NEW_BOOK_ACTIVITY_REQUEST_CODE);
-                Workout ww = new Workout(0, "");
-                long id = w.addWorkout(ww);
-                Log.d("MainActivity", ww.getId()+"");
-
-                //TODO on result fail delete new workout, and all sets conected to it
             }
         });
 
