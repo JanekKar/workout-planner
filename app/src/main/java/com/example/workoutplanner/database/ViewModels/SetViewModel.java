@@ -43,4 +43,8 @@ public class SetViewModel extends AndroidViewModel {
             NewWorkoutActivity.setsId = idArr;
         });
     }
+
+    public LiveData<List<Set>> getSets(long[] setIds) {
+        return PlannerDatabase.getDatabase(getApplication()).setDao().getSets(setIds);
+    }
 }

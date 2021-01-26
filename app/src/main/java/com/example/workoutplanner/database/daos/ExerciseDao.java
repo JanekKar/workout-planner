@@ -6,10 +6,8 @@ import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
-import androidx.room.Transaction;
 
 import com.example.workoutplanner.database.models.Exercise;
-import com.example.workoutplanner.database.models.ExerciseWithSets;
 
 import java.util.List;
 
@@ -30,6 +28,6 @@ public interface ExerciseDao {
     @Query("DELETE FROM EXERCISE")
     void deleteAll();
 
-
-
+    @Query("SELECT * FROM exercise where exerciseId in (:idList)")
+    LiveData<List<Exercise>> getExercisesById(Long[] idList);
 }

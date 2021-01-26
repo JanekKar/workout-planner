@@ -30,4 +30,7 @@ public interface SetDao {
 
     @Query("DELETE FROM set_table")
     void deleteAll();
+
+    @Query("SELECT * FROM set_table WHERE setId IN (:setIds)")
+    LiveData<List<Set>> getSets(long[] setIds);
 }

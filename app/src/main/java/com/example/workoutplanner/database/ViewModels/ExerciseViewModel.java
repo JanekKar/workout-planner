@@ -25,4 +25,7 @@ public class ExerciseViewModel extends AndroidViewModel {
         return exercises;
     }
 
+    public LiveData<List<Exercise>> getExercisesById(Long[] objects) {
+        return PlannerDatabase.getDatabase(getApplication()).exerciseDao().getExercisesById(objects);
+    }
 }

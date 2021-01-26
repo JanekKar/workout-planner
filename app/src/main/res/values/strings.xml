@@ -14,4 +14,5 @@
     <string name="weight_hint">Additional weight</string>
     <string name="exercise_list">All exercises</string>
     <string name="save_button">Save</string>
+    <string name="start_training_button">Start training</string>
 </resources>
