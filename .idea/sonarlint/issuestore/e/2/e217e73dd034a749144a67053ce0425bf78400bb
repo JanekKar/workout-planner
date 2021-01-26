@@ -1,5 +1,7 @@
 
-R
-java:S1068"0Remove this unused "exerciseList" private field.(ÿµØ¸ÿÿÿÿÿ8üÿŸÑò.
+P
+java:S1128"3Remove this unused import 'androidx.room.Embedded'.(ãœÉ“8ëßŠ¤ó.
+W
+java:S1128"5Remove this unused import 'androidx.room.ForeignKey'.(Ù¡Ìúÿÿÿÿ8ëßŠ¤ó.
 M
-java:S1068"+Remove this unused "weekDay" private field.(Òâ“øÿÿÿÿ8¸¸¼›î.
+java:S1128"+Remove this unused import 'java.util.List'.(Õë±Äøÿÿÿÿ8ëßŠ¤ó.

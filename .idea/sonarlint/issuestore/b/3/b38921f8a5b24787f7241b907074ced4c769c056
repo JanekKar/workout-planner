@@ -1,10 +1,26 @@
 
-K
-java:S30200".Pass "new String[0]" as argument to "toArray".(ÃƒçÔ8Á¡Ï‰ó.
-v
-java:S22930"YReplace the type specification in this constructor call with the diamond operator ("<>").(ÃƒçÔ8Á¡Ï‰ó.
-{
-java:S1450"^Remove the "exerciseSpinner" field and declare it as a local variable in the relevant methods.(àİ²º8èİŸ‰ó.
+Ÿ
+java:S1186„"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(«û³±8„“°¢ó.
+‰
+java:S3252~"gUse static access with "com.google.android.material.snackbar.BaseTransientBottomBar" for "LENGTH_LONG".(ç„èÌûÿÿÿÿ8ÉÑ–£ó.
+M
+java:S1068%"0Remove this unused "exerciseName" private field.(”Ëù¹8‰ú¢ó.
+E
+java:S1604z"(Make this anonymous inner class a lambda(ñ—‘â8Æ•£ó.
+Ÿ
+java:S1186¦"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(±¾ê8ôõË¢ó.
+J
+java:S1604C"(Make this anonymous inner class a lambda(—¥É™üÿÿÿÿ8å‘¸ ó.
+Ÿ
+java:S1186˜"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(«û³±8ôõË¢ó.
+Ÿ
+java:S1186’"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(±¾ê8„“°¢ó.
 @
-java:S1068"*Remove this unused "dayNum" private field.(Î¯€ô
-V	java:S110"<This class has 9 parents which is greater than 5 authorized.(äŠÊıÿÿÿÿ
+java:S1068#"*Remove this unused "dayNum" private field.(Î¯€ô
+£
+java:S1186e"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(¹Æº×şÿÿÿÿ8˜Çø¢ó.
+V	java:S110 "<This class has 9 parents which is greater than 5 authorized.(äŠÊıÿÿÿÿ
+D
+java:S1604;"(Make this anonymous inner class a lambda(Î°¹@8ª­ÔŸó.
+{
+java:S2293V"YReplace the type specification in this constructor call with the diamond operator ("<>").(¿”å¾ûÿÿÿÿ8 ‚åó.

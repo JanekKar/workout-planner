@@ -1,26 +1,35 @@
 
-˜
-java:S1186‰"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(¡é††
-Q	java:S110"<This class has 9 parents which is greater than 5 authorized.(²Ú±
-C
-java:S1604Q"(Make this anonymous inner class a lambda(—¥É™üÿÿÿÿ
-~	java:S116!"iRename this field "NEW_BOOK_ACTIVITY_REQUEST_CODE" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ºªëÃ
-F
-java:S1068v"+Remove this unused "workout" private field.(½‡ç‡ıÿÿÿÿ
-V	java:S125j"<This block of commented-out lines of code should be removed.(Ù÷ñùÿÿÿÿ
->
-java:S16043"(Make this anonymous inner class a lambda(íÎËÀ
-q
-java:S1450v"VRemove the "workout" field and declare it as a local variable in the relevant methods.(½‡ç‡ıÿÿÿÿ
-B
-java:S1481g"'Remove this unused "id" local variable.(ªÙğúÿÿÿÿ
-Q
-java:S1854g"6Remove this useless assignment to local variable "id".(ªÙğúÿÿÿÿ
-~
-java:S3252"gUse static access with "com.google.android.material.snackbar.BaseTransientBottomBar" for "LENGTH_LONG".(®®á–
->
-java:S1604H"(Make this anonymous inner class a lambda(²™ğÔ
 A
-java:S1172"*Remove this unused method parameter "num".(‹ ±¶
+java:S1172‚"*Remove this unused method parameter "num".(‹ ±¶
+Q	java:S110 "<This class has 9 parents which is greater than 5 authorized.(²Ú±
+x
+java:S3008#"[Rename this field "WORKOUT_ID_EXTRA" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ëÅÏ÷8Î¥±§ó.
+I
+java:S1481S"'Remove this unused "id" local variable.(÷È‚•üÿÿÿÿ8ëÙ„¤ó.
+~
+java:S3252“"gUse static access with "com.google.android.material.snackbar.BaseTransientBottomBar" for "LENGTH_LONG".(®®á–
+>
+java:S16041"(Make this anonymous inner class a lambda(íÎËÀ
+~	java:S116""iRename this field "NEW_BOOK_ACTIVITY_REQUEST_CODE" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ºªëÃ
+z
+java:S1128"]Remove this unused import 'com.example.workoutplanner.database.ViewModels.ExerciseViewModel'.(°óÀ 8åäÓŸó.
+M
+java:S1481l"+Remove this unused "intent" local variable.(õ¸ûÿÿÿÿ8›Çî§ó.
 œ
-java:S1186J"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(¨ñ¢”ùÿÿÿÿ
+java:S1186F"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(¨ñ¢”ùÿÿÿÿ
+S
+java:S1444#"6Make this "public static WORKOUT_ID_EXTRA" field final(ëÅÏ÷8Î¥±§ó.
+m
+java:S1128"PRemove this unused import 'com.example.workoutplanner.database.models.Exercise'.(×Ãô†8¤×ÿ£ó.
+y
+java:S1104#"\Make WORKOUT_ID_EXTRA a static final constant or non-public and provide accessors if needed.(ëÅÏ÷8Î¥±§ó.
+\
+java:S1854l":Remove this useless assignment to local variable "intent".(õ¸ûÿÿÿÿ8›Çî§ó.
+J
+java:S1604M"(Make this anonymous inner class a lambda(—¥É™üÿÿÿÿ8Æñó.
+O
+java:S1135V"2Complete the task associated to this TODO comment.(Ü¤ø8Àéª£ó.
+>
+java:S1604D"(Make this anonymous inner class a lambda(²™ğÔ
+X
+java:S1854S"6Remove this useless assignment to local variable "id".(÷È‚•üÿÿÿÿ8ëÙ„¤ó.

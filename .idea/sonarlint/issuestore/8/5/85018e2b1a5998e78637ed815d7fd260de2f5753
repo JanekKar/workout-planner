@@ -1,5 +1,8 @@
 
-u
-java:S3008!"SRename this field "INSTANCE" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(’ã÷çùÿÿÿÿ8›’êÑò.
+]	java:S125,"<This block of commented-out lines of code should be removed.(Š×®åøÿÿÿÿ8¹‘‹¨ó.
+\
+java:S1128":Remove this unused import 'java.util.concurrent.Executor'.(÷ý¶Œúÿÿÿÿ8ðœß£ó.
 y
-java:S3077!"WUse a thread-safe type; adding "volatile" is not enough to make this field thread-safe.(’ã÷çùÿÿÿÿ8›’êÑò.
+java:S3077#"WUse a thread-safe type; adding "volatile" is not enough to make this field thread-safe.(’ã÷çùÿÿÿÿ8›’êÑò.
+u
+java:S3008#"SRename this field "INSTANCE" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(’ã÷çùÿÿÿÿ8›’êÑò.
