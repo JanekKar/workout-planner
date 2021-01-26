@@ -1,20 +1,0 @@
-
-q
-java:S1450"[Remove the "workout_name" field and declare it as a local variable in the relevant methods.(„øÕ
-F
-java:S1068"0Remove this unused "workout_name" private field.(„øÕ
-C
-java:S1604:"(Make this anonymous inner class a lambda(—¥É™üÿÿÿÿ
-l	java:S116"WRename this field "workout_name" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(„øÕ
-M
-java:S1135N"2Complete the task associated to this TODO comment.(Íó‚ıÿÿÿÿ
-V	java:S110"<This class has 9 parents which is greater than 5 authorized.(Ãöß÷ÿÿÿÿÿ
-k
-java:S1450"URemove the "dayNum" field and declare it as a local variable in the relevant methods.(Î¯€ô
-t
-java:S1450"YRemove the "daySpinner" field and declare it as a local variable in the relevant methods.(Ş¿Ìüÿÿÿÿ
-—
-java:S1186`"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(¡é††
-@
-java:S1068"*Remove this unused "dayNum" private field.(Î¯€ô
-’	java:S116""qRename this field "NEW_EXERCISE_SET_ACTIVITY_REQUEST_CODE" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(“åæ±úÿÿÿÿ8ğªÃ‰ó.
