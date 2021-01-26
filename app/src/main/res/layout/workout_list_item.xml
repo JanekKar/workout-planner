@@ -9,7 +9,8 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:padding="@dimen/small_padding">
 
 <!--        <ImageView-->
 <!--            android:id="@+id/img_cover"-->
@@ -20,20 +21,26 @@
 <!--            android:layout_marginStart="20dp"-->
 <!--            android:scaleType="centerInside"-->
 <!--            android:contentDescription="@string/content_description"/>-->
+
         <TextView
             android:id="@+id/workout_day"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="25dp"
+            style="@style/title"
             android:textAppearance="?attr/textAppearanceListItem"/>
 
         <TextView
             android:id="@+id/workout_name"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/workout_day"
             android:layout_alignStart="@+id/workout_day"
+            android:textAlignment="center"
+            android:textSize="18sp"
             android:textAppearance="?attr/textAppearanceListItem"/>
+
+
+
     </RelativeLayout>
 
 </androidx.cardview.widget.CardView>

@@ -1,13 +1,7 @@
 package com.example.workoutplanner;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -17,10 +11,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.workoutplanner.database.ViewModels.ExerciseViewModel;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.workoutplanner.database.ViewModels.WorkoutSetViewModel;
 import com.example.workoutplanner.database.ViewModels.WorkoutViewModel;
-import com.example.workoutplanner.database.models.Exercise;
 import com.example.workoutplanner.database.models.Workout;
 import com.example.workoutplanner.database.models.WorkoutSet;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -45,16 +44,16 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         WorkoutSetViewModel ws = ViewModelProviders.of(this).get(WorkoutSetViewModel.class);
-        WorkoutViewModel w =ViewModelProviders.of(this).get(WorkoutViewModel.class);
+        WorkoutViewModel w = ViewModelProviders.of(this).get(WorkoutViewModel.class);
         w.getWorkouts().observe(this, new Observer<List<Workout>>() {
             @Override
             public void onChanged(List<Workout> workouts) {
                 adapter.setWorkouts(workouts);
 
                 List<Integer> numberOfExercises = new ArrayList<>();
-                for(Workout w: workouts){
+                for (Workout w : workouts) {
                     List<Long> temp = ws.getAllExercises(w.getId()).getValue();
-                    if(temp!=null)
+                    if (temp != null)
                         numberOfExercises.add(temp.size());
                     else
                         numberOfExercises.add(0);
@@ -62,7 +61,6 @@ public class MainActivity extends AppCompatActivity {
                 adapter.setExerciseList(numberOfExercises);
             }
         });
-
 
 
         ws.getAllWorkoutsSets().observe(this, new Observer<List<WorkoutSet>>() {
@@ -101,13 +99,17 @@ public class MainActivity extends AppCompatActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.exercise_list) {
             Intent intent = new Intent(MainActivity.this, ExerciseListActivity.class);
+            //TODO exercise list activity
+            //TODO adding new activity
+            //TODO deleting activity
+            //TODO editing activity
         }
 
         return super.onOptionsItemSelected(item);
     }
 
 
-    private class WorkoutHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener{
+    private class WorkoutHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
 
         private TextView dayTextView;
         private TextView nameTextView;
@@ -122,11 +124,11 @@ public class MainActivity extends AppCompatActivity {
             nameTextView = itemView.findViewById(R.id.workout_name);
         }
 
-        public void bind(Workout workout,int num){
+        public void bind(Workout workout, int num) {
             this.workout = workout;
 
-            dayTextView.setText("Day: " + workout.getId());
-            nameTextView.setText("Number of sets: " + workout.getName());
+            nameTextView.setText(workout.getName());
+            dayTextView.setText(dayNumberToName(workout.getWeekDay()));
         }
 
         @Override
@@ -156,33 +158,39 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public void onBindViewHolder(@NonNull WorkoutHolder holder, int position) {
-            if(workouts != null && numOfEx != null){
+            if (workouts != null && numOfEx != null) {
                 Workout workout = workouts.get(position);
                 int num = numOfEx.get(position);
                 holder.bind(workout, num);
-            }else{
+            } else {
                 Log.d("MainActivity", "No workouts");
             }
         }
 
         @Override
         public int getItemCount() {
-            if(workouts != null){
+            if (workouts != null) {
                 return workouts.size();
-            }else{
+            } else {
                 return 0;
             }
         }
 
-        void setWorkouts(List<Workout> workouts){
+        void setWorkouts(List<Workout> workouts) {
             this.workouts = workouts;
             notifyDataSetChanged();
         }
 
-        void setExerciseList(List<Integer> numberOfExercises){
+        void setExerciseList(List<Integer> numberOfExercises) {
             this.numOfEx = numberOfExercises;
             notifyDataSetChanged();
         }
 
+    }
+
+    public String dayNumberToName(int number) {
+        Resources res = getResources();
+        String[] days = res.getStringArray(R.array.days_of_week);
+        return days[number];
     }
 }

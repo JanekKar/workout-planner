@@ -150,7 +150,7 @@ public class WorkoutActivity extends AppCompatActivity {
         private TextView exerciseName;
 
         public ExerciseHolder(LayoutInflater inflater, ViewGroup parent) {
-            super(inflater.inflate(R.layout.exercise_list_item, parent, false));
+            super(inflater.inflate(R.layout.exercise_card_list_item, parent, false));
             itemView.setOnClickListener(this);
 
             exerciseName = itemView.findViewById(R.id.exercise_name);

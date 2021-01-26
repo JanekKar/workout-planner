@@ -9,10 +9,14 @@
         <item>Saturday</item>
         <item>Sunday</item>
     </string-array>
-    <string name="workout_name_hint">Enter workout name</string>
-    <string name="reps_hint">Number of reps</string>
-    <string name="weight_hint">Additional weight</string>
+    <string name="workout_name_hint">Workout name</string>
+    <string name="reps_hint">Repetitions</string>
+    <string name="weight_hint">Weight</string>
     <string name="exercise_list">All exercises</string>
     <string name="save_button">Save</string>
     <string name="start_training_button">Start training</string>
+    <string name="delete_button">Delete</string>
+    <string name="choose_day">Choose day:</string>
+    <string name="no_name">NO_NAME</string>
+    <string name="choose_exercise">Choose exercise</string>
 </resources>

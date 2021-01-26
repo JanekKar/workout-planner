@@ -5,25 +5,32 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".WorkoutActivity">
+    tools:context=".WorkoutActivity"
+    android:padding="@dimen/big_padding">
 
     <TextView
         android:id="@+id/workout_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="TextView" />
+        android:text="TextView"
+        style="@style/title"
+        />
 
     <TextView
         android:id="@+id/exercise_count"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="TextView" />
+        android:text="TextView"
+        android:textSize="20dp"
+        android:textColor="@color/black"/>
 
     <TextView
         android:id="@+id/total_set_count"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="TextView" />
+        android:text="TextView"
+        android:textSize="20dp"
+        android:textColor="@color/black"/>
 
 
     <androidx.recyclerview.widget.RecyclerView
@@ -35,8 +42,9 @@
 
     <Button
         android:id="@+id/start_button"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:padding="@dimen/big_padding"
         android:text="@string/start_training_button" />
 
 </LinearLayout>

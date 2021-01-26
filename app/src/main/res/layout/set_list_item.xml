@@ -1,31 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:padding="@dimen/small_padding">
 
     <EditText
         android:id="@+id/reps_to_do_edit_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:ems="10"
         android:inputType="number"
-        android:hint="Set number of reps" />
+        android:hint="@string/reps_hint"
+        android:paddingHorizontal="@dimen/small_padding"
+        style="@style/edit_text_list_item" />
 
     <EditText
         android:id="@+id/additional_weight_edit_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:ems="10"
         android:inputType="number"
-        android:hint="Set number of reps"/>
+        android:hint="@string/weight_hint"
+        style="@style/edit_text_list_item"/>
 
     <Button
         android:id="@+id/delete_set_button"
+        android:layout_height="match_parent"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_add_black_24dp"/>
+        android:text="@string/delete_button"
+        android:layout_margin="@dimen/small_padding"/>
 
 
 </LinearLayout>
