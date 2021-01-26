@@ -13,4 +13,5 @@
     <string name="reps_hint">Number of reps</string>
     <string name="weight_hint">Additional weight</string>
     <string name="exercise_list">All exercises</string>
+    <string name="save_button">Save</string>
 </resources>

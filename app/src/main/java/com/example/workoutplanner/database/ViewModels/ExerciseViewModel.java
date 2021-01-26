@@ -24,4 +24,5 @@ public class ExerciseViewModel extends AndroidViewModel {
     public LiveData<List<Exercise>> getExercises() {
         return exercises;
     }
+
 }

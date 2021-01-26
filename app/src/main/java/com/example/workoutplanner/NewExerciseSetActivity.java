@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -21,11 +22,13 @@ import android.widget.EditText;
 import android.widget.Spinner;
 
 import com.example.workoutplanner.database.ViewModels.ExerciseViewModel;
+import com.example.workoutplanner.database.ViewModels.SetViewModel;
 import com.example.workoutplanner.database.models.Exercise;
 import com.example.workoutplanner.database.models.Set;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,8 +39,10 @@ public class NewExerciseSetActivity extends AppCompatActivity {
 
     private String exerciseName;
 
-    private List<Set> setList;
-
+    private ArrayList<Set> setList;
+    private SetAdapter adapter;
+    private Button saveButton;
+    private long exerciseId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +50,7 @@ public class NewExerciseSetActivity extends AppCompatActivity {
         setContentView(R.layout.activity_new_exercise_set);
 
         RecyclerView recyclerView = findViewById(R.id.set_recyclerview);
-        final SetAdapter adapter = new SetAdapter();
+        adapter = new SetAdapter();
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -72,8 +77,39 @@ public class NewExerciseSetActivity extends AppCompatActivity {
             }
         });
 
-
+        saveButton = findViewById(R.id.save_button);
+        saveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                saveSets();
+            }
+        });
     }
+
+    private void saveSets() {
+//        SetViewModel svm = ViewModelProviders.of(this).get(SetViewModel.class);
+        for (Set set : setList){
+            if(set.getNumberOfRepsToDO()!=0){
+                set.setExerciseId(exerciseId);
+//                svm.addSet(set);
+            }
+        }
+
+        Intent replyIntent = new Intent();
+        replyIntent.putParcelableArrayListExtra("list_of_sets", setList);
+        setResult(RESULT_OK, replyIntent);
+        finish();
+    }
+
+
+
+    protected void deleteRow(Set s){
+        setList.remove(s);
+        adapter.setSets(setList);
+    }
+
+
+
 
     public void setupExerciseSpinner(List<Exercise> exercises){
         List<String> exerciseNames = new ArrayList<>();
@@ -95,6 +131,7 @@ public class NewExerciseSetActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 exerciseName = exerciseNames.get(position);
+                exerciseId = exercises.get(position).getExerciseId();
             }
 
             @Override
@@ -122,7 +159,7 @@ public class NewExerciseSetActivity extends AppCompatActivity {
             deleteSet.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    setList.remove(set);
+                    deleteRow(set);
                     Snackbar.make(findViewById(R.id.coordinator_layout), "Set deleted", Snackbar.LENGTH_LONG).show();
                 }
             });
@@ -156,9 +193,9 @@ public class NewExerciseSetActivity extends AppCompatActivity {
                 @Override
                 public void onTextChanged(CharSequence s, int start, int before, int count) {
                     if(!s.toString().equals(""))
-                        set.setAditonalWeight(Integer.parseInt(s.toString()));
+                        set.setAdditionalWeight(Integer.parseInt(s.toString()));
                     else{
-                        set.setAditonalWeight(0);
+                        set.setAdditionalWeight(0);
                     }
                 }
 
@@ -173,8 +210,8 @@ public class NewExerciseSetActivity extends AppCompatActivity {
             this.set = s;
             if(set.getNumberOfRepsToDO()!=0)
                 repsToDo.setText(s.getNumberOfRepsToDO()+"");
-            if(set.getAditonalWeight()!=0){
-                additionalWeight.setText(s.getAditonalWeight()+"");
+            if(set.getAdditionalWeight()!=0){
+                additionalWeight.setText(s.getAdditionalWeight()+"");
             }
         }
     }
