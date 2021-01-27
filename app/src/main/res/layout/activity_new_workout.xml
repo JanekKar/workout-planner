@@ -40,11 +40,27 @@
                 android:layout_margin="@dimen/small_padding" />
         </LinearLayout>
 
+        <TextView
+            style="@style/spinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/exercise_list_label"
+            android:layout_marginTop="@dimen/big_padding"
+            />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/exercise_recyclerview"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:minHeight="@dimen/small_padding"/>
+
+        <Button
+            android:id="@+id/add_exercise_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/big_padding"
+            android:text="@string/add_exercise"
+            android:backgroundTint="@color/design_default_color_secondary"/>
 
         <Button
             android:id="@+id/save_button"
@@ -55,15 +71,15 @@
 
     </LinearLayout>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/add_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        android:src="@drawable/ic_add_black_24dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+<!--    <com.google.android.material.floatingactionbutton.FloatingActionButton-->
+<!--        android:id="@+id/add_button"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_gravity="bottom|end"-->
+<!--        android:layout_margin="@dimen/fab_margin"-->
+<!--        android:src="@drawable/ic_add_black_24dp"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent" />-->
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

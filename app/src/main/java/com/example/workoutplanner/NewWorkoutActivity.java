@@ -83,7 +83,8 @@ public class NewWorkoutActivity extends AppCompatActivity implements AdapterView
         daySpinner.setAdapter(spinnerAdapter);
         daySpinner.setOnItemSelectedListener(this);
 
-        FloatingActionButton addWorkoutFab = findViewById(R.id.add_button);
+//        FloatingActionButton addWorkoutFab = findViewById(R.id.add_button);
+        Button addWorkoutFab = findViewById(R.id.add_exercise_button);
         addWorkoutFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

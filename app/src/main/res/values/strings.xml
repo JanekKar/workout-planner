@@ -25,5 +25,7 @@
     <string name="weight_checkbox">Is additional weight needed?</string>
     <string name="exercise_name_hint">Exercise name</string>
     <string name="exercise_type_hint">Type</string>
+    <string name="exercise_list_label">Exercises:</string>
+    <string name="add_exercise">Add exercise to workout</string>
 
 </resources>

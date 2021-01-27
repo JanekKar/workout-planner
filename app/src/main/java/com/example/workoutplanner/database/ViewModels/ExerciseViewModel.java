@@ -43,4 +43,10 @@ public class ExerciseViewModel extends AndroidViewModel {
             dao.update(e);
         });
     }
+
+    public void delete(Exercise e){
+        PlannerDatabase.databaseWriteExecutor.execute(() -> {
+            dao.delete(e);
+        });
+    }
 }

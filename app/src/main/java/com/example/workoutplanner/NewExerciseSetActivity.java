@@ -38,6 +38,7 @@ public class NewExerciseSetActivity extends AppCompatActivity {
     private SetAdapter adapter;
     private Button saveButton;
     private long exerciseId;
+    private boolean weight;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -124,6 +125,8 @@ public class NewExerciseSetActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 exerciseId = exercises.get(position).getExerciseId();
+                weight = exercises.get(position).isAditiona_weight();
+                adapter.notifyDataSetChanged();
             }
 
             @Override
@@ -201,6 +204,7 @@ public class NewExerciseSetActivity extends AppCompatActivity {
             this.set = s;
             if (set.getNumberOfRepsToDO() != 0)
                 repsToDo.setText(s.getNumberOfRepsToDO() + "");
+            additionalWeight.setEnabled(weight);
             if (set.getAdditionalWeight() != 0) {
                 additionalWeight.setText(s.getAdditionalWeight() + "");
             }

@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.workoutplanner.database.ViewModels.ExerciseViewModel;
 import com.example.workoutplanner.database.models.Exercise;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.List;
 
@@ -26,6 +27,8 @@ public class ExerciseListActivity extends AppCompatActivity {
     public static String KEY_EXTRA_EEXERCISE_TYPE = "exercise_type";
     public static String KEY_EXTRA_EEXERCISE_WEIGHT = "exercise_weight";
     public static String KEY_EXTRA_EEXERCISE_ID = "exercise_id";
+
+    private ExerciseViewModel evm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +40,7 @@ public class ExerciseListActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        ExerciseViewModel evm = ViewModelProviders.of(this).get(ExerciseViewModel.class);
+        evm = ViewModelProviders.of(this).get(ExerciseViewModel.class);
         evm.getExercises().observe(this, new Observer<List<Exercise>>() {
             @Override
             public void onChanged(List<Exercise> exercises) {
@@ -56,13 +59,14 @@ public class ExerciseListActivity extends AppCompatActivity {
     }
 
 
-    private class ExerciseHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    private class ExerciseHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
         private TextView exerciseName;
         private Exercise e;
 
         public ExerciseHolder(LayoutInflater inflater, ViewGroup parent) {
             super(inflater.inflate(R.layout.exercise_card_list_item, parent, false));
             itemView.setOnClickListener(this);
+            itemView.setOnLongClickListener(this);
 
             exerciseName = itemView.findViewById(R.id.exercise_name);
         }
@@ -80,6 +84,13 @@ public class ExerciseListActivity extends AppCompatActivity {
             intent.putExtra(KEY_EXTRA_EEXERCISE_WEIGHT, e.isAditiona_weight());
             intent.putExtra(KEY_EXTRA_EEXERCISE_ID, e.getExerciseId());
             startActivity(intent);
+        }
+
+        @Override
+        public boolean onLongClick(View v) {
+            evm.delete(e);
+            Snackbar.make(findViewById(R.id.coordinator_layout), "Exercise" + e.getName() +" deleted", Snackbar.LENGTH_LONG).show();
+            return true;
         }
     }
 
