@@ -29,7 +29,7 @@ import com.example.workoutplanner.database.models.Exercise;
 import com.example.workoutplanner.database.models.Set;
 import com.example.workoutplanner.database.models.Workout;
 import com.example.workoutplanner.database.models.WorkoutSet;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -38,17 +38,22 @@ import java.util.List;
 
 public class NewWorkoutActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
+    public static final String EXTRA_SET_LIST = "EXTRA_SET_LIST";
+    private static final int NEW_EXERCISE_SET_ACTIVITY_REQUEST_CODE = 21;
+    private static final int EDIT_EXERCISE_SET_ACTIVITY_REQUEST_CODE = 22;
     private Spinner daySpinner;
     private EditText workout_name;
     private int weekDay;
 
-    private HashMap<Exercise, List<Set>> exerciseSetMap;
-    private int NEW_EXERCISE_SET_ACTIVITY_REQUEST_CODE = 21;
+    private HashMap<Exercise, ArrayList<Set>> exerciseSetMap;
     private ExerciseAdapter adapter;
     private Button saveButton;
 
     public static long workoutID = -1;
     public static long[] setsId = null;
+
+    private SetViewModel svm;
+    private WorkoutSetViewModel wsvm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,8 +76,8 @@ public class NewWorkoutActivity extends AppCompatActivity implements AdapterView
             public void onClick(View v) {
                 if (!exerciseSetMap.isEmpty()) {
                     saveWorkout();
-                    saveSetsInWorkout();
-                    finish();
+                } else {
+                    Snackbar.make(findViewById(R.id.coordinator_layout), getResources().getString(R.string.add_set_snack_info), Snackbar.LENGTH_LONG).show();
                 }
             }
         });
@@ -94,6 +99,12 @@ public class NewWorkoutActivity extends AppCompatActivity implements AdapterView
         });
     }
 
+    private void deleteExercise(Exercise e) {
+        exerciseSetMap.remove(e);
+        adapter.setExercises(new ArrayList<>(exerciseSetMap.keySet()));
+
+    }
+
     private void saveWorkout() {
         if (!workout_name.getText().toString().isEmpty()) {
             workoutID = -1;
@@ -104,6 +115,9 @@ public class NewWorkoutActivity extends AppCompatActivity implements AdapterView
             // TODO Synchronizacja wontków - do poprawy jak bedzie czas
             while (workoutID == -1) {
             }
+            saveSetsInWorkout();
+        } else {
+            Snackbar.make(findViewById(R.id.coordinator_layout), getResources().getString(R.string.enter_workout_name), Snackbar.LENGTH_LONG).show();
         }
     }
 
@@ -119,7 +133,7 @@ public class NewWorkoutActivity extends AppCompatActivity implements AdapterView
 
         Log.d("MainActivity", setList + "");
 
-        SetViewModel svm = ViewModelProviders.of(this).get(SetViewModel.class);
+        svm = ViewModelProviders.of(this).get(SetViewModel.class);
         svm.addSets(setList);
 
         while (setsId == null) {
@@ -128,21 +142,24 @@ public class NewWorkoutActivity extends AppCompatActivity implements AdapterView
         Log.d("MainActivity", Arrays.toString(setsId));
 
 
-        WorkoutSetViewModel wsvm = ViewModelProviders.of(this).get(WorkoutSetViewModel.class);
+        wsvm = ViewModelProviders.of(this).get(WorkoutSetViewModel.class);
 
         for (long setId : setsId) {
             wsvm.connectSetToWorkout(new WorkoutSet(workoutID, setId));
         }
 
-    }
+        finish();
 
+    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == NEW_EXERCISE_SET_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
-            ArrayList<Set> setlist = data.getParcelableArrayListExtra("list_of_sets");
+        if ((requestCode == NEW_EXERCISE_SET_ACTIVITY_REQUEST_CODE
+                || requestCode == EDIT_EXERCISE_SET_ACTIVITY_REQUEST_CODE)
+                && resultCode == RESULT_OK) {
+            ArrayList<Set> setlist = data.getParcelableArrayListExtra(NewExerciseSetActivity.EXTRA_SET_LIST_TO_SAVE);
             if (!setlist.isEmpty()) {
                 long exerciseId = setlist.get(0).getExerciseId();
                 ExerciseViewModel evm = ViewModelProviders.of(this).get(ExerciseViewModel.class);
@@ -160,7 +177,7 @@ public class NewWorkoutActivity extends AppCompatActivity implements AdapterView
         }
     }
 
-    private void addExerciseToList(Exercise e, List<Set> setList) {
+    private void addExerciseToList(Exercise e, ArrayList<Set> setList) {
         Log.d("MainActivity", e + "");
         Log.d("MainActivity", setList + "");
         exerciseSetMap.put(e, setList);
@@ -177,23 +194,36 @@ public class NewWorkoutActivity extends AppCompatActivity implements AdapterView
         //TODO block adding new workout
     }
 
-    private class ExerciseHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    private class ExerciseHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
         private TextView exerciseName;
+        private Exercise exercise;
 
         public ExerciseHolder(LayoutInflater inflater, ViewGroup parent) {
             super(inflater.inflate(R.layout.exercise_list_item, parent, false));
             itemView.setOnClickListener(this);
+            itemView.setOnLongClickListener(this);
 
             exerciseName = itemView.findViewById(R.id.exercise_name);
         }
 
         public void bind(Exercise e) {
+            this.exercise = e;
             this.exerciseName.setText(e.getName());
         }
 
         @Override
         public void onClick(View v) {
-            //TODO edycja ćwiczenia
+            Intent intent = new Intent(NewWorkoutActivity.this, NewExerciseSetActivity.class);
+            intent.putParcelableArrayListExtra(EXTRA_SET_LIST, exerciseSetMap.get(exercise));
+            startActivityForResult(intent, EDIT_EXERCISE_SET_ACTIVITY_REQUEST_CODE);
+            deleteExercise(exercise);
+        }
+
+        @Override
+        public boolean onLongClick(View v) {
+            deleteExercise(exercise);
+            Snackbar.make(findViewById(R.id.coordinator_layout), getResources().getString(R.string.exercise_set_deleted, exercise.getName()), Snackbar.LENGTH_LONG).show();
+            return true;
         }
     }
 

@@ -27,5 +27,10 @@
     <string name="exercise_type_hint">Type</string>
     <string name="exercise_list_label">Exercises:</string>
     <string name="add_exercise">Add exercise to workout</string>
+    <string name="exercise_deleted">Exercise %s deleted</string>
+    <string name="set_deleted">Set deleted</string>
+    <string name="add_set_snack_info">Add at least one exercise to training.</string>
+    <string name="enter_workout_name">Enter workout name</string>
+    <string name="exercise_set_deleted">Exercise  %s and its sets deleted from workout</string>
 
 </resources>

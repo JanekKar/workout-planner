@@ -32,6 +32,7 @@ import java.util.List;
 
 public class NewExerciseSetActivity extends AppCompatActivity {
 
+    public static final String EXTRA_SET_LIST_TO_SAVE = "extra_set_list_to_save";
     private Spinner exerciseSpinner;
 
     private ArrayList<Set> setList;
@@ -39,6 +40,7 @@ public class NewExerciseSetActivity extends AppCompatActivity {
     private Button saveButton;
     private long exerciseId;
     private boolean weight;
+    private boolean edit = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,11 +52,21 @@ public class NewExerciseSetActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        setList = new ArrayList<>();
-        setList.add(new Set(0, 0, 0));
-        setList.add(new Set(0, 0, 0));
-        setList.add(new Set(0, 0, 0));
+        if(getIntent().hasExtra(NewWorkoutActivity.EXTRA_SET_LIST)){
+            setList = getIntent().getParcelableArrayListExtra(NewWorkoutActivity.EXTRA_SET_LIST);
+            exerciseId = setList.get(0).getExerciseId();
+            edit = true;
+        }else{
+            setList = new ArrayList<>();
+            setList.add(new Set(0, 0, 0));
+            setList.add(new Set(0, 0, 0));
+            setList.add(new Set(0, 0, 0));
+            exerciseId = 0;
+        }
+
         adapter.setSets(setList);
+
+
 
         ExerciseViewModel evm = ViewModelProviders.of(this).get(ExerciseViewModel.class);
         evm.getExercises().observe(this, new Observer<List<Exercise>>() {
@@ -83,7 +95,6 @@ public class NewExerciseSetActivity extends AppCompatActivity {
     }
 
     private void saveSets() {
-//        SetViewModel svm = ViewModelProviders.of(this).get(SetViewModel.class);
         ArrayList<Set> toSave = new ArrayList<>();
         for (Set set : setList) {
             if (set.getNumberOfRepsToDO() != 0) {
@@ -93,7 +104,7 @@ public class NewExerciseSetActivity extends AppCompatActivity {
         }
 
         Intent replyIntent = new Intent();
-        replyIntent.putParcelableArrayListExtra("list_of_sets", toSave);
+        replyIntent.putParcelableArrayListExtra(EXTRA_SET_LIST_TO_SAVE, toSave);
         setResult(RESULT_OK, replyIntent);
         finish();
     }
@@ -106,16 +117,21 @@ public class NewExerciseSetActivity extends AppCompatActivity {
 
 
     public void setupExerciseSpinner(List<Exercise> exercises) {
+         int pos = 0;
         List<String> exerciseNames = new ArrayList<>();
         if (exercises != null) {
             for (Exercise e : exercises) {
                 exerciseNames.add(e.getName());
+                if(e.getExerciseId() == exerciseId)
+                    pos = exerciseNames.indexOf(e.getName());
+
             }
 
             exerciseSpinner = findViewById(R.id.exercise_spinner);
             ArrayAdapter<String> exerciseAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, exerciseNames);
             exerciseAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             exerciseSpinner.setAdapter(exerciseAdapter);
+            exerciseSpinner.setSelection(pos);
 
         } else {
             Log.d("MainActivity", "No exercises found");
@@ -154,7 +170,7 @@ public class NewExerciseSetActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     deleteRow(set);
-                    Snackbar.make(findViewById(R.id.coordinator_layout), "Set deleted", Snackbar.LENGTH_LONG).show();
+                    Snackbar.make(findViewById(R.id.coordinator_layout), getResources().getString(R.string.set_deleted), Snackbar.LENGTH_LONG).show();
                 }
             });
 
@@ -204,9 +220,14 @@ public class NewExerciseSetActivity extends AppCompatActivity {
             this.set = s;
             if (set.getNumberOfRepsToDO() != 0)
                 repsToDo.setText(s.getNumberOfRepsToDO() + "");
+            else{
+                repsToDo.setText("");
+            }
             additionalWeight.setEnabled(weight);
-            if (set.getAdditionalWeight() != 0) {
+            if (set.getAdditionalWeight() != 0 || weight) {
                 additionalWeight.setText(s.getAdditionalWeight() + "");
+            }else{
+                additionalWeight.setText("");
             }
         }
     }

@@ -89,7 +89,7 @@ public class ExerciseListActivity extends AppCompatActivity {
         @Override
         public boolean onLongClick(View v) {
             evm.delete(e);
-            Snackbar.make(findViewById(R.id.coordinator_layout), "Exercise" + e.getName() +" deleted", Snackbar.LENGTH_LONG).show();
+            Snackbar.make(findViewById(R.id.coordinator_layout), getResources().getString(R.string.exercise_deleted, e.getName()), Snackbar.LENGTH_LONG).show();
             return true;
         }
     }
