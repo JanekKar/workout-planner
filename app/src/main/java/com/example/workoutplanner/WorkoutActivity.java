@@ -121,7 +121,7 @@ public class WorkoutActivity extends AppCompatActivity {
                         exerciseNumOfSets.put(set.getExerciseId(), 1);
                     }
                 }
-                totalNumberOfSets.setText(sets.size() + "");
+                totalNumberOfSets.setText(getResources().getString(R.string.total_sets_label,sets.size()));
                 Log.d("MainActivity", exerciseNumOfSets + "");
 
                 getAllExercises(new ArrayList<Long>(exerciseNumOfSets.keySet()));
@@ -139,7 +139,7 @@ public class WorkoutActivity extends AppCompatActivity {
                     Log.d("MainActivity", e + "");
                 }
 
-                totalNumberOfExercises.setText(exercises.size() + "");
+                totalNumberOfExercises.setText(getResources().getString(R.string.total_exercise_label, exercises.size()));
                 adapter.setExercises(exercises);
             }
         });

@@ -32,6 +32,14 @@
         android:textSize="20dp"
         android:textColor="@color/black"/>
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/exercise_label"
+        android:textSize="20dp"
+        android:textColor="@color/black"/>
+
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/exercise_recyclerview"

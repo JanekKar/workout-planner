@@ -54,7 +54,7 @@ public abstract class PlannerDatabase extends RoomDatabase {
 //                Set s = new Set(1, 30, 0);
 //                setDao.insertAll(s, s, s);
 //
-//                WorkOutDao wd = INSTANCE.workOutDao();
+//                WorkoutDao wd = INSTANCE.workOutDao();
 //                wd.deleteAll();
 //
 //                Workout w = new Workout(1, "Test name");
@@ -65,6 +65,7 @@ public abstract class PlannerDatabase extends RoomDatabase {
 //                wd.insertAll(w);
 //
 //                WorkoutSetDao wsd = INSTANCE.workoutSetDao();
+//                wsd.deleteAll();
 //                WorkoutSet ws = new WorkoutSet(22, 2);
 //                wsd.insertAll(ws);
 //                ws = new WorkoutSet(22, 3);

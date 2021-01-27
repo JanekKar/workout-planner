@@ -72,6 +72,7 @@ public class NewWorkoutActivity extends AppCompatActivity implements AdapterView
                 if (!exerciseSetMap.isEmpty()) {
                     saveWorkout();
                     saveSetsInWorkout();
+                    finish();
                 }
             }
         });

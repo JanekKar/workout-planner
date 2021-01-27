@@ -30,7 +30,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    private int NEW_BOOK_ACTIVITY_REQUEST_CODE = 0;
+    private int NEW_WORKOUT_ACTIVITY_REQUEST_CODE = 0;
     public static String WORKOUT_ID_EXTRA = "WORKOUT_ID_EXTRA";
 
     @Override
@@ -76,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, NewWorkoutActivity.class);
-                startActivityForResult(intent, NEW_BOOK_ACTIVITY_REQUEST_CODE);
+                startActivityForResult(intent, NEW_WORKOUT_ACTIVITY_REQUEST_CODE);
             }
         });
 

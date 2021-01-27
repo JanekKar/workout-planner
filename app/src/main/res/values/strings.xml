@@ -19,4 +19,8 @@
     <string name="choose_day">Choose day:</string>
     <string name="no_name">NO_NAME</string>
     <string name="choose_exercise">Choose exercise</string>
+    <string name="total_exercise_label">Number of exercises: %d</string>
+    <string name="total_sets_label">Number of sets to do: %d</string>
+    <string name="exercise_label">Exercises:</string>
+
 </resources>
