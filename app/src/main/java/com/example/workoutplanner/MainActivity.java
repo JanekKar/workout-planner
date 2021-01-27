@@ -30,8 +30,8 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    private int NEW_WORKOUT_ACTIVITY_REQUEST_CODE = 0;
     public static String WORKOUT_ID_EXTRA = "WORKOUT_ID_EXTRA";
+    private final int NEW_WORKOUT_ACTIVITY_REQUEST_CODE = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,11 +109,16 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    public String dayNumberToName(int number) {
+        Resources res = getResources();
+        String[] days = res.getStringArray(R.array.days_of_week);
+        return days[number];
+    }
 
     private class WorkoutHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
 
-        private TextView dayTextView;
-        private TextView nameTextView;
+        private final TextView dayTextView;
+        private final TextView nameTextView;
         private Workout workout;
 
         public WorkoutHolder(LayoutInflater inflater, ViewGroup parent) {
@@ -187,11 +192,5 @@ public class MainActivity extends AppCompatActivity {
             notifyDataSetChanged();
         }
 
-    }
-
-    public String dayNumberToName(int number) {
-        Resources res = getResources();
-        String[] days = res.getStringArray(R.array.days_of_week);
-        return days[number];
     }
 }

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/coordinator_layout"
     android:layout_width="match_parent"
@@ -44,23 +43,22 @@
             style="@style/spinner"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/exercise_list_label"
             android:layout_marginTop="@dimen/big_padding"
-            />
+            android:text="@string/exercise_list_label" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/exercise_recyclerview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:minHeight="@dimen/small_padding"/>
+            android:minHeight="@dimen/small_padding" />
 
         <Button
             android:id="@+id/add_exercise_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:backgroundTint="@color/design_default_color_secondary"
             android:padding="@dimen/big_padding"
-            android:text="@string/add_exercise"
-            android:backgroundTint="@color/design_default_color_secondary"/>
+            android:text="@string/add_exercise" />
 
         <Button
             android:id="@+id/save_button"
@@ -71,15 +69,15 @@
 
     </LinearLayout>
 
-<!--    <com.google.android.material.floatingactionbutton.FloatingActionButton-->
-<!--        android:id="@+id/add_button"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_gravity="bottom|end"-->
-<!--        android:layout_margin="@dimen/fab_margin"-->
-<!--        android:src="@drawable/ic_add_black_24dp"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent" />-->
+    <!--    <com.google.android.material.floatingactionbutton.FloatingActionButton-->
+    <!--        android:id="@+id/add_button"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_gravity="bottom|end"-->
+    <!--        android:layout_margin="@dimen/fab_margin"-->
+    <!--        android:src="@drawable/ic_add_black_24dp"-->
+    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent" />-->
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

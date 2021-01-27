@@ -60,7 +60,7 @@ public class ExerciseListActivity extends AppCompatActivity {
 
 
     private class ExerciseHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
-        private TextView exerciseName;
+        private final TextView exerciseName;
         private Exercise e;
 
         public ExerciseHolder(LayoutInflater inflater, ViewGroup parent) {

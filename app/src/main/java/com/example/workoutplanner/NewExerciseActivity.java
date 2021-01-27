@@ -14,11 +14,11 @@ import com.example.workoutplanner.database.models.Exercise;
 
 public class NewExerciseActivity extends AppCompatActivity {
 
+    long id;
     private EditText exerciseName;
     private EditText typeName;
     private CheckBox weight;
     private Button saveButton;
-    long id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

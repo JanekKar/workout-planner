@@ -7,16 +7,15 @@
 
     <TextView
         android:id="@+id/exercise_name"
+        style="@style/main_text_list_item"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
-        style="@style/main_text_list_item"
-        />
+        android:text="TextView" />
 
     <TextView
         android:id="@+id/number_of_sets_name"
+        style="@style/secondary_text_list_item"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
-        style="@style/secondary_text_list_item"/>
+        android:text="TextView" />
 </LinearLayout>

@@ -20,21 +20,21 @@
             android:orientation="horizontal">
 
             <TextView
+                style="@style/spinner"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/choose_exercise"
-                style="@style/spinner"/>
+                android:text="@string/choose_exercise" />
 
             <Spinner
                 android:id="@+id/exercise_spinner"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content" />
         </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/set_recyclerview"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
+            android:layout_height="wrap_content">
 
         </androidx.recyclerview.widget.RecyclerView>
 

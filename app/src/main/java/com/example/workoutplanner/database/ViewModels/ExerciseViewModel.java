@@ -14,8 +14,8 @@ import java.util.List;
 
 public class ExerciseViewModel extends AndroidViewModel {
 
-    private LiveData<List<Exercise>> exercises;
-    private ExerciseDao dao;
+    private final LiveData<List<Exercise>> exercises;
+    private final ExerciseDao dao;
 
     public ExerciseViewModel(@NonNull Application application) {
         super(application);
@@ -44,7 +44,7 @@ public class ExerciseViewModel extends AndroidViewModel {
         });
     }
 
-    public void delete(Exercise e){
+    public void delete(Exercise e) {
         PlannerDatabase.databaseWriteExecutor.execute(() -> {
             dao.delete(e);
         });

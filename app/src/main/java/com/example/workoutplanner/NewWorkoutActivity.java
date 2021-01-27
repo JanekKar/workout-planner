@@ -41,17 +41,14 @@ public class NewWorkoutActivity extends AppCompatActivity implements AdapterView
     public static final String EXTRA_SET_LIST = "EXTRA_SET_LIST";
     private static final int NEW_EXERCISE_SET_ACTIVITY_REQUEST_CODE = 21;
     private static final int EDIT_EXERCISE_SET_ACTIVITY_REQUEST_CODE = 22;
+    public static long workoutID = -1;
+    public static long[] setsId = null;
     private Spinner daySpinner;
     private EditText workout_name;
     private int weekDay;
-
     private HashMap<Exercise, ArrayList<Set>> exerciseSetMap;
     private ExerciseAdapter adapter;
     private Button saveButton;
-
-    public static long workoutID = -1;
-    public static long[] setsId = null;
-
     private SetViewModel svm;
     private WorkoutSetViewModel wsvm;
 
@@ -67,7 +64,7 @@ public class NewWorkoutActivity extends AppCompatActivity implements AdapterView
 
         exerciseSetMap = new HashMap<>();
 
-        daySpinner = (Spinner) findViewById(R.id.day_spinner);
+        daySpinner = findViewById(R.id.day_spinner);
         workout_name = findViewById(R.id.workout_name_editText);
         saveButton = findViewById(R.id.save_button);
 
@@ -195,7 +192,7 @@ public class NewWorkoutActivity extends AppCompatActivity implements AdapterView
     }
 
     private class ExerciseHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
-        private TextView exerciseName;
+        private final TextView exerciseName;
         private Exercise exercise;
 
         public ExerciseHolder(LayoutInflater inflater, ViewGroup parent) {

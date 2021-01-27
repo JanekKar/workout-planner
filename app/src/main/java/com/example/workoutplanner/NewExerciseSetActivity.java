@@ -52,11 +52,11 @@ public class NewExerciseSetActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        if(getIntent().hasExtra(NewWorkoutActivity.EXTRA_SET_LIST)){
+        if (getIntent().hasExtra(NewWorkoutActivity.EXTRA_SET_LIST)) {
             setList = getIntent().getParcelableArrayListExtra(NewWorkoutActivity.EXTRA_SET_LIST);
             exerciseId = setList.get(0).getExerciseId();
             edit = true;
-        }else{
+        } else {
             setList = new ArrayList<>();
             setList.add(new Set(0, 0, 0));
             setList.add(new Set(0, 0, 0));
@@ -65,7 +65,6 @@ public class NewExerciseSetActivity extends AppCompatActivity {
         }
 
         adapter.setSets(setList);
-
 
 
         ExerciseViewModel evm = ViewModelProviders.of(this).get(ExerciseViewModel.class);
@@ -117,12 +116,12 @@ public class NewExerciseSetActivity extends AppCompatActivity {
 
 
     public void setupExerciseSpinner(List<Exercise> exercises) {
-         int pos = 0;
+        int pos = 0;
         List<String> exerciseNames = new ArrayList<>();
         if (exercises != null) {
             for (Exercise e : exercises) {
                 exerciseNames.add(e.getName());
-                if(e.getExerciseId() == exerciseId)
+                if (e.getExerciseId() == exerciseId)
                     pos = exerciseNames.indexOf(e.getName());
 
             }
@@ -154,9 +153,9 @@ public class NewExerciseSetActivity extends AppCompatActivity {
 
     private class SetHolder extends RecyclerView.ViewHolder {
 
-        private EditText repsToDo;
-        private EditText additionalWeight;
-        private Button deleteSet;
+        private final EditText repsToDo;
+        private final EditText additionalWeight;
+        private final Button deleteSet;
         private Set set;
 
         public SetHolder(LayoutInflater inflater, ViewGroup parent) {
@@ -220,13 +219,13 @@ public class NewExerciseSetActivity extends AppCompatActivity {
             this.set = s;
             if (set.getNumberOfRepsToDO() != 0)
                 repsToDo.setText(s.getNumberOfRepsToDO() + "");
-            else{
+            else {
                 repsToDo.setText("");
             }
             additionalWeight.setEnabled(weight);
             if (set.getAdditionalWeight() != 0 || weight) {
                 additionalWeight.setText(s.getAdditionalWeight() + "");
-            }else{
+            } else {
                 additionalWeight.setText("");
             }
         }

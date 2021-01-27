@@ -7,26 +7,23 @@ import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
-import java.io.Serializable;
-
-@Entity( tableName = "set_table")
+@Entity(tableName = "set_table")
 public class Set implements Parcelable {
+    @Ignore
+    public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
+        public Set createFromParcel(Parcel in) {
+            return new Set(in);
+        }
+
+        public Set[] newArray(int size) {
+            return new Set[size];
+        }
+    };
     @PrimaryKey(autoGenerate = true)
     private long setId;
     private long exerciseId;
     private int numberOfRepsToDO;
     private int additionalWeight;
-
-    @Ignore
-    public static final Parcelable.Creator CREATOR  = new Parcelable.Creator(){
-        public Set createFromParcel(Parcel in){
-            return new Set(in);
-        }
-
-        public Set[] newArray(int size){
-            return new Set[size];
-        }
-    };
 
     public Set(long exerciseId, int numberOfRepsToDO, int additionalWeight) {
         this.exerciseId = exerciseId;
@@ -34,7 +31,7 @@ public class Set implements Parcelable {
         this.additionalWeight = additionalWeight;
     }
 
-    public Set(Parcel in){
+    public Set(Parcel in) {
         this.setId = in.readLong();
         this.exerciseId = in.readLong();
         this.numberOfRepsToDO = in.readInt();

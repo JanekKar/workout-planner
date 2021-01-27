@@ -7,7 +7,6 @@ import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 
-import com.example.workoutplanner.database.models.Set;
 import com.example.workoutplanner.database.models.Workout;
 
 import java.util.List;

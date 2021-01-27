@@ -6,29 +6,29 @@
 
     <EditText
         android:id="@+id/reps_to_do_edit_text"
+        style="@style/edit_text_list_item"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:inputType="number"
         android:hint="@string/reps_hint"
-        android:paddingHorizontal="@dimen/small_padding"
-        style="@style/edit_text_list_item" />
+        android:inputType="number"
+        android:paddingHorizontal="@dimen/small_padding" />
 
     <EditText
         android:id="@+id/additional_weight_edit_text"
+        style="@style/edit_text_list_item"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:inputType="number"
         android:hint="@string/weight_hint"
-        style="@style/edit_text_list_item"/>
+        android:inputType="number" />
 
     <Button
         android:id="@+id/delete_set_button"
-        android:layout_height="match_parent"
         android:layout_width="wrap_content"
-        android:text="@string/delete_button"
-        android:layout_margin="@dimen/small_padding"/>
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/small_padding"
+        android:text="@string/delete_button" />
 
 
 </LinearLayout>

@@ -23,19 +23,10 @@ import java.util.concurrent.Executors;
 @Database(entities = {Exercise.class, Set.class, Workout.class, WorkoutSet.class}, version = 1, exportSchema = false)
 public abstract class PlannerDatabase extends RoomDatabase {
 
-    public abstract ExerciseDao exerciseDao();
-
-    public abstract SetDao setDao();
-
-    public abstract WorkoutDao workOutDao();
-
-    public abstract WorkoutSetDao workoutSetDao();
-
-    private static volatile PlannerDatabase INSTANCE;
     public static final int NUMBER_OF_THREADS = 4;
     public static final ExecutorService databaseWriteExecutor = Executors.newFixedThreadPool(NUMBER_OF_THREADS);
-
-    private static RoomDatabase.Callback sPlannerDatabaseCallback = new RoomDatabase.Callback() {
+    private static volatile PlannerDatabase INSTANCE;
+    private static final RoomDatabase.Callback sPlannerDatabaseCallback = new RoomDatabase.Callback() {
         @Override
         public void onOpen(@NonNull SupportSQLiteDatabase db) {
             super.onOpen(db);
@@ -89,4 +80,12 @@ public abstract class PlannerDatabase extends RoomDatabase {
         }
         return INSTANCE;
     }
+
+    public abstract ExerciseDao exerciseDao();
+
+    public abstract SetDao setDao();
+
+    public abstract WorkoutDao workOutDao();
+
+    public abstract WorkoutSetDao workoutSetDao();
 }

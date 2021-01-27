@@ -8,7 +8,6 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.workoutplanner.database.ViewModels.ExerciseViewModel;
 import com.example.workoutplanner.database.models.Set;
 
 import java.util.ArrayList;
@@ -41,7 +40,7 @@ public class TrainingActivity extends AppCompatActivity {
 
         setList = getIntent().getParcelableArrayListExtra(WorkoutActivity.EXERCISE_SET_LIST_EXTRA);
         exerciseName = getIntent().getStringExtra(WorkoutActivity.EXERCISE_NAME_EXTRA);
-        if (setList==null || setList.isEmpty()){
+        if (setList == null || setList.isEmpty()) {
             finish();
             //TODO Nie wiem jeszcze co wtedy
         }
@@ -55,13 +54,13 @@ public class TrainingActivity extends AppCompatActivity {
         nextSetButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(++currentSet < setList.size()){
+                if (++currentSet < setList.size()) {
                     //TODO save set as done
                     setAllFields();
-                    if(currentSet+1 == setList.size()){
+                    if (currentSet + 1 == setList.size()) {
                         nextSetButton.setText(R.string.last_set);
                     }
-                }else{
+                } else {
                     finish();
                 }
             }
@@ -69,8 +68,8 @@ public class TrainingActivity extends AppCompatActivity {
     }
 
     private void setAllFields() {
-        setNumberTextView.setText(getResources().getString(R.string.set_number, currentSet+1, setList.size()));
-        repsToDoTextView.setText(setList.get(currentSet).getNumberOfRepsToDO()+"");
-        repsDoneEditText.setText(setList.get(currentSet).getNumberOfRepsToDO()+"");
+        setNumberTextView.setText(getResources().getString(R.string.set_number, currentSet + 1, setList.size()));
+        repsToDoTextView.setText(setList.get(currentSet).getNumberOfRepsToDO() + "");
+        repsDoneEditText.setText(setList.get(currentSet).getNumberOfRepsToDO() + "");
     }
 }

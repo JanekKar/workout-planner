@@ -15,7 +15,7 @@ import java.util.List;
 
 public class SetViewModel extends AndroidViewModel {
     private final SetDao setDao;
-    private LiveData<List<Set>> sets;
+    private final LiveData<List<Set>> sets;
 
     public SetViewModel(@NonNull Application application) {
         super(application);
@@ -34,10 +34,10 @@ public class SetViewModel extends AndroidViewModel {
         });
     }
 
-    public void addSets(List<Set> setList){
+    public void addSets(List<Set> setList) {
         PlannerDatabase.databaseWriteExecutor.execute(() -> {
             long[] idArr = new long[setList.size()];
-            for(int i =0; i<setList.size(); i++){
+            for (int i = 0; i < setList.size(); i++) {
                 idArr[i] = setDao.insert(setList.get(i));
             }
             NewWorkoutActivity.setsId = idArr;

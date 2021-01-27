@@ -6,7 +6,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -31,13 +30,11 @@ import java.util.List;
 
 public class WorkoutActivity extends AppCompatActivity {
 
-    public  static final String EXERCISE_NAME_EXTRA = "exercise_name_extra";
+    public static final String EXERCISE_NAME_EXTRA = "exercise_name_extra";
     public static final String EXERCISE_SET_LIST_EXTRA = "exercise_set_list_extra";
+    public List<Set> setList;
     private long workoutId;
     private Workout workout = null;
-
-    public List<Set> setList;
-
     private TextView workoutName;
     private TextView totalNumberOfExercises;
     private TextView totalNumberOfSets;
@@ -83,7 +80,7 @@ public class WorkoutActivity extends AppCompatActivity {
         workoutSetViewModel.getAllSets(workout.getId()).observe(this, new Observer<List<WorkoutSet>>() {
             @Override
             public void onChanged(List<WorkoutSet> workoutSets) {
-                long setIds[] = new long[workoutSets.size()];
+                long[] setIds = new long[workoutSets.size()];
                 int i = 0;
                 for (WorkoutSet ws : workoutSets) {
                     setIds[i++] = ws.getSetId();
@@ -112,7 +109,7 @@ public class WorkoutActivity extends AppCompatActivity {
                         exerciseNumOfSets.put(set.getExerciseId(), 1);
                     }
                 }
-                totalNumberOfSets.setText(getResources().getString(R.string.total_sets_label,sets.size()));
+                totalNumberOfSets.setText(getResources().getString(R.string.total_sets_label, sets.size()));
                 Log.d("MainActivity", exerciseNumOfSets + "");
 
                 getAllExercises(new ArrayList<Long>(exerciseNumOfSets.keySet()));
@@ -138,7 +135,7 @@ public class WorkoutActivity extends AppCompatActivity {
 
 
     private class ExerciseHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        private TextView exerciseName;
+        private final TextView exerciseName;
         private Exercise exercise;
 
         public ExerciseHolder(LayoutInflater inflater, ViewGroup parent) {
@@ -156,9 +153,9 @@ public class WorkoutActivity extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             ArrayList<Set> exerciseSetList = new ArrayList<>();
-            for(Set set : setList){
-                if(set.getExerciseId() == exercise.getExerciseId());
-                    exerciseSetList.add(set);
+            for (Set set : setList) {
+                if (set.getExerciseId() == exercise.getExerciseId()) ;
+                exerciseSetList.add(set);
             }
             Intent intent = new Intent(WorkoutActivity.this, TrainingActivity.class);
             intent.putParcelableArrayListExtra(EXERCISE_SET_LIST_EXTRA, exerciseSetList);
