@@ -22,5 +22,8 @@
     <string name="total_exercise_label">Number of exercises: %d</string>
     <string name="total_sets_label">Number of sets to do: %d</string>
     <string name="exercise_label">Exercises:</string>
+    <string name="weight_checkbox">Is additional weight needed?</string>
+    <string name="exercise_name_hint">Exercise name</string>
+    <string name="exercise_type_hint">Type</string>
 
 </resources>

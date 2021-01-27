@@ -49,4 +49,14 @@ public class Exercise {
     public void setAditiona_weight(boolean aditiona_weight) {
         this.aditiona_weight = aditiona_weight;
     }
+
+    @Override
+    public String toString() {
+        return "Exercise{" +
+                "exerciseId=" + exerciseId +
+                ", name='" + name + '\'' +
+                ", type='" + type + '\'' +
+                ", aditiona_weight=" + aditiona_weight +
+                '}';
+    }
 }

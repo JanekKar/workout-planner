@@ -99,6 +99,7 @@ public class MainActivity extends AppCompatActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.exercise_list) {
             Intent intent = new Intent(MainActivity.this, ExerciseListActivity.class);
+            startActivity(intent);
             //TODO exercise list activity
             //TODO adding new activity
             //TODO deleting activity
