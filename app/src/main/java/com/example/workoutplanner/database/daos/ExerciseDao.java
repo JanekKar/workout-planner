@@ -6,6 +6,7 @@ import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
+import androidx.room.Update;
 
 import com.example.workoutplanner.database.models.Exercise;
 
@@ -15,6 +16,9 @@ import java.util.List;
 public interface ExerciseDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertAll(Exercise... exercises);
+
+    @Update
+    void update(Exercise exercise);
 
     @Delete
     void delete(Exercise exercise);

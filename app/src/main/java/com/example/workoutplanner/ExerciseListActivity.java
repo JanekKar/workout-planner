@@ -1,18 +1,18 @@
 package com.example.workoutplanner;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.workoutplanner.database.ViewModels.ExerciseViewModel;
 import com.example.workoutplanner.database.models.Exercise;
@@ -21,6 +21,11 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.List;
 
 public class ExerciseListActivity extends AppCompatActivity {
+
+    public static String KEY_EXTRA_EEXERCISE_NAME = "exercise_name";
+    public static String KEY_EXTRA_EEXERCISE_TYPE = "exercise_type";
+    public static String KEY_EXTRA_EEXERCISE_WEIGHT = "exercise_weight";
+    public static String KEY_EXTRA_EEXERCISE_ID = "exercise_id";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,14 +53,12 @@ public class ExerciseListActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-
     }
-
 
 
     private class ExerciseHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private TextView exerciseName;
+        private Exercise e;
 
         public ExerciseHolder(LayoutInflater inflater, ViewGroup parent) {
             super(inflater.inflate(R.layout.exercise_card_list_item, parent, false));
@@ -65,12 +68,18 @@ public class ExerciseListActivity extends AppCompatActivity {
         }
 
         public void bind(Exercise e) {
+            this.e = e;
             this.exerciseName.setText(e.getName());
         }
 
         @Override
         public void onClick(View v) {
-            //TODO edycja ćwiczenia
+            Intent intent = new Intent(ExerciseListActivity.this, NewExerciseActivity.class);
+            intent.putExtra(KEY_EXTRA_EEXERCISE_NAME, e.getName());
+            intent.putExtra(KEY_EXTRA_EEXERCISE_TYPE, e.getType());
+            intent.putExtra(KEY_EXTRA_EEXERCISE_WEIGHT, e.isAditiona_weight());
+            intent.putExtra(KEY_EXTRA_EEXERCISE_ID, e.getExerciseId());
+            startActivity(intent);
         }
     }
 
