@@ -1,5 +1,6 @@
 package com.example.workoutplanner;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -30,6 +31,8 @@ import java.util.List;
 
 public class WorkoutActivity extends AppCompatActivity {
 
+    public  static final String EXERCISE_NAME_EXTRA = "exercise_name_extra";
+    public static final String EXERCISE_SET_LIST_EXTRA = "exercise_set_list_extra";
     private long workoutId;
     private Workout workout = null;
 
@@ -39,7 +42,6 @@ public class WorkoutActivity extends AppCompatActivity {
     private TextView totalNumberOfExercises;
     private TextView totalNumberOfSets;
     private ExerciseAdapter adapter;
-    private Button startTrainingButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +51,6 @@ public class WorkoutActivity extends AppCompatActivity {
         workoutName = findViewById(R.id.workout_name);
         totalNumberOfExercises = findViewById(R.id.exercise_count);
         totalNumberOfSets = findViewById(R.id.total_set_count);
-        startTrainingButton = findViewById(R.id.start_button);
 
         RecyclerView recyclerView = findViewById(R.id.exercise_recyclerview);
         adapter = new ExerciseAdapter();
@@ -73,16 +74,6 @@ public class WorkoutActivity extends AppCompatActivity {
 
                     }
                 }
-            }
-        });
-
-        startTrainingButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //TODO new activity for training
-                //TODO Set workoutId and setID and save state for resume
-                //TODO add resume to this activity if traininig started
-                //TODO Training activity as FRAGMENTS
             }
         });
     }
@@ -148,6 +139,7 @@ public class WorkoutActivity extends AppCompatActivity {
 
     private class ExerciseHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private TextView exerciseName;
+        private Exercise exercise;
 
         public ExerciseHolder(LayoutInflater inflater, ViewGroup parent) {
             super(inflater.inflate(R.layout.exercise_card_list_item, parent, false));
@@ -157,12 +149,21 @@ public class WorkoutActivity extends AppCompatActivity {
         }
 
         public void bind(Exercise e) {
+            this.exercise = e;
             this.exerciseName.setText(e.getName());
         }
 
         @Override
         public void onClick(View v) {
-            //TODO edycja ćwiczenia
+            ArrayList<Set> exerciseSetList = new ArrayList<>();
+            for(Set set : setList){
+                if(set.getExerciseId() == exercise.getExerciseId());
+                    exerciseSetList.add(set);
+            }
+            Intent intent = new Intent(WorkoutActivity.this, TrainingActivity.class);
+            intent.putParcelableArrayListExtra(EXERCISE_SET_LIST_EXTRA, exerciseSetList);
+            intent.putExtra(EXERCISE_NAME_EXTRA, exercise.getName());
+            startActivity(intent);
         }
     }
 

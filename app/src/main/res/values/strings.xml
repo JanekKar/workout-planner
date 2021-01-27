@@ -32,5 +32,11 @@
     <string name="add_set_snack_info">Add at least one exercise to training.</string>
     <string name="enter_workout_name">Enter workout name</string>
     <string name="exercise_set_deleted">Exercise  %s and its sets deleted from workout</string>
+    <string name="workout_info">Tap exercise to start workout</string>
+    <string name="reps_to_do_label">REPETITIONS TO DO</string>
+    <string name="reps_done_label">REPETITIONS DONE</string>
+    <string name="next_set">NEXT SET</string>
+    <string name="set_number">SET %d of %d</string>
+    <string name="last_set">END EXERCISE</string>
 
 </resources>
