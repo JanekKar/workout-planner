@@ -28,7 +28,6 @@ import com.example.workoutplanner.database.models.DoneSet;
 import com.example.workoutplanner.database.models.Workout;
 import com.example.workoutplanner.database.models.WorkoutSet;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -76,15 +75,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
-        ws.getAllWorkoutsSets().observe(this, new Observer<List<WorkoutSet>>() {
-            @Override
-            public void onChanged(List<WorkoutSet> workoutSets) {
-
-            }
-        });
-
-
         FloatingActionButton addWorkoutFab = findViewById(R.id.add_button);
         addWorkoutFab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -110,15 +100,18 @@ public class MainActivity extends AppCompatActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.exercise_list) {
-            Intent intent = new Intent(MainActivity.this, ExerciseListActivity.class);
-            startActivity(intent);
-            //TODO exercise list activity
-            //TODO adding new activity
-            //TODO deleting activity
-            //TODO editing activity
+
+        switch (id) {
+            case R.id.exercise_list:
+                Intent intent = new Intent(MainActivity.this, ExerciseListActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.past_trainings:
+                Intent intent1 = new Intent(MainActivity.this, PastTrainingsActivity.class);
+                startActivity(intent1);
+                break;
         }
+
 
         return super.onOptionsItemSelected(item);
     }
@@ -156,12 +149,12 @@ public class MainActivity extends AppCompatActivity {
 
             Calendar cal = Calendar.getInstance();
 
-            int currentDayNumber = (cal.get(Calendar.DAY_OF_WEEK)-cal.getFirstDayOfWeek())-1;
-            if(workout.getWeekDay() == currentDayNumber){
+            int currentDayNumber = (cal.get(Calendar.DAY_OF_WEEK) - cal.getFirstDayOfWeek()) - 1;
+            if (workout.getWeekDay() == currentDayNumber) {
                 layout.setBackgroundColor(getResources().getColor(R.color.todays_workout));
             }
 
-            Log.d("MainActivity", "Day of week " + currentDayNumber +"");
+            Log.d("MainActivity", "Day of week " + currentDayNumber + "");
 
 
             ws.getAllSets(workout.getId()).observe(owner, new Observer<List<WorkoutSet>>() {
@@ -179,9 +172,9 @@ public class MainActivity extends AppCompatActivity {
                         @Override
                         public void onChanged(List<DoneSet> doneSets) {
                             int done = 0;
-                            for(DoneSet ds : doneSets){
-                                for(WorkoutSet ws : workoutSets){
-                                    if(ws.getSetId() == ds.getSet().getSetId()){
+                            for (DoneSet ds : doneSets) {
+                                for (WorkoutSet ws : workoutSets) {
+                                    if (ws.getSetId() == ds.getSet().getSetId()) {
                                         done++;
                                     }
                                 }
@@ -190,7 +183,7 @@ public class MainActivity extends AppCompatActivity {
                             progressBar.setMax(max);
                             progressBar.setProgress(done);
 
-                            if(done == max){
+                            if (done == max) {
                                 layout.setBackgroundColor(getResources().getColor(R.color.done_workout));
                             }
 

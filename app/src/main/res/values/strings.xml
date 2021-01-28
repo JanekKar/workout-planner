@@ -38,5 +38,9 @@
     <string name="next_set">NEXT SET</string>
     <string name="set_number">SET %d of %d</string>
     <string name="last_set">END</string>
+    <string name="past_trainings">Past Trainings</string>
+    <string name="from_editText_hint">From:</string>
+    <string name="to_editText_hint">To:</string>
+    <string name="search">Search</string>
 
 </resources>

@@ -33,11 +33,15 @@ public class DoneSetViewModel extends AndroidViewModel {
         });
     }
 
-    public LiveData<List<DoneSet>> get(Date beginning, Date end, long exerciseId, long workooutId){
-        return dao.select(beginning, end, exerciseId, workooutId);
+    public LiveData<List<DoneSet>> get(Date beginning, Date end, long exerciseId, long workoutId){
+        return dao.select(beginning, end, exerciseId, workoutId);
     }
 
     public LiveData<List<DoneSet>> get(Date beginning, Date end, long workoutId){
         return dao.select(beginning, end, workoutId);
+    }
+
+    public LiveData<List<DoneSet>> get(Date beginning, Date end){
+        return dao.select(beginning, end);
     }
 }

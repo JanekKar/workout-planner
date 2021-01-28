@@ -7,4 +7,10 @@
         android:orderInCategory="100"
         android:title="@string/exercise_list"
         app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/past_trainings"
+        android:orderInCategory="100"
+        android:title="@string/past_trainings"
+        app:showAsAction="never"/>
 </menu>

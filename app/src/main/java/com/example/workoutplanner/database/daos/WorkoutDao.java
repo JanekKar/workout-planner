@@ -22,7 +22,7 @@ public interface WorkoutDao {
     @Delete
     void delete(Workout workout);
 
-    @Query("SELECT * FROM workout")
+    @Query("SELECT * FROM workout order by weekDay")
     LiveData<List<Workout>> getAll();
 
     @Query("DELETE FROM workout")
