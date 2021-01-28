@@ -1,5 +1,6 @@
 package com.example.workoutplanner;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -7,10 +8,14 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProviders;
 
+import com.example.workoutplanner.database.ViewModels.DoneSetViewModel;
+import com.example.workoutplanner.database.models.DoneSet;
 import com.example.workoutplanner.database.models.Set;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class TrainingActivity extends AppCompatActivity {
 
@@ -27,6 +32,8 @@ public class TrainingActivity extends AppCompatActivity {
 
     private ArrayList<Set> setList;
 
+    private DoneSetViewModel dsvm;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,13 +47,14 @@ public class TrainingActivity extends AppCompatActivity {
 
         setList = getIntent().getParcelableArrayListExtra(WorkoutActivity.EXERCISE_SET_LIST_EXTRA);
         exerciseName = getIntent().getStringExtra(WorkoutActivity.EXERCISE_NAME_EXTRA);
+        workoutId = getIntent().getLongExtra(WorkoutActivity.WORKOUT_ID_EXTRA, -1);
         if (setList == null || setList.isEmpty()) {
             finish();
             //TODO Nie wiem jeszcze co wtedy
         }
 
         exerciseNameTextView.setText(exerciseName);
-
+        dsvm =  ViewModelProviders.of(this).get(DoneSetViewModel.class);
 
         setAllFields();
 
@@ -54,8 +62,14 @@ public class TrainingActivity extends AppCompatActivity {
         nextSetButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                DoneSet ds = new DoneSet(workoutId,
+                        setList.get(currentSet),
+                        new Date(),
+                        Integer.parseInt(repsDoneEditText.getText().toString()));
+
+               dsvm.insert(ds);
+
                 if (++currentSet < setList.size()) {
-                    //TODO save set as done
                     setAllFields();
                     if (currentSet + 1 == setList.size()) {
                         nextSetButton.setText(R.string.last_set);

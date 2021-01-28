@@ -37,6 +37,6 @@
     <string name="reps_done_label">REPETITIONS DONE</string>
     <string name="next_set">NEXT SET</string>
     <string name="set_number">SET %d of %d</string>
-    <string name="last_set">END EXERCISE</string>
+    <string name="last_set">END</string>
 
 </resources>

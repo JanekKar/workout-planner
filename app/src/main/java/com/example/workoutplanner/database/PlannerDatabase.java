@@ -6,12 +6,15 @@ import androidx.annotation.NonNull;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
+import androidx.room.TypeConverters;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
+import com.example.workoutplanner.database.daos.DoneSetDao;
 import com.example.workoutplanner.database.daos.ExerciseDao;
 import com.example.workoutplanner.database.daos.SetDao;
 import com.example.workoutplanner.database.daos.WorkoutDao;
 import com.example.workoutplanner.database.daos.WorkoutSetDao;
+import com.example.workoutplanner.database.models.DoneSet;
 import com.example.workoutplanner.database.models.Exercise;
 import com.example.workoutplanner.database.models.Set;
 import com.example.workoutplanner.database.models.Workout;
@@ -20,7 +23,10 @@ import com.example.workoutplanner.database.models.WorkoutSet;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@Database(entities = {Exercise.class, Set.class, Workout.class, WorkoutSet.class}, version = 1, exportSchema = false)
+@Database(entities = {Exercise.class, Set.class, Workout.class, WorkoutSet.class, DoneSet.class},
+        version = 1,
+        exportSchema = false)
+@TypeConverters({Converters.class})
 public abstract class PlannerDatabase extends RoomDatabase {
 
     public static final int NUMBER_OF_THREADS = 4;
@@ -88,4 +94,6 @@ public abstract class PlannerDatabase extends RoomDatabase {
     public abstract WorkoutDao workOutDao();
 
     public abstract WorkoutSetDao workoutSetDao();
+
+    public abstract DoneSetDao doneSetDao();
 }

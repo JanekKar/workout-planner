@@ -32,6 +32,7 @@ public class WorkoutActivity extends AppCompatActivity {
 
     public static final String EXERCISE_NAME_EXTRA = "exercise_name_extra";
     public static final String EXERCISE_SET_LIST_EXTRA = "exercise_set_list_extra";
+    public static final String WORKOUT_ID_EXTRA = "workout_id_extra";
     public List<Set> setList;
     private long workoutId;
     private Workout workout = null;
@@ -160,6 +161,7 @@ public class WorkoutActivity extends AppCompatActivity {
             Intent intent = new Intent(WorkoutActivity.this, TrainingActivity.class);
             intent.putParcelableArrayListExtra(EXERCISE_SET_LIST_EXTRA, exerciseSetList);
             intent.putExtra(EXERCISE_NAME_EXTRA, exercise.getName());
+            intent.putExtra(WORKOUT_ID_EXTRA, workoutId);
             startActivity(intent);
         }
     }
