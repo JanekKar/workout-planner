@@ -31,7 +31,7 @@
             android:textAppearance="?attr/textAppearanceListItem" />
 
         <TextView
-            android:id="@+id/number_of_sets_name"
+            android:id="@+id/secondary_info"
             style="@style/secondary_text_list_item"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

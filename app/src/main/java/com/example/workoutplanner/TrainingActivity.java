@@ -35,7 +35,6 @@ public class TrainingActivity extends AppCompatActivity {
     private ArrayList<Set> setList;
 
     private DoneSetViewModel dsvm;
-    private long exerciseId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,9 +56,10 @@ public class TrainingActivity extends AppCompatActivity {
         }
 
 
-        exerciseId = setList.get(0).getExerciseId();
         exerciseNameTextView.setText(exerciseName);
         dsvm = ViewModelProviders.of(this).get(DoneSetViewModel.class);
+
+        setAllFields();
 
         nextSetButton.setOnClickListener(new View.OnClickListener() {
             @Override

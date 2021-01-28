@@ -165,19 +165,6 @@ public class WorkoutActivity extends AppCompatActivity {
         return exerciseSetList;
     }
 
-    private void getSetStatus(Exercise e, ExerciseHolder exerciseHolder) {
-
-
-
-        dsvm.get(beginning, now, e.getExerciseId(), workoutId).observe(this, new Observer<List<DoneSet>>() {
-            @Override
-            public void onChanged(List<DoneSet> doneSets) {
-                Log.d("MainActivity", doneSets.toString());
-
-            }
-        });
-    }
-
     private class ExerciseHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private final TextView exerciseName;
         private final ProgressBar progressBar;

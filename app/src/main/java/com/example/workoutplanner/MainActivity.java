@@ -9,29 +9,41 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.workoutplanner.database.ViewModels.DoneSetViewModel;
 import com.example.workoutplanner.database.ViewModels.WorkoutSetViewModel;
 import com.example.workoutplanner.database.ViewModels.WorkoutViewModel;
+import com.example.workoutplanner.database.models.DoneSet;
 import com.example.workoutplanner.database.models.Workout;
 import com.example.workoutplanner.database.models.WorkoutSet;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
     public static String WORKOUT_ID_EXTRA = "WORKOUT_ID_EXTRA";
     private final int NEW_WORKOUT_ACTIVITY_REQUEST_CODE = 0;
+
+    private WorkoutSetViewModel ws;
+    private DoneSetViewModel dsvm;
+
+    private FragmentActivity owner = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +55,9 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        WorkoutSetViewModel ws = ViewModelProviders.of(this).get(WorkoutSetViewModel.class);
+        ws = ViewModelProviders.of(this).get(WorkoutSetViewModel.class);
+        dsvm = ViewModelProviders.of(this).get(DoneSetViewModel.class);
+
         WorkoutViewModel w = ViewModelProviders.of(this).get(WorkoutViewModel.class);
         w.getWorkouts().observe(this, new Observer<List<Workout>>() {
             @Override
@@ -115,19 +129,23 @@ public class MainActivity extends AppCompatActivity {
         return days[number];
     }
 
-    private class WorkoutHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
+    private class WorkoutHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         private final TextView dayTextView;
         private final TextView nameTextView;
+        private final ProgressBar progressBar;
+        private RelativeLayout layout;
+
         private Workout workout;
 
         public WorkoutHolder(LayoutInflater inflater, ViewGroup parent) {
             super(inflater.inflate(R.layout.workout_list_item, parent, false));
             itemView.setOnClickListener(this);
-            itemView.setOnLongClickListener(this);
 
             dayTextView = itemView.findViewById(R.id.workout_day);
             nameTextView = itemView.findViewById(R.id.workout_name);
+            progressBar = itemView.findViewById(R.id.progressBar);
+            layout = itemView.findViewById(R.id.layout);
         }
 
         public void bind(Workout workout, int num) {
@@ -135,6 +153,52 @@ public class MainActivity extends AppCompatActivity {
 
             nameTextView.setText(workout.getName());
             dayTextView.setText(dayNumberToName(workout.getWeekDay()));
+
+            Calendar cal = Calendar.getInstance();
+
+            int currentDayNumber = (cal.get(Calendar.DAY_OF_WEEK)-cal.getFirstDayOfWeek())-1;
+            if(workout.getWeekDay() == currentDayNumber){
+                layout.setBackgroundColor(getResources().getColor(R.color.todays_workout));
+            }
+
+            Log.d("MainActivity", "Day of week " + currentDayNumber +"");
+
+
+            ws.getAllSets(workout.getId()).observe(owner, new Observer<List<WorkoutSet>>() {
+                @Override
+                public void onChanged(List<WorkoutSet> workoutSets) {
+                    int max = workoutSets.size();
+
+                    Calendar cal = Calendar.getInstance();
+                    cal.add(Calendar.DAY_OF_MONTH, -6);
+
+                    Date beginning = cal.getTime();
+                    Date now = new Date();
+
+                    dsvm.get(beginning, now, workout.getId()).observe(owner, new Observer<List<DoneSet>>() {
+                        @Override
+                        public void onChanged(List<DoneSet> doneSets) {
+                            int done = 0;
+                            for(DoneSet ds : doneSets){
+                                for(WorkoutSet ws : workoutSets){
+                                    if(ws.getSetId() == ds.getSet().getSetId()){
+                                        done++;
+                                    }
+                                }
+                            }
+
+                            progressBar.setMax(max);
+                            progressBar.setProgress(done);
+
+                            if(done == max){
+                                layout.setBackgroundColor(getResources().getColor(R.color.done_workout));
+                            }
+
+                        }
+                    });
+                }
+            });
+
         }
 
         @Override
@@ -143,12 +207,6 @@ public class MainActivity extends AppCompatActivity {
             intent.putExtra(WORKOUT_ID_EXTRA, workout.getId());
             startActivity(intent);
 
-        }
-
-        @Override
-        public boolean onLongClick(View v) {
-            Snackbar.make(findViewById(R.id.coordinator_layout), "LONG TEST", Snackbar.LENGTH_LONG).show();
-            return true;
         }
     }
 

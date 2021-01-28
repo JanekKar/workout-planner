@@ -61,19 +61,22 @@ public class ExerciseListActivity extends AppCompatActivity {
 
     private class ExerciseHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
         private final TextView exerciseName;
+        private final TextView exerciseType;
         private Exercise e;
 
         public ExerciseHolder(LayoutInflater inflater, ViewGroup parent) {
-            super(inflater.inflate(R.layout.exercise_card_list_item, parent, false));
+            super(inflater.inflate(R.layout.exercise_list_item, parent, false));
             itemView.setOnClickListener(this);
             itemView.setOnLongClickListener(this);
 
             exerciseName = itemView.findViewById(R.id.exercise_name);
+            exerciseType = itemView.findViewById(R.id.secondary_info);
         }
 
         public void bind(Exercise e) {
             this.e = e;
             this.exerciseName.setText(e.getName());
+            this.exerciseType.setText(e.getType());
         }
 
         @Override

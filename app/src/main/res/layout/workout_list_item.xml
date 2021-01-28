@@ -8,6 +8,7 @@
     card_view:cardUseCompatPadding="true">
 
     <RelativeLayout
+        android:id="@+id/layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="@dimen/small_padding">
@@ -38,6 +39,15 @@
             android:textAlignment="center"
             android:textAppearance="?attr/textAppearanceListItem"
             android:textSize="18sp" />
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/workout_name"
+            android:layout_alignStart="@+id/workout_name" />
+
 
 
     </RelativeLayout>
