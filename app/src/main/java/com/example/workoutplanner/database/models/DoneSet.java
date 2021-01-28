@@ -63,4 +63,15 @@ public class DoneSet {
     public void setDoneReps(int doneReps) {
         this.doneReps = doneReps;
     }
+
+    @Override
+    public String toString() {
+        return "DoneSet{" +
+                "id=" + id +
+                ", workoutId=" + workoutId +
+                ", doneReps=" + doneReps +
+                ", set=" + set +
+                ", date=" + date +
+                '}';
+    }
 }

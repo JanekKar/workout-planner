@@ -6,25 +6,31 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.workoutplanner.database.ViewModels.DoneSetViewModel;
 import com.example.workoutplanner.database.ViewModels.ExerciseViewModel;
 import com.example.workoutplanner.database.ViewModels.SetViewModel;
 import com.example.workoutplanner.database.ViewModels.WorkoutSetViewModel;
 import com.example.workoutplanner.database.ViewModels.WorkoutViewModel;
+import com.example.workoutplanner.database.models.DoneSet;
 import com.example.workoutplanner.database.models.Exercise;
 import com.example.workoutplanner.database.models.Set;
 import com.example.workoutplanner.database.models.Workout;
 import com.example.workoutplanner.database.models.WorkoutSet;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -40,7 +46,11 @@ public class WorkoutActivity extends AppCompatActivity {
     private TextView totalNumberOfExercises;
     private TextView totalNumberOfSets;
     private ExerciseAdapter adapter;
+    private DoneSetViewModel dsvm;
 
+    private Date beginning, now;
+
+    FragmentActivity owner = this;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,6 +84,17 @@ public class WorkoutActivity extends AppCompatActivity {
                 }
             }
         });
+
+        dsvm = ViewModelProviders.of(this).get(DoneSetViewModel.class);
+
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.DAY_OF_MONTH, -6);
+
+        beginning = cal.getTime();
+        now = new Date();
+
+
+//        dsvm.get()
     }
 
     private void getSets() {
@@ -134,36 +155,94 @@ public class WorkoutActivity extends AppCompatActivity {
         });
     }
 
+    private ArrayList<Set> getExerciseSetList(long exerciseId) {
+
+        ArrayList<Set> exerciseSetList = new ArrayList<>();
+        for (Set set : setList) {
+            if (set.getExerciseId() == exerciseId)
+                exerciseSetList.add(set);
+        }
+        return exerciseSetList;
+    }
+
+    private void getSetStatus(Exercise e, ExerciseHolder exerciseHolder) {
+
+
+
+        dsvm.get(beginning, now, e.getExerciseId(), workoutId).observe(this, new Observer<List<DoneSet>>() {
+            @Override
+            public void onChanged(List<DoneSet> doneSets) {
+                Log.d("MainActivity", doneSets.toString());
+
+            }
+        });
+    }
 
     private class ExerciseHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private final TextView exerciseName;
+        private final ProgressBar progressBar;
         private Exercise exercise;
+
+        private ArrayList<Set> exerciseSetList;
 
         public ExerciseHolder(LayoutInflater inflater, ViewGroup parent) {
             super(inflater.inflate(R.layout.exercise_card_list_item, parent, false));
             itemView.setOnClickListener(this);
 
+            progressBar = itemView.findViewById(R.id.progressBar);
             exerciseName = itemView.findViewById(R.id.exercise_name);
         }
 
         public void bind(Exercise e) {
             this.exercise = e;
             this.exerciseName.setText(e.getName());
+
+
+            ArrayList<Set> toRemove = new ArrayList<>();
+
+            ArrayList<Set> setList = getExerciseSetList(e.getExerciseId());
+            int max = setList.size();
+            progressBar.setMax(setList.size());
+            Calendar cal = Calendar.getInstance();
+            cal.add(Calendar.DAY_OF_MONTH, -6);
+
+            Date beginning = cal.getTime();
+            Date now = new Date();
+            dsvm.get(beginning, now, e.getExerciseId(), workoutId).observe(owner, new Observer<List<DoneSet>>() {
+                @Override
+                public void onChanged(List<DoneSet> doneSets) {
+                    for(DoneSet ds : doneSets)
+                        for(Set s : setList)
+                            if(ds.getSet().getSetId() == s.getSetId())
+                                toRemove.add(s);
+
+                    for(Set set : toRemove){
+                        setList.remove(set);
+                    }
+
+                    progressBar.setProgress(max-setList.size());
+                    setEnabled(setList.size()!=0);
+
+                    exerciseSetList = setList;
+
+                }
+            });
+        }
+
+        private void setEnabled(boolean b) {
+            itemView.setEnabled(b);
         }
 
         @Override
         public void onClick(View v) {
-            ArrayList<Set> exerciseSetList = new ArrayList<>();
-            for (Set set : setList) {
-                if (set.getExerciseId() == exercise.getExerciseId()) ;
-                exerciseSetList.add(set);
-            }
+            ArrayList<Set> exerciseSetList = getExerciseSetList(exercise.getExerciseId());
             Intent intent = new Intent(WorkoutActivity.this, TrainingActivity.class);
             intent.putParcelableArrayListExtra(EXERCISE_SET_LIST_EXTRA, exerciseSetList);
             intent.putExtra(EXERCISE_NAME_EXTRA, exercise.getName());
             intent.putExtra(WORKOUT_ID_EXTRA, workoutId);
             startActivity(intent);
         }
+
     }
 
     private class ExerciseAdapter extends RecyclerView.Adapter<ExerciseHolder> {

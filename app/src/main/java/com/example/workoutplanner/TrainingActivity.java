@@ -1,6 +1,5 @@
 package com.example.workoutplanner;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -8,6 +7,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.workoutplanner.database.ViewModels.DoneSetViewModel;
@@ -15,7 +15,9 @@ import com.example.workoutplanner.database.models.DoneSet;
 import com.example.workoutplanner.database.models.Set;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 public class TrainingActivity extends AppCompatActivity {
 
@@ -33,6 +35,7 @@ public class TrainingActivity extends AppCompatActivity {
     private ArrayList<Set> setList;
 
     private DoneSetViewModel dsvm;
+    private long exerciseId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,11 +56,10 @@ public class TrainingActivity extends AppCompatActivity {
             //TODO Nie wiem jeszcze co wtedy
         }
 
+
+        exerciseId = setList.get(0).getExerciseId();
         exerciseNameTextView.setText(exerciseName);
-        dsvm =  ViewModelProviders.of(this).get(DoneSetViewModel.class);
-
-        setAllFields();
-
+        dsvm = ViewModelProviders.of(this).get(DoneSetViewModel.class);
 
         nextSetButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,7 +69,7 @@ public class TrainingActivity extends AppCompatActivity {
                         new Date(),
                         Integer.parseInt(repsDoneEditText.getText().toString()));
 
-               dsvm.insert(ds);
+                dsvm.insert(ds);
 
                 if (++currentSet < setList.size()) {
                     setAllFields();
