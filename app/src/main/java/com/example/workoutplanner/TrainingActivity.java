@@ -64,9 +64,18 @@ public class TrainingActivity extends AppCompatActivity {
         nextSetButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Calendar now = Calendar.getInstance();
+
+
+                now.set(Calendar.HOUR_OF_DAY, 0);
+                now.set(Calendar.MINUTE, 0);
+                now.set(Calendar.SECOND, 0);
+                now.set(Calendar.MILLISECOND, 0);
+
+
                 DoneSet ds = new DoneSet(workoutId,
                         setList.get(currentSet),
-                        new Date(),
+                        now.getTime(),
                         Integer.parseInt(repsDoneEditText.getText().toString()));
 
                 dsvm.insert(ds);
