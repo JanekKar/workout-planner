@@ -11,6 +11,7 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.example.workoutplanner.database.daos.DoneSetDao;
 import com.example.workoutplanner.database.daos.ExerciseDao;
+import com.example.workoutplanner.database.daos.ProgressDao;
 import com.example.workoutplanner.database.daos.SetDao;
 import com.example.workoutplanner.database.daos.WorkoutDao;
 import com.example.workoutplanner.database.daos.WorkoutSetDao;
@@ -96,4 +97,6 @@ public abstract class PlannerDatabase extends RoomDatabase {
     public abstract WorkoutSetDao workoutSetDao();
 
     public abstract DoneSetDao doneSetDao();
+
+    public abstract ProgressDao progressDao();
 }

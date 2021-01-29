@@ -13,4 +13,10 @@
         android:orderInCategory="100"
         android:title="@string/past_trainings"
         app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/camera"
+        android:orderInCategory="100"
+        android:title="camera"
+        app:showAsAction="never"/>
 </menu>

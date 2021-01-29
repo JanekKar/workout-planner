@@ -1,8 +1,10 @@
 package com.example.workoutplanner;
 
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -101,20 +103,29 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
 
+        Intent intent;
         switch (id) {
             case R.id.exercise_list:
-                Intent intent = new Intent(MainActivity.this, ExerciseListActivity.class);
-                startActivity(intent);
+                 intent = new Intent(MainActivity.this, ExerciseListActivity.class);
                 break;
             case R.id.past_trainings:
-                Intent intent1 = new Intent(MainActivity.this, PastTrainingsActivity.class);
-                startActivity(intent1);
+                 intent = new Intent(MainActivity.this, PastTrainingsActivity.class);
                 break;
+            case R.id.camera:
+                intent = new Intent(MainActivity.this, ProgressActivity.class);
+                break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + id);
         }
+        
+        startActivity(intent);
 
 
         return super.onOptionsItemSelected(item);
     }
+
+
+
 
     public String dayNumberToName(int number) {
         Resources res = getResources();
