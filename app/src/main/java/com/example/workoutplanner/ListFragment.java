@@ -21,6 +21,7 @@ import com.example.workoutplanner.database.ViewModels.ProgressViewModel;
 import com.example.workoutplanner.database.models.Progress;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 public class ListFragment extends Fragment {
@@ -30,6 +31,10 @@ public class ListFragment extends Fragment {
     private RecyclerView recyclerView;
 
     private ProgressViewModel pvm;
+
+    private SimpleDateFormat sdf;
+
+    private List<Progress> progressList;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -52,27 +57,39 @@ public class ListFragment extends Fragment {
 
         Log.d("MainActivity", "onCreateView");
 
+        sdf = new SimpleDateFormat("dd.MM.yyyy");
+
         return view;
     }
 
+    @Override
+    public void onResume() {
+        adapter.clear();
+        updateView();
+        super.onResume();
+    }
+
     private void updateView() {
-        if (adapter == null) {
+
+        Log.d("MainActivity", recyclerView+"");
+//        if (adapter == null) {
             adapter = new WorkoutAdapter();
             recyclerView.setAdapter(adapter);
             Log.d("MainActivity", "new Adapter");
 
-        }
+//        }
 
         pvm = ViewModelProviders.of(this).get(ProgressViewModel.class);
 
         pvm.getAll().observe(getViewLifecycleOwner(), new Observer<List<Progress>>() {
             @Override
             public void onChanged(List<Progress> progresses) {
-                Log.d("MainActivity", "progress changed");
-
-                adapter.setProgesList(progresses);
+                progressList = progresses;
+                adapter.setProgressList(progresses);
             }
         });
+
+        adapter.setProgressList(progressList);
     }
 
     private void switchToB() {
@@ -103,7 +120,8 @@ public class ListFragment extends Fragment {
         }
 
         public void bind(Progress progress) {
-            date.setText(progress.getDate().toString());
+            Log.d("MainActivity", "Bind");
+            date.setText(sdf.format(progress.getDate()));
             description.setText(progress.getDescription());
             name.setText(progress.getName());
             doneSets.setText(progress.getDoneSets()+"");
@@ -151,6 +169,8 @@ public class ListFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(@NonNull WorkoutHolder holder, int position) {
+
+            Log.d("MainActivity", "onBindViewHolder");
             if (progressList != null) {
                 Progress progress = progressList.get(position);
                 holder.bind(progress);
@@ -168,8 +188,15 @@ public class ListFragment extends Fragment {
             }
         }
 
-        void setProgesList(List<Progress> progress) {
+        void setProgressList(List<Progress> progress) {
             this.progressList = progress;
+            Log.d("MainActivity", "setProgress");
+            notifyDataSetChanged();
+        }
+
+        void clear(){
+            if(this.progressList!=null)
+                this.progressList.clear();
             notifyDataSetChanged();
         }
 

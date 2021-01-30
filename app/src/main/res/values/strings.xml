@@ -50,5 +50,9 @@
     <string name="camera_button">Take picture</string>
     <string name="no_exercises">No exercises found.</string>
     <string name="progress">See progress</string>
+    <string name="name_hint">Name</string>
+    <string name="description">Description</string>
+    <string name="set_count_details">Number of sets: %d</string>
+    <string name="set_details">ToDo: %d, Done: %d, Weight %d kg</string>
 
 </resources>

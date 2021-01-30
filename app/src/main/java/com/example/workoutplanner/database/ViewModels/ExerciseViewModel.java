@@ -49,4 +49,5 @@ public class ExerciseViewModel extends AndroidViewModel {
             dao.delete(e);
         });
     }
+
 }

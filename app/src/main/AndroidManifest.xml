@@ -22,8 +22,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.WorkoutPlanner">
-        <activity
-            android:name=".ProgressActivity"></activity>
+        <activity android:name=".PastTrainingsDetailsActivity"></activity>
+        <activity android:name=".ProgressActivity" />
         <activity android:name=".PastTrainingsActivity" />
         <activity android:name=".TrainingActivity" />
         <activity android:name=".NewExerciseActivity" />

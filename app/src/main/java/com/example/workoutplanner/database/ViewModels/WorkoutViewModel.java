@@ -31,6 +31,7 @@ public class WorkoutViewModel extends AndroidViewModel {
         return workouts;
     }
 
+
     public void addWorkout(Workout workout) {
         PlannerDatabase.databaseWriteExecutor.execute(() -> {
             long test = workoutDao.insert(workout);

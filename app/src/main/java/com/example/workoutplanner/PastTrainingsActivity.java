@@ -21,7 +21,6 @@ import android.widget.TextView;
 
 import com.example.workoutplanner.database.ViewModels.DoneSetViewModel;
 import com.example.workoutplanner.database.models.DoneSet;
-import com.example.workoutplanner.database.models.Workout;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -32,6 +31,7 @@ import java.util.List;
 
 public class PastTrainingsActivity extends AppCompatActivity {
 
+    public static final String WORKOUT_IDS_EXTRA = "WORKOUT_ID_EXTRA";
     private Calendar startCal = Calendar.getInstance();
     private Calendar endCal = Calendar.getInstance();
 
@@ -148,7 +148,7 @@ public class PastTrainingsActivity extends AppCompatActivity {
                 }
 
                 Log.d("MainActivity", orderedDates.size()+"");
-                adapter.setDate(dateWorkoutMap, orderedDates);
+                adapter.setData(dateWorkoutMap, orderedDates);
                 
                 Log.d("MainActivity", dateWorkoutMap.size()+"");
             }
@@ -163,9 +163,7 @@ public class PastTrainingsActivity extends AppCompatActivity {
         private final TextView workoutCountTextView;
 
         private Date date;
-        private List<Long> ids;
-
-        private Workout workout;
+        private ArrayList<Long> ids;
 
         public WorkoutHolder(LayoutInflater inflater, ViewGroup parent) {
             super(inflater.inflate(R.layout.past_training_list_item, parent, false));
@@ -175,7 +173,7 @@ public class PastTrainingsActivity extends AppCompatActivity {
             workoutCountTextView = itemView.findViewById(R.id.workout_names_label);
         }
 
-        public void bind(Date date, List<Long> ids) {
+        public void bind(Date date, ArrayList<Long> ids) {
             this.ids = ids;
             this.date = date;
 
@@ -186,9 +184,10 @@ public class PastTrainingsActivity extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             //TODO new oacitvity, list of exercisess with set info - one card per exercise with all ioformation
-//            Intent intent = new Intent(PastTrainingsActivity.this, WorkoutActivity.class);
-////            intent.putExtra(WORKOUT_ID_EXTRA, workout.getId());
-//            startActivity(intent);
+
+            Intent intent = new Intent(PastTrainingsActivity.this, PastTrainingsDetailsActivity.class);
+            intent.putExtra(WORKOUT_IDS_EXTRA, date.getTime());
+            startActivity(intent);
 
         }
     }
@@ -207,7 +206,7 @@ public class PastTrainingsActivity extends AppCompatActivity {
         @Override
         public void onBindViewHolder(@NonNull WorkoutHolder holder, int position) {
             Date date = orderedDates.get(position);
-            holder.bind(date,data.get(date));
+            holder.bind(date, (ArrayList<Long>) data.get(date));
         }
 
         @Override
@@ -219,7 +218,7 @@ public class PastTrainingsActivity extends AppCompatActivity {
             }
         }
 
-        void setDate(HashMap<Date, List<Long>> map, List<Date> orderedDates) {
+        void setData(HashMap<Date, List<Long>> map, List<Date> orderedDates) {
             this.orderedDates = orderedDates;
             this.data = map;
             notifyDataSetChanged();
