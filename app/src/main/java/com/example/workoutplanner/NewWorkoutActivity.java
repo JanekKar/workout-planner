@@ -99,10 +99,10 @@ public class NewWorkoutActivity extends AppCompatActivity implements AdapterView
         addWorkoutFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(!noExercises){
+                if (!noExercises) {
                     Intent intent = new Intent(NewWorkoutActivity.this, NewExerciseSetActivity.class);
                     startActivityForResult(intent, NEW_EXERCISE_SET_ACTIVITY_REQUEST_CODE);
-                }else{
+                } else {
                     Snackbar.make(findViewById(R.id.coordinator_layout), getResources().getString(R.string.no_exercises), Snackbar.LENGTH_LONG).show();
                 }
             }
@@ -201,7 +201,7 @@ public class NewWorkoutActivity extends AppCompatActivity implements AdapterView
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
-        //TODO block adding new workout
+        //Not possible
     }
 
     private class ExerciseHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {

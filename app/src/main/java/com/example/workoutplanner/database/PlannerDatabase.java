@@ -33,7 +33,6 @@ public abstract class PlannerDatabase extends RoomDatabase {
 
     public static final int NUMBER_OF_THREADS = 4;
     public static final ExecutorService databaseWriteExecutor = Executors.newFixedThreadPool(NUMBER_OF_THREADS);
-    private static volatile PlannerDatabase INSTANCE;
     private static final RoomDatabase.Callback sPlannerDatabaseCallback = new RoomDatabase.Callback() {
         @Override
         public void onOpen(@NonNull SupportSQLiteDatabase db) {
@@ -74,6 +73,7 @@ public abstract class PlannerDatabase extends RoomDatabase {
             });
         }
     };
+    private static volatile PlannerDatabase INSTANCE;
 
     public static PlannerDatabase getDatabase(final Context context) {
         if (INSTANCE == null) {

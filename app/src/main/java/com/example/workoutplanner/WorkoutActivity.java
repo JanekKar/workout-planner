@@ -40,6 +40,7 @@ public class WorkoutActivity extends AppCompatActivity {
     public static final String EXERCISE_SET_LIST_EXTRA = "exercise_set_list_extra";
     public static final String WORKOUT_ID_EXTRA = "workout_id_extra";
     public List<Set> setList;
+    FragmentActivity owner = this;
     private long workoutId;
     private Workout workout = null;
     private TextView workoutName;
@@ -47,10 +48,8 @@ public class WorkoutActivity extends AppCompatActivity {
     private TextView totalNumberOfSets;
     private ExerciseAdapter adapter;
     private DoneSetViewModel dsvm;
-
     private Date beginning, now;
 
-    FragmentActivity owner = this;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -198,17 +197,17 @@ public class WorkoutActivity extends AppCompatActivity {
             dsvm.get(beginning, now, e.getExerciseId(), workoutId).observe(owner, new Observer<List<DoneSet>>() {
                 @Override
                 public void onChanged(List<DoneSet> doneSets) {
-                    for(DoneSet ds : doneSets)
-                        for(Set s : setList)
-                            if(ds.getSet().getSetId() == s.getSetId())
+                    for (DoneSet ds : doneSets)
+                        for (Set s : setList)
+                            if (ds.getSet().getSetId() == s.getSetId())
                                 toRemove.add(s);
 
-                    for(Set set : toRemove){
+                    for (Set set : toRemove) {
                         setList.remove(set);
                     }
 
-                    progressBar.setProgress(max-setList.size());
-                    setEnabled(setList.size()!=0);
+                    progressBar.setProgress(max - setList.size());
+                    setEnabled(setList.size() != 0);
 
                     exerciseSetList = setList;
 

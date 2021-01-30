@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
     private WorkoutSetViewModel ws;
     private DoneSetViewModel dsvm;
 
-    private FragmentActivity owner = this;
+    private final FragmentActivity owner = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,10 +104,10 @@ public class MainActivity extends AppCompatActivity {
         Intent intent;
         switch (id) {
             case R.id.exercise_list:
-                 intent = new Intent(MainActivity.this, ExerciseListActivity.class);
+                intent = new Intent(MainActivity.this, ExerciseListActivity.class);
                 break;
             case R.id.past_trainings:
-                 intent = new Intent(MainActivity.this, PastTrainingsActivity.class);
+                intent = new Intent(MainActivity.this, PastTrainingsActivity.class);
                 break;
             case R.id.progress:
                 intent = new Intent(MainActivity.this, ProgressActivity.class);
@@ -115,14 +115,12 @@ public class MainActivity extends AppCompatActivity {
             default:
                 throw new IllegalStateException("Unexpected value: " + id);
         }
-        
+
         startActivity(intent);
 
 
         return super.onOptionsItemSelected(item);
     }
-
-
 
 
     public String dayNumberToName(int number) {
@@ -136,7 +134,7 @@ public class MainActivity extends AppCompatActivity {
         private final TextView dayTextView;
         private final TextView nameTextView;
         private final ProgressBar progressBar;
-        private RelativeLayout layout;
+        private final RelativeLayout layout;
 
         private Workout workout;
 

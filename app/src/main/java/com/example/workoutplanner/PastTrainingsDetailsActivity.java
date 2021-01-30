@@ -69,13 +69,20 @@ public class PastTrainingsDetailsActivity extends AppCompatActivity {
                 adapter.setExercises(exercises);
             }
         });
+
+        wvm.getWorkouts().observe(this, new Observer<List<Workout>>() {
+            @Override
+            public void onChanged(List<Workout> workouts) {
+                adapter.setWorkouts(workouts);
+            }
+        });
     }
 
 
     private class WorkoutHolder extends RecyclerView.ViewHolder {
 
-        private TextView workoutName;
-        private TextView secondaryInfo;
+        private final TextView workoutName;
+        private final TextView secondaryInfo;
 
         public WorkoutHolder(LayoutInflater inflater, ViewGroup parent) {
             super(inflater.inflate(R.layout.training_detail_list_item, parent, false));
@@ -86,35 +93,36 @@ public class PastTrainingsDetailsActivity extends AppCompatActivity {
 
         }
 
-        public void bind(ArrayList<DoneSet> dss, List<Exercise> exerciseListc) {
+        public void bind(Workout workout, ArrayList<DoneSet> dss, List<Exercise> exerciseListc) {
 
+            workoutName.setText(workout.getName());
 
             ArrayList<Long> exerciseId = new ArrayList<>();
             ArrayList<Integer> setCount = new ArrayList<>();
 
-            for( DoneSet ds : dss){
-                if(!exerciseId.contains(ds.getSet().getExerciseId())){
+            for (DoneSet ds : dss) {
+                if (!exerciseId.contains(ds.getSet().getExerciseId())) {
                     setCount.add(1);
                     exerciseId.add(ds.getSet().getExerciseId());
-                }else
-                    setCount.set(exerciseId.indexOf(ds.getSet().getExerciseId()), setCount.get(exerciseId.indexOf(ds.getSet().getExerciseId()))+1);
+                } else
+                    setCount.set(exerciseId.indexOf(ds.getSet().getExerciseId()), setCount.get(exerciseId.indexOf(ds.getSet().getExerciseId())) + 1);
             }
 
             ArrayList<Exercise> exercises = new ArrayList<>();
-            for(long id : exerciseId){
-                for(Exercise exercise : exerciseListc)
-                    if(exercise.getExerciseId() == id)
+            for (long id : exerciseId) {
+                for (Exercise exercise : exerciseListc)
+                    if (exercise.getExerciseId() == id)
                         exercises.add(exercise);
             }
 
             StringBuffer sb = new StringBuffer();
 
-            for(int i = 0; i<exercises.size(); i++){
+            for (int i = 0; i < exercises.size(); i++) {
                 Exercise e = exercises.get(i);
-                sb.append(e.getName()+"\n");
-                sb.append(getResources().getString(R.string.set_count_details, setCount.get(i))+"\n");
-                for(DoneSet ds : dss){
-                    sb.append(getResources().getString(R.string.set_details, ds.getSet().getNumberOfRepsToDO(), ds.getDoneReps(), ds.getSet().getAdditionalWeight())+"\n");
+                sb.append(e.getName() + "\n");
+                sb.append(getResources().getString(R.string.set_count_details, setCount.get(i)) + "\n");
+                for (DoneSet ds : dss) {
+                    sb.append(getResources().getString(R.string.set_details, ds.getSet().getNumberOfRepsToDO(), ds.getDoneReps(), ds.getSet().getAdditionalWeight()) + "\n");
                 }
             }
             Log.d("MainActivity", sb.toString());
@@ -130,6 +138,7 @@ public class PastTrainingsDetailsActivity extends AppCompatActivity {
         private ArrayList<Long> workouts;
         private ArrayList<DoneSet> doneSets;
         private List<Exercise> exercises;
+        private List<Workout> workoutsDetailsList;
 
         @NonNull
         @Override
@@ -140,12 +149,18 @@ public class PastTrainingsDetailsActivity extends AppCompatActivity {
         @Override
         public void onBindViewHolder(@NonNull WorkoutHolder holder, int position) {
             long id = workouts.get(position);
+
+            Workout workout = null;
+            for (Workout w : workoutsDetailsList)
+                if (w.getId() == id)
+                    workout = w;
+
             ArrayList<DoneSet> dss = new ArrayList<>();
             for (DoneSet ds : doneSets) {
                 if (ds.getWorkoutId() == id)
                     dss.add(ds);
             }
-            holder.bind(dss, exercises);
+            holder.bind(workout, dss, exercises);
 
         }
 
@@ -163,11 +178,14 @@ public class PastTrainingsDetailsActivity extends AppCompatActivity {
             notifyDataSetChanged();
         }
 
-        void setExercises(List<Exercise> exercises){
+        void setExercises(List<Exercise> exercises) {
             this.exercises = exercises;
             notifyDataSetChanged();
         }
 
+        public void setWorkouts(List<Workout> workouts) {
+            this.workoutsDetailsList = workouts;
+        }
     }
 
 }

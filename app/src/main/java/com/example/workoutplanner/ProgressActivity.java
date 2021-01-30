@@ -2,20 +2,16 @@ package com.example.workoutplanner;
 
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
 public class ProgressActivity extends AppCompatActivity {
 
     public static final String TAG_LIST = "first";
     public static final String TAG_NEW_PROGRESS = "second";
-
 
 
     @Override
@@ -34,7 +30,7 @@ public class ProgressActivity extends AppCompatActivity {
         getSupportFragmentManager().executePendingTransactions();
     }
 
-    public void onBackPressed(){
+    public void onBackPressed() {
         FragmentManager fm = getSupportFragmentManager();
         if (fm.getBackStackEntryCount() > 0) {
             Log.i("MainActivity", "popping backstack");

@@ -41,13 +41,8 @@
     <style name="spinner">
         <item name="android:textSize">20sp</item>
         <item name="android:textColor">@color/black</item>
-        <item name="android:textAlignment">center</item>
     </style>
 
-    <style name="Theme.WorkoutPlanner.NoActionBar">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-    </style>
 
     <style name="Theme.WorkoutPlanner.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 

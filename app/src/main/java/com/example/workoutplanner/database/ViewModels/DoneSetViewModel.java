@@ -23,25 +23,25 @@ public class DoneSetViewModel extends AndroidViewModel {
         dao = db.doneSetDao();
     }
 
-    public LiveData<List<DoneSet>> getAll(){
+    public LiveData<List<DoneSet>> getAll() {
         return dao.selectAll();
     }
 
-    public void insert(DoneSet ds){
-        PlannerDatabase.databaseWriteExecutor.execute(()->{
+    public void insert(DoneSet ds) {
+        PlannerDatabase.databaseWriteExecutor.execute(() -> {
             dao.insertAll(ds);
         });
     }
 
-    public LiveData<List<DoneSet>> get(Date beginning, Date end, long exerciseId, long workoutId){
+    public LiveData<List<DoneSet>> get(Date beginning, Date end, long exerciseId, long workoutId) {
         return dao.select(beginning, end, exerciseId, workoutId);
     }
 
-    public LiveData<List<DoneSet>> get(Date beginning, Date end, long workoutId){
+    public LiveData<List<DoneSet>> get(Date beginning, Date end, long workoutId) {
         return dao.select(beginning, end, workoutId);
     }
 
-    public LiveData<List<DoneSet>> get(Date beginning, Date end){
+    public LiveData<List<DoneSet>> get(Date beginning, Date end) {
         return dao.select(beginning, end);
     }
 }

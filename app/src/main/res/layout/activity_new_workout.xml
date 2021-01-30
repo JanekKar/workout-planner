@@ -21,23 +21,19 @@
             android:hint="@string/workout_name_hint"
             android:inputType="textPersonName" />
 
-        <LinearLayout
+
+        <TextView
+            style="@style/spinner"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_gravity="bottom"
+            android:text="@string/choose_day" />
 
-            <TextView
-                style="@style/spinner"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/choose_day" />
-
-            <Spinner
-                android:id="@+id/day_spinner"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/small_padding" />
-        </LinearLayout>
+        <Spinner
+            android:id="@+id/day_spinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:listitem="@android:layout/simple_spinner_item" />
 
         <TextView
             style="@style/spinner"

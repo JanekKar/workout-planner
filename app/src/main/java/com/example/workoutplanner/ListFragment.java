@@ -71,11 +71,11 @@ public class ListFragment extends Fragment {
 
     private void updateView() {
 
-        Log.d("MainActivity", recyclerView+"");
+        Log.d("MainActivity", recyclerView + "");
 //        if (adapter == null) {
-            adapter = new WorkoutAdapter();
-            recyclerView.setAdapter(adapter);
-            Log.d("MainActivity", "new Adapter");
+        adapter = new WorkoutAdapter();
+        recyclerView.setAdapter(adapter);
+        Log.d("MainActivity", "new Adapter");
 
 //        }
 
@@ -94,20 +94,20 @@ public class ListFragment extends Fragment {
 
     private void switchToB() {
         getActivity().getSupportFragmentManager().beginTransaction()
-        .replace(R.id.fragment_container, AddProgressFragment.class, null)
-        .setReorderingAllowed(true)
-        .addToBackStack(null).commit();
+                .replace(R.id.fragment_container, AddProgressFragment.class, null)
+                .setReorderingAllowed(true)
+                .addToBackStack(null).commit();
         getActivity().getSupportFragmentManager().executePendingTransactions();
     }
 
 
     private class WorkoutHolder extends RecyclerView.ViewHolder {
 
-        private TextView name;
-        private TextView description;
-        private TextView date;
-        private TextView doneSets;
-        private ImageView imageView;
+        private final TextView name;
+        private final TextView description;
+        private final TextView date;
+        private final TextView doneSets;
+        private final ImageView imageView;
 
         public WorkoutHolder(LayoutInflater inflater, ViewGroup parent) {
             super(inflater.inflate(R.layout.progress_list_item, parent, false));
@@ -124,17 +124,17 @@ public class ListFragment extends Fragment {
             date.setText(sdf.format(progress.getDate()));
             description.setText(progress.getDescription());
             name.setText(progress.getName());
-            doneSets.setText(progress.getDoneSets()+"");
+            doneSets.setText(progress.getDoneSets() + "");
 
-            if(progress.getPhotoUri()!=null)
+            if (progress.getPhotoUri() != null)
                 setPic(progress.getPhotoUri());
 
         }
 
         public void setPic(String currentPhotoPath) {
             // Get the dimensions of the View
-            int targetW = (int)getResources().getDimension(R.dimen.image_dim);
-            int targetH = (int)getResources().getDimension(R.dimen.image_dim);
+            int targetW = (int) getResources().getDimension(R.dimen.image_dim);
+            int targetH = (int) getResources().getDimension(R.dimen.image_dim);
 
             // Get the dimensions of the bitmap
             BitmapFactory.Options bmOptions = new BitmapFactory.Options();
@@ -194,8 +194,8 @@ public class ListFragment extends Fragment {
             notifyDataSetChanged();
         }
 
-        void clear(){
-            if(this.progressList!=null)
+        void clear() {
+            if (this.progressList != null)
                 this.progressList.clear();
             notifyDataSetChanged();
         }

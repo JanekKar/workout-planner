@@ -6,17 +6,17 @@
         android:id="@+id/exercise_list"
         android:orderInCategory="100"
         android:title="@string/exercise_list"
-        app:showAsAction="never"/>
+        app:showAsAction="never" />
 
     <item
         android:id="@+id/past_trainings"
         android:orderInCategory="100"
         android:title="@string/past_trainings"
-        app:showAsAction="never"/>
+        app:showAsAction="never" />
 
     <item
         android:id="@+id/progress"
         android:orderInCategory="100"
         android:title="@string/progress"
-        app:showAsAction="never"/>
+        app:showAsAction="never" />
 </menu>

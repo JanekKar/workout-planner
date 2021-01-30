@@ -19,7 +19,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
@@ -82,8 +81,8 @@ public class AddProgressFragment extends Fragment {
 //                        .navigate(R.id.action_SecondFragment_to_FirstFragment);
                 Date start = new Date(0);
                 Calendar cal = Calendar.getInstance();
-                if(lastProgress!=null)
-                   start = lastProgress.getDate();
+                if (lastProgress != null)
+                    start = lastProgress.getDate();
 
                 dsvm.get(start, cal.getTime()).observe(getViewLifecycleOwner(), new Observer<List<DoneSet>>() {
                     @Override

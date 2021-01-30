@@ -7,7 +7,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.workoutplanner.database.ViewModels.DoneSetViewModel;
@@ -16,8 +15,6 @@ import com.example.workoutplanner.database.models.Set;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
 
 public class TrainingActivity extends AppCompatActivity {
 

@@ -22,23 +22,23 @@
                 android:id="@+id/from_editTextDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="date"
+                android:layout_weight="1"
                 android:clickable="true"
+                android:ems="10"
                 android:focusable="false"
                 android:hint="@string/from_editText_hint"
-                android:layout_weight="1"/>
+                android:inputType="date" />
 
             <EditText
                 android:id="@+id/to_editTextDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="date"
-                android:focusable="false"
+                android:layout_weight="1"
                 android:clickable="true"
+                android:ems="10"
+                android:focusable="false"
                 android:hint="@string/to_editText_hint"
-                android:layout_weight="1"/>
+                android:inputType="date" />
 
         </LinearLayout>
 
@@ -47,12 +47,12 @@
             android:layout_height="wrap_content"
             android:gravity="center_horizontal">
 
-        <Button
-            android:id="@+id/search_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/ic_baseline_search_24"
-            android:text="@string/search"/>
+            <Button
+                android:id="@+id/search_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/ic_baseline_search_24"
+                android:text="@string/search" />
 
         </LinearLayout>
 
@@ -60,8 +60,8 @@
             android:id="@+id/recyclerview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:minHeight="@dimen/small_padding"
-            android:layout_marginTop="@dimen/small_padding"/>
+            android:layout_marginTop="@dimen/small_padding"
+            android:minHeight="@dimen/small_padding" />
 
     </LinearLayout>
 

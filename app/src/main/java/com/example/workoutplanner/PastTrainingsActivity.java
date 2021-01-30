@@ -1,12 +1,5 @@
 package com.example.workoutplanner;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -18,6 +11,13 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.workoutplanner.database.ViewModels.DoneSetViewModel;
 import com.example.workoutplanner.database.models.DoneSet;
@@ -32,14 +32,14 @@ import java.util.List;
 public class PastTrainingsActivity extends AppCompatActivity {
 
     public static final String WORKOUT_IDS_EXTRA = "WORKOUT_ID_EXTRA";
-    private Calendar startCal = Calendar.getInstance();
-    private Calendar endCal = Calendar.getInstance();
+    private final Calendar startCal = Calendar.getInstance();
+    private final Calendar endCal = Calendar.getInstance();
 
     private EditText startEditText;
     private EditText endEditText;
     private Button searchButton;
 
-    private WorkoutAdapter adapter;
+    private TrainingAdapter adapter;
 
     private DoneSetViewModel dsvm;
 
@@ -65,7 +65,7 @@ public class PastTrainingsActivity extends AppCompatActivity {
         sdf = new SimpleDateFormat("dd.MM.yyyy");
 
         RecyclerView recyclerView = findViewById(R.id.recyclerview);
-        adapter = new WorkoutAdapter();
+        adapter = new TrainingAdapter();
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -121,7 +121,7 @@ public class PastTrainingsActivity extends AppCompatActivity {
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               populateList();
+                populateList();
             }
         });
 
@@ -133,31 +133,29 @@ public class PastTrainingsActivity extends AppCompatActivity {
         dsvm.get(startCal.getTime(), endCal.getTime()).observe(this, new Observer<List<DoneSet>>() {
             @Override
             public void onChanged(List<DoneSet> doneSets) {
-                for(DoneSet ds : doneSets){
+                for (DoneSet ds : doneSets) {
 
-                    if(!orderedDates.contains(ds.getDate()))
+                    if (!orderedDates.contains(ds.getDate()))
                         orderedDates.add(ds.getDate());
-                    if(dateWorkoutMap.containsKey(ds.getDate())){
-                        if(!dateWorkoutMap.get(ds.getDate()).contains(ds.getWorkoutId()))
+                    if (dateWorkoutMap.containsKey(ds.getDate())) {
+                        if (!dateWorkoutMap.get(ds.getDate()).contains(ds.getWorkoutId()))
                             dateWorkoutMap.get(ds.getDate()).add(ds.getWorkoutId());
-                    }else{
+                    } else {
                         List<Long> temp = new ArrayList<>();
                         temp.add(ds.getWorkoutId());
                         dateWorkoutMap.put(ds.getDate(), temp);
                     }
                 }
 
-                Log.d("MainActivity", orderedDates.size()+"");
+                Log.d("MainActivity", orderedDates.size() + "");
                 adapter.setData(dateWorkoutMap, orderedDates);
-                
-                Log.d("MainActivity", dateWorkoutMap.size()+"");
+
+                Log.d("MainActivity", dateWorkoutMap.size() + "");
             }
         });
     }
 
-    //TODO rewrite this holder and adapter
-
-    private class WorkoutHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    private class TrainingHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         private final TextView dateTextView;
         private final TextView workoutCountTextView;
@@ -165,7 +163,7 @@ public class PastTrainingsActivity extends AppCompatActivity {
         private Date date;
         private ArrayList<Long> ids;
 
-        public WorkoutHolder(LayoutInflater inflater, ViewGroup parent) {
+        public TrainingHolder(LayoutInflater inflater, ViewGroup parent) {
             super(inflater.inflate(R.layout.past_training_list_item, parent, false));
             itemView.setOnClickListener(this);
 
@@ -177,14 +175,12 @@ public class PastTrainingsActivity extends AppCompatActivity {
             this.ids = ids;
             this.date = date;
 
-            this.dateTextView.setText(sdf.format(date)+"");
+            this.dateTextView.setText(sdf.format(date) + "");
             this.workoutCountTextView.setText(getResources().getString(R.string.workout_count, ids.size()));
         }
 
         @Override
         public void onClick(View v) {
-            //TODO new oacitvity, list of exercisess with set info - one card per exercise with all ioformation
-
             Intent intent = new Intent(PastTrainingsActivity.this, PastTrainingsDetailsActivity.class);
             intent.putExtra(WORKOUT_IDS_EXTRA, date.getTime());
             startActivity(intent);
@@ -192,19 +188,19 @@ public class PastTrainingsActivity extends AppCompatActivity {
         }
     }
 
-    private class WorkoutAdapter extends RecyclerView.Adapter<WorkoutHolder> {
+    private class TrainingAdapter extends RecyclerView.Adapter<TrainingHolder> {
 
         private HashMap<Date, List<Long>> data;
         private List<Date> orderedDates;
 
         @NonNull
         @Override
-        public WorkoutHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            return new WorkoutHolder(getLayoutInflater(), parent);
+        public TrainingHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            return new TrainingHolder(getLayoutInflater(), parent);
         }
 
         @Override
-        public void onBindViewHolder(@NonNull WorkoutHolder holder, int position) {
+        public void onBindViewHolder(@NonNull TrainingHolder holder, int position) {
             Date date = orderedDates.get(position);
             holder.bind(date, (ArrayList<Long>) data.get(date));
         }

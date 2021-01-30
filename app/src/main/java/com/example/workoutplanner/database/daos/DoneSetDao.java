@@ -30,10 +30,7 @@ public interface DoneSetDao {
     LiveData<List<DoneSet>> select(Date beginningOfWeek, Date endOfWeek, long workoutId);
 
     @Query("SELECT * FROM doneset where date>=:beginningOfWeek and date<=:endOfWeek and exerciseId = :exerciseID and workoutId = :workoutId")
-    LiveData<List<DoneSet>> select(Date beginningOfWeek, Date endOfWeek, long exerciseID, long workoutId );
-
-
-
+    LiveData<List<DoneSet>> select(Date beginningOfWeek, Date endOfWeek, long exerciseID, long workoutId);
 
 
 }
