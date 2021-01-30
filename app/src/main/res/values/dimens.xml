@@ -5,4 +5,6 @@
     <dimen name="big_padding">16dp</dimen>
     <dimen name="title_font_size">18sp</dimen>
     <dimen name="author_font_size">16sp</dimen>
+    <dimen name="image_dim">135dp</dimen>
+    <dimen name="big_image">300dp</dimen>
 </resources>

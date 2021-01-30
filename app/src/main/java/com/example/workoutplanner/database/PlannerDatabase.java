@@ -17,6 +17,7 @@ import com.example.workoutplanner.database.daos.WorkoutDao;
 import com.example.workoutplanner.database.daos.WorkoutSetDao;
 import com.example.workoutplanner.database.models.DoneSet;
 import com.example.workoutplanner.database.models.Exercise;
+import com.example.workoutplanner.database.models.Progress;
 import com.example.workoutplanner.database.models.Set;
 import com.example.workoutplanner.database.models.Workout;
 import com.example.workoutplanner.database.models.WorkoutSet;
@@ -24,7 +25,7 @@ import com.example.workoutplanner.database.models.WorkoutSet;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@Database(entities = {Exercise.class, Set.class, Workout.class, WorkoutSet.class, DoneSet.class},
+@Database(entities = {Exercise.class, Set.class, Workout.class, WorkoutSet.class, DoneSet.class, Progress.class},
         version = 1,
         exportSchema = false)
 @TypeConverters({Converters.class})

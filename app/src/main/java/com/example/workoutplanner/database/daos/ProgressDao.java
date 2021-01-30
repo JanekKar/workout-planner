@@ -19,9 +19,12 @@ public interface ProgressDao {
     @Delete
     void delete(Progress... progresses);
 
-    @Query("SELECT * FROM PROGRESS")
+    @Query("SELECT * FROM Progress")
     LiveData<List<Progress>> getAll();
 
     @Query("SELECT * FROM Progress WHERE id = :id")
     Progress get(long id);
+
+    @Query("SELECT * FROM Progress WHERE id = (SELECT MAX(id) FROM PROGRESS)")
+    Progress getLast();
 }

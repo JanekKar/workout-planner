@@ -51,6 +51,7 @@ public class NewWorkoutActivity extends AppCompatActivity implements AdapterView
     private Button saveButton;
     private SetViewModel svm;
     private WorkoutSetViewModel wsvm;
+    private boolean noExercises;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,13 +86,25 @@ public class NewWorkoutActivity extends AppCompatActivity implements AdapterView
         daySpinner.setAdapter(spinnerAdapter);
         daySpinner.setOnItemSelectedListener(this);
 
+        ExerciseViewModel evm = ViewModelProviders.of(this).get(ExerciseViewModel.class);
+        evm.getExercises().observe(this, new Observer<List<Exercise>>() {
+            @Override
+            public void onChanged(List<Exercise> exercises) {
+                noExercises = exercises.isEmpty();
+            }
+        });
+
 //        FloatingActionButton addWorkoutFab = findViewById(R.id.add_button);
         Button addWorkoutFab = findViewById(R.id.add_exercise_button);
         addWorkoutFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(NewWorkoutActivity.this, NewExerciseSetActivity.class);
-                startActivityForResult(intent, NEW_EXERCISE_SET_ACTIVITY_REQUEST_CODE);
+                if(!noExercises){
+                    Intent intent = new Intent(NewWorkoutActivity.this, NewExerciseSetActivity.class);
+                    startActivityForResult(intent, NEW_EXERCISE_SET_ACTIVITY_REQUEST_CODE);
+                }else{
+                    Snackbar.make(findViewById(R.id.coordinator_layout), getResources().getString(R.string.no_exercises), Snackbar.LENGTH_LONG).show();
+                }
             }
         });
     }

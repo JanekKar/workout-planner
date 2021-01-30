@@ -43,5 +43,12 @@
     <string name="to_editText_hint">To:</string>
     <string name="search">Search</string>
     <string name="workout_count">"Workouts done - %d"</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+
+    <string name="camera_button">Take picture</string>
+    <string name="no_exercises">No exercises found.</string>
+    <string name="progress">See progress</string>
 
 </resources>

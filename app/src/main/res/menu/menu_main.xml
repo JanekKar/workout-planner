@@ -15,8 +15,8 @@
         app:showAsAction="never"/>
 
     <item
-        android:id="@+id/camera"
+        android:id="@+id/progress"
         android:orderInCategory="100"
-        android:title="camera"
+        android:title="@string/progress"
         app:showAsAction="never"/>
 </menu>

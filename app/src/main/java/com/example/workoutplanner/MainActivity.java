@@ -1,10 +1,8 @@
 package com.example.workoutplanner;
 
-import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -111,7 +109,7 @@ public class MainActivity extends AppCompatActivity {
             case R.id.past_trainings:
                  intent = new Intent(MainActivity.this, PastTrainingsActivity.class);
                 break;
-            case R.id.camera:
+            case R.id.progress:
                 intent = new Intent(MainActivity.this, ProgressActivity.class);
                 break;
             default:

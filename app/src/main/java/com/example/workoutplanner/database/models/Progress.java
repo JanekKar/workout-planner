@@ -13,16 +13,26 @@ public class Progress {
     private String photoUri;
     private Date date;
     private String description;
+    private String name;
     private int doneSets;
-    private int doneWokrout;
+    private int doneWorkouts;
 
-    public Progress(long id, String photoUri, Date date, String description, int doneSets, int doneWokrout) {
+    public Progress(String photoUri, Date date, String description, String name, int doneSets, int doneWorkouts) {
         this.id = id;
         this.photoUri = photoUri;
         this.date = date;
         this.description = description;
+        this.name = name;
         this.doneSets = doneSets;
-        this.doneWokrout = doneWokrout;
+        this.doneWorkouts = doneWorkouts;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public long getId() {
@@ -65,11 +75,11 @@ public class Progress {
         this.doneSets = doneSets;
     }
 
-    public int getDoneWokrout() {
-        return doneWokrout;
+    public int getDoneWorkouts() {
+        return doneWorkouts;
     }
 
-    public void setDoneWokrout(int doneWokrout) {
-        this.doneWokrout = doneWokrout;
+    public void setDoneWorkouts(int doneWorkouts) {
+        this.doneWorkouts = doneWorkouts;
     }
 }

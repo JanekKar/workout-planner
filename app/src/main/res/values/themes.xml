@@ -44,4 +44,13 @@
         <item name="android:textAlignment">center</item>
     </style>
 
+    <style name="Theme.WorkoutPlanner.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.WorkoutPlanner.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.WorkoutPlanner.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
 </resources>

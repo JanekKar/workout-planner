@@ -10,6 +10,7 @@ import com.example.workoutplanner.database.PlannerDatabase;
 import com.example.workoutplanner.database.daos.ProgressDao;
 import com.example.workoutplanner.database.models.Progress;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ProgressViewModel extends AndroidViewModel {
@@ -22,6 +23,32 @@ public class ProgressViewModel extends AndroidViewModel {
         PlannerDatabase db = PlannerDatabase.getDatabase(application);
         progressList = db.progressDao().getAll();
         dao = db.progressDao();
+    }
+
+    public void insert(Progress p){
+        PlannerDatabase.databaseWriteExecutor.execute(()->{
+            dao.insertAll(p);
+        });
+    }
+
+    public LiveData<List<Progress>> getAll(){
+        return progressList;
+    }
+
+    public Progress getLast(){
+        List<Progress> temp = progressList.getValue();
+
+        if(temp == null)
+            return null;
+
+        Progress toReturn = temp.get(0);
+
+        for(Progress p : temp){
+            if(p.getDate().after(toReturn.getDate())){
+                toReturn = p;
+            }
+        }
+        return toReturn;
     }
 
     //TODO end progress view model
