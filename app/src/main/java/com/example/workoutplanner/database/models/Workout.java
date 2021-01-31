@@ -3,25 +3,29 @@ package com.example.workoutplanner.database.models;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import java.io.Serializable;
+
 
 @Entity(tableName = "workout")
-public class Workout {
+public class Workout implements Serializable {
     @PrimaryKey(autoGenerate = true)
-    private long id;
+    private long workoutId;
     private int weekDay;
     private String name;
+
+    private boolean deleted = false;
 
     public Workout(int weekDay, String name) {
         this.weekDay = weekDay;
         this.name = name;
     }
 
-    public long getId() {
-        return id;
+    public long getWorkoutId() {
+        return workoutId;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setWorkoutId(long workoutId) {
+        this.workoutId = workoutId;
     }
 
     public int getWeekDay() {
@@ -40,10 +44,18 @@ public class Workout {
         this.name = name;
     }
 
+    public boolean isDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
+    }
+
     @Override
     public String toString() {
         return "Workout{" +
-                "id=" + id +
+                "id=" + workoutId +
                 ", weekDay=" + weekDay +
                 ", name='" + name + '\'' +
                 '}';

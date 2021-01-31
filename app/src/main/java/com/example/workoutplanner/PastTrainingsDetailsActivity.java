@@ -55,8 +55,8 @@ public class PastTrainingsDetailsActivity extends AppCompatActivity {
                 ArrayList<Long> workouts = new ArrayList<>();
 
                 for (DoneSet ds : doneSets) {
-                    if (!workouts.contains(ds.getWorkoutId()))
-                        workouts.add(ds.getWorkoutId());
+                    if (!workouts.contains(ds.getWorkout().getWorkoutId()))
+                        workouts.add(ds.getWorkout().getWorkoutId());
                 }
 
                 adapter.setData(workouts, new ArrayList<>(doneSets));
@@ -70,7 +70,7 @@ public class PastTrainingsDetailsActivity extends AppCompatActivity {
             }
         });
 
-        wvm.getWorkouts().observe(this, new Observer<List<Workout>>() {
+        wvm.getAllWorkouts().observe(this, new Observer<List<Workout>>() {
             @Override
             public void onChanged(List<Workout> workouts) {
                 adapter.setWorkouts(workouts);
@@ -94,6 +94,8 @@ public class PastTrainingsDetailsActivity extends AppCompatActivity {
         }
 
         public void bind(Workout workout, ArrayList<DoneSet> dss, List<Exercise> exerciseListc) {
+
+
 
             workoutName.setText(workout.getName());
 
@@ -135,7 +137,7 @@ public class PastTrainingsDetailsActivity extends AppCompatActivity {
 
     private class WorkoutAdapter extends RecyclerView.Adapter<WorkoutHolder> {
 
-        private ArrayList<Long> workouts;
+        private ArrayList<Long> workoutsIds;
         private ArrayList<DoneSet> doneSets;
         private List<Exercise> exercises;
         private List<Workout> workoutsDetailsList;
@@ -148,16 +150,18 @@ public class PastTrainingsDetailsActivity extends AppCompatActivity {
 
         @Override
         public void onBindViewHolder(@NonNull WorkoutHolder holder, int position) {
-            long id = workouts.get(position);
+            long id = workoutsIds.get(position);
+
+            Log.d("Main23", workoutsDetailsList+"");
 
             Workout workout = null;
             for (Workout w : workoutsDetailsList)
-                if (w.getId() == id)
+                if (w.getWorkoutId() == id)
                     workout = w;
 
             ArrayList<DoneSet> dss = new ArrayList<>();
             for (DoneSet ds : doneSets) {
-                if (ds.getWorkoutId() == id)
+                if (ds.getWorkout().getWorkoutId() == id)
                     dss.add(ds);
             }
             holder.bind(workout, dss, exercises);
@@ -166,14 +170,14 @@ public class PastTrainingsDetailsActivity extends AppCompatActivity {
 
         @Override
         public int getItemCount() {
-            if (workouts != null) {
-                return workouts.size();
+            if (workoutsIds != null) {
+                return workoutsIds.size();
             } else
                 return 0;
         }
 
         void setData(ArrayList<Long> workouts, ArrayList<DoneSet> doneSets) {
-            this.workouts = workouts;
+            this.workoutsIds = workouts;
             this.doneSets = doneSets;
             notifyDataSetChanged();
         }
@@ -183,8 +187,8 @@ public class PastTrainingsDetailsActivity extends AppCompatActivity {
             notifyDataSetChanged();
         }
 
-        public void setWorkouts(List<Workout> workouts) {
-            this.workoutsDetailsList = workouts;
+        public void setWorkouts(List<Workout> workoutsIds) {
+            this.workoutsDetailsList = workoutsIds;
         }
     }
 

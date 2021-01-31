@@ -54,5 +54,9 @@
     <string name="description">Description</string>
     <string name="set_count_details">Number of sets: %d</string>
     <string name="set_details">ToDo: %d, Done: %d, Weight %d kg</string>
+    <string name="dialog_message">Do you want to delete \"%s\" workout?</string>
+    <string name="dialog_title">Delete?</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
 
 </resources>

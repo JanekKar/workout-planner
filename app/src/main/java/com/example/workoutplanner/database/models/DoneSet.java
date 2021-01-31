@@ -10,50 +10,28 @@ import java.util.Date;
 @Entity
 public class DoneSet {
     @PrimaryKey(autoGenerate = true)
-    private long id;
-    private long workoutId;
+    private long doneSetId;
+    //    private long workoutId;
     private int doneReps;
     @Embedded
     private Set set;
+    @Embedded
+    private Workout workout;
     private Date date;
 
-    public DoneSet(long workoutId, Set set, Date date, int doneReps) {
-        this.workoutId = workoutId;
-        this.set = set;
-        this.date = date;
+    public DoneSet(Workout workout, Set set, Date date, int doneReps) {
         this.doneReps = doneReps;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public long getWorkoutId() {
-        return workoutId;
-    }
-
-    public void setWorkoutId(long workoutId) {
-        this.workoutId = workoutId;
-    }
-
-    public Set getSet() {
-        return set;
-    }
-
-    public void setSet(Set set) {
         this.set = set;
-    }
-
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
+        this.workout = workout;
         this.date = date;
+    }
+
+    public long getDoneSetId() {
+        return doneSetId;
+    }
+
+    public void setDoneSetId(long doneSetId) {
+        this.doneSetId = doneSetId;
     }
 
     public int getDoneReps() {
@@ -64,13 +42,37 @@ public class DoneSet {
         this.doneReps = doneReps;
     }
 
+    public Set getSet() {
+        return set;
+    }
+
+    public void setSet(Set set) {
+        this.set = set;
+    }
+
+    public Workout getWorkout() {
+        return workout;
+    }
+
+    public void setWorkout(Workout workout) {
+        this.workout = workout;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
     @Override
     public String toString() {
         return "DoneSet{" +
-                "id=" + id +
-                ", workoutId=" + workoutId +
+                "id=" + doneSetId +
                 ", doneReps=" + doneReps +
                 ", set=" + set +
+                ", workout=" + workout +
                 ", date=" + date +
                 '}';
     }

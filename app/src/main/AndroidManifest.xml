@@ -22,16 +22,36 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.WorkoutPlanner">
-        <activity android:name=".PastTrainingsDetailsActivity"></activity>
-        <activity android:name=".ProgressActivity" />
-        <activity android:name=".PastTrainingsActivity" />
-        <activity android:name=".TrainingActivity" />
-        <activity android:name=".NewExerciseActivity" />
-        <activity android:name=".ExerciseListActivity" />
-        <activity android:name=".WorkoutActivity" />
-        <activity android:name=".NewExerciseSetActivity" />
-        <activity android:name=".NewWorkoutActivity" />
-        <activity android:name=".MainActivity">
+        <activity
+            android:name=".PastTrainingsDetailsActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".ProgressActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".PastTrainingsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".TrainingActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".NewExerciseActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ExerciseListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".WorkoutActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".NewExerciseSetActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".NewWorkoutActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".MainActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

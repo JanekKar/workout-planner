@@ -6,6 +6,7 @@ import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
+import androidx.room.Update;
 
 import com.example.workoutplanner.database.models.Workout;
 
@@ -22,12 +23,18 @@ public interface WorkoutDao {
     @Delete
     void delete(Workout workout);
 
+    @Update
+    void update(Workout workout);
+
+    @Query("SELECT * FROM workout where deleted=0 order by weekDay")
+    LiveData<List<Workout>> getAllActive();
+
     @Query("SELECT * FROM workout order by weekDay")
     LiveData<List<Workout>> getAll();
 
     @Query("DELETE FROM workout")
     void deleteAll();
 
-    @Query("SELECT * FROM workout WHERE id=(SELECT max(id) FROM workout)")
+    @Query("SELECT * FROM workout WHERE workoutId=(SELECT max(workoutId) FROM workout)")
     Workout getLast();
 }

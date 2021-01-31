@@ -28,6 +28,7 @@ import com.example.workoutplanner.database.models.Set;
 import com.example.workoutplanner.database.models.Workout;
 import com.example.workoutplanner.database.models.WorkoutSet;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -74,7 +75,7 @@ public class WorkoutActivity extends AppCompatActivity {
             @Override
             public void onChanged(List<Workout> workouts) {
                 for (Workout w : workouts) {
-                    if (w.getId() == workoutId) {
+                    if (w.getWorkoutId() == workoutId) {
                         workout = w;
                         workoutName.setText(w.getName());
                         getSets();
@@ -98,7 +99,7 @@ public class WorkoutActivity extends AppCompatActivity {
 
     private void getSets() {
         WorkoutSetViewModel workoutSetViewModel = ViewModelProviders.of(this).get(WorkoutSetViewModel.class);
-        workoutSetViewModel.getAllSets(workout.getId()).observe(this, new Observer<List<WorkoutSet>>() {
+        workoutSetViewModel.getAllSets(workout.getWorkoutId()).observe(this, new Observer<List<WorkoutSet>>() {
             @Override
             public void onChanged(List<WorkoutSet> workoutSets) {
                 long[] setIds = new long[workoutSets.size()];
@@ -225,7 +226,7 @@ public class WorkoutActivity extends AppCompatActivity {
             Intent intent = new Intent(WorkoutActivity.this, TrainingActivity.class);
             intent.putParcelableArrayListExtra(EXERCISE_SET_LIST_EXTRA, exerciseSetList);
             intent.putExtra(EXERCISE_NAME_EXTRA, exercise.getName());
-            intent.putExtra(WORKOUT_ID_EXTRA, workoutId);
+            intent.putExtra(WORKOUT_ID_EXTRA, (Serializable) workout);
             startActivity(intent);
         }
 

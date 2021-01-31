@@ -1,5 +1,7 @@
 package com.example.workoutplanner;
 
+import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -14,6 +16,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.Observer;
@@ -41,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
 
     private WorkoutSetViewModel ws;
     private DoneSetViewModel dsvm;
+    private WorkoutViewModel wvm;
 
     private final FragmentActivity owner = this;
 
@@ -56,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
 
         ws = ViewModelProviders.of(this).get(WorkoutSetViewModel.class);
         dsvm = ViewModelProviders.of(this).get(DoneSetViewModel.class);
+        wvm = ViewModelProviders.of(this).get(WorkoutViewModel.class);
 
         WorkoutViewModel w = ViewModelProviders.of(this).get(WorkoutViewModel.class);
         w.getWorkouts().observe(this, new Observer<List<Workout>>() {
@@ -65,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
 
                 List<Integer> numberOfExercises = new ArrayList<>();
                 for (Workout w : workouts) {
-                    List<Long> temp = ws.getAllExercises(w.getId()).getValue();
+                    List<Long> temp = ws.getAllExercises(w.getWorkoutId()).getValue();
                     if (temp != null)
                         numberOfExercises.add(temp.size());
                     else
@@ -129,7 +134,7 @@ public class MainActivity extends AppCompatActivity {
         return days[number];
     }
 
-    private class WorkoutHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    private class WorkoutHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener{
 
         private final TextView dayTextView;
         private final TextView nameTextView;
@@ -141,6 +146,7 @@ public class MainActivity extends AppCompatActivity {
         public WorkoutHolder(LayoutInflater inflater, ViewGroup parent) {
             super(inflater.inflate(R.layout.workout_list_item, parent, false));
             itemView.setOnClickListener(this);
+            itemView.setOnLongClickListener(this);
 
             dayTextView = itemView.findViewById(R.id.workout_day);
             nameTextView = itemView.findViewById(R.id.workout_name);
@@ -164,7 +170,7 @@ public class MainActivity extends AppCompatActivity {
             Log.d("MainActivity", "Day of week " + currentDayNumber + "");
 
 
-            ws.getAllSets(workout.getId()).observe(owner, new Observer<List<WorkoutSet>>() {
+            ws.getAllSets(workout.getWorkoutId()).observe(owner, new Observer<List<WorkoutSet>>() {
                 @Override
                 public void onChanged(List<WorkoutSet> workoutSets) {
                     int max = workoutSets.size();
@@ -175,7 +181,7 @@ public class MainActivity extends AppCompatActivity {
                     Date beginning = cal.getTime();
                     Date now = new Date();
 
-                    dsvm.get(beginning, now, workout.getId()).observe(owner, new Observer<List<DoneSet>>() {
+                    dsvm.get(beginning, now, workout.getWorkoutId()).observe(owner, new Observer<List<DoneSet>>() {
                         @Override
                         public void onChanged(List<DoneSet> doneSets) {
                             int done = 0;
@@ -204,9 +210,35 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             Intent intent = new Intent(MainActivity.this, WorkoutActivity.class);
-            intent.putExtra(WORKOUT_ID_EXTRA, workout.getId());
+            intent.putExtra(WORKOUT_ID_EXTRA, workout.getWorkoutId());
             startActivity(intent);
 
+        }
+
+        @Override
+        public boolean onLongClick(View v) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+            builder.setMessage(getResources().getString(R.string.dialog_message, workout.getName()))
+                    .setTitle(R.string.dialog_title);
+            builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+                    // User clicked OK button
+                    Log.d("MainActivity", "Ok, delete");
+                    workout.setDeleted(true);
+                    wvm.update(workout);
+
+                }
+            });
+            builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+                    // User cancelled the dialog
+                }
+            });
+
+            builder.create();
+            builder.show();
+
+            return true;
         }
     }
 

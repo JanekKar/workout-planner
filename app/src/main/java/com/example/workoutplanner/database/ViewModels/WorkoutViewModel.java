@@ -17,6 +17,7 @@ import java.util.List;
 public class WorkoutViewModel extends AndroidViewModel {
 
     private final LiveData<List<Workout>> workouts;
+    private final LiveData<List<Workout>> workoutsActive;
     private final WorkoutDao workoutDao;
 
 
@@ -25,9 +26,14 @@ public class WorkoutViewModel extends AndroidViewModel {
         PlannerDatabase database = PlannerDatabase.getDatabase(application);
         this.workouts = database.workOutDao().getAll();
         workoutDao = database.workOutDao();
+        workoutsActive = workoutDao.getAllActive();
     }
 
     public LiveData<List<Workout>> getWorkouts() {
+        return workoutsActive;
+    }
+
+    public LiveData<List<Workout>> getAllWorkouts() {
         return workouts;
     }
 
@@ -38,6 +44,12 @@ public class WorkoutViewModel extends AndroidViewModel {
             Log.d("MainActivity", test + "");
 
             NewWorkoutActivity.workoutID = test;
+        });
+    }
+
+    public void update(Workout w){
+        PlannerDatabase.databaseWriteExecutor.execute(()->{
+            workoutDao.update(w);
         });
     }
 

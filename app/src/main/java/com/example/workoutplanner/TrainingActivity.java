@@ -12,13 +12,14 @@ import androidx.lifecycle.ViewModelProviders;
 import com.example.workoutplanner.database.ViewModels.DoneSetViewModel;
 import com.example.workoutplanner.database.models.DoneSet;
 import com.example.workoutplanner.database.models.Set;
+import com.example.workoutplanner.database.models.Workout;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 
 public class TrainingActivity extends AppCompatActivity {
 
-    private long workoutId;
+    private Workout workoutId;
     private String exerciseName;
 
     private int currentSet = 0;
@@ -46,7 +47,7 @@ public class TrainingActivity extends AppCompatActivity {
 
         setList = getIntent().getParcelableArrayListExtra(WorkoutActivity.EXERCISE_SET_LIST_EXTRA);
         exerciseName = getIntent().getStringExtra(WorkoutActivity.EXERCISE_NAME_EXTRA);
-        workoutId = getIntent().getLongExtra(WorkoutActivity.WORKOUT_ID_EXTRA, -1);
+        workoutId = (Workout) getIntent().getSerializableExtra(WorkoutActivity.WORKOUT_ID_EXTRA);
         if (setList == null || setList.isEmpty()) {
             finish();
             //TODO Nie wiem jeszcze co wtedy
@@ -68,6 +69,8 @@ public class TrainingActivity extends AppCompatActivity {
                 now.set(Calendar.MINUTE, 0);
                 now.set(Calendar.SECOND, 0);
                 now.set(Calendar.MILLISECOND, 0);
+
+
 
 
                 DoneSet ds = new DoneSet(workoutId,

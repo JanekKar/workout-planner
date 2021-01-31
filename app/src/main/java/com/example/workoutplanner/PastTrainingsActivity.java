@@ -138,11 +138,11 @@ public class PastTrainingsActivity extends AppCompatActivity {
                     if (!orderedDates.contains(ds.getDate()))
                         orderedDates.add(ds.getDate());
                     if (dateWorkoutMap.containsKey(ds.getDate())) {
-                        if (!dateWorkoutMap.get(ds.getDate()).contains(ds.getWorkoutId()))
-                            dateWorkoutMap.get(ds.getDate()).add(ds.getWorkoutId());
+                        if (!dateWorkoutMap.get(ds.getDate()).contains(ds.getWorkout().getWorkoutId()))
+                            dateWorkoutMap.get(ds.getDate()).add(ds.getWorkout().getWorkoutId());
                     } else {
                         List<Long> temp = new ArrayList<>();
-                        temp.add(ds.getWorkoutId());
+                        temp.add(ds.getWorkout().getWorkoutId());
                         dateWorkoutMap.put(ds.getDate(), temp);
                     }
                 }

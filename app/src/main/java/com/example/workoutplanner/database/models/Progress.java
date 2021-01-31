@@ -18,7 +18,6 @@ public class Progress {
     private int doneWorkouts;
 
     public Progress(String photoUri, Date date, String description, String name, int doneSets, int doneWorkouts) {
-        this.id = id;
         this.photoUri = photoUri;
         this.date = date;
         this.description = description;
