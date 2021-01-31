@@ -25,7 +25,7 @@
     <string name="set_deleted">Seria usunięta</string>
     <string name="add_set_snack_info">Dodaj przynajmniej jedno ćwiczenie do treningu.</string>
     <string name="enter_workout_name">Podaj nazwę treningu</string>
-    <string name="exercise_set_deleted">Ćwiczenie %s i wszystkie jego serie zostąły usunięte.</string>
+    <string name="exercise_set_deleted">Ćwiczenie %s i wszystkie jego serie zostały usunięte.</string>
     <string name="workout_info">Dotknij ćwiczenia aby zacząć trening</string>
     <string name="reps_to_do_label">POWTÓRZENIA DO ZROBIENIA</string>
     <string name="reps_done_label">ZROBIONO</string>
@@ -60,7 +60,7 @@
     <string name="date_label">Data treningu: %s</string>
     <string name="no_description">Brak opisu.</string>
     <string name="no_name">Nie dodano nazwy.</string>
-    <string name="add_name">Dodaj nazwe.</string>
+    <string name="add_name">Dodaj nazwę.</string>
     <string name="add_description">Dodaj opis.</string>
     <string name="all_sets_done">Wszystkie serie zrobione.</string>
 </resources>
