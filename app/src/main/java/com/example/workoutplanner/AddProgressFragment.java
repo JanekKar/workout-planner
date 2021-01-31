@@ -27,6 +27,7 @@ import com.example.workoutplanner.database.ViewModels.DoneSetViewModel;
 import com.example.workoutplanner.database.ViewModels.ProgressViewModel;
 import com.example.workoutplanner.database.models.DoneSet;
 import com.example.workoutplanner.database.models.Progress;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.io.File;
 import java.io.IOException;
@@ -74,12 +75,21 @@ public class AddProgressFragment extends Fragment {
 
         Progress lastProgress = pvm.getLast();
 
+        View temp = view.findViewById(R.id.coordinator_layout);
 
         view.findViewById(R.id.save_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                NavHostFragment.findNavController(SecondFragment.this)
-//                        .navigate(R.id.action_SecondFragment_to_FirstFragment);
+
+                if(progressName.getText().toString().isEmpty()){
+                    Snackbar.make(temp, getResources().getString(R.string.add_name), Snackbar.LENGTH_LONG).show();
+                    return;
+                }
+                if(progressDescription.getText().toString().isEmpty()){
+                    Snackbar.make(temp, getResources().getString(R.string.add_description), Snackbar.LENGTH_LONG).show();
+                    return;
+                }
+
                 Date start = new Date(0);
                 Calendar cal = Calendar.getInstance();
                 if (lastProgress != null)

@@ -50,7 +50,6 @@ public class TrainingActivity extends AppCompatActivity {
         workoutId = (Workout) getIntent().getSerializableExtra(WorkoutActivity.WORKOUT_ID_EXTRA);
         if (setList == null || setList.isEmpty()) {
             finish();
-            //TODO Nie wiem jeszcze co wtedy
         }
 
 

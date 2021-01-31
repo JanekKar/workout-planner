@@ -1,66 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/coordinator_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="@dimen/small_padding"
-    tools:context=".AddProgressFragment">
+    android:layout_height="match_parent">
 
-    <ScrollView
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="@dimen/small_padding"
+        tools:context=".AddProgressFragment">
 
-        <LinearLayout
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <EditText
-                android:id="@+id/progress_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="@string/name_hint"
-                android:inputType="textPersonName" />
-
-            <EditText
-                android:id="@+id/progress_description"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="@string/description_hint"
-                android:inputType="textMultiLine" />
-
-
-            <ImageView
-                android:id="@+id/imageView"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/big_image"
-                android:src="@drawable/ic_baseline_image_135" />
+            android:layout_height="wrap_content">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_horizontal">
+                android:orientation="vertical">
 
-                <Button
-                    android:id="@+id/camera_button"
-                    android:layout_width="wrap_content"
+                <EditText
+                    android:id="@+id/progress_name"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/small_padding"
-                    android:drawableLeft="@drawable/ic_baseline_photo_camera_24"
-                    android:text="@string/camera_button" />
+                    android:ems="10"
+                    android:hint="@string/name_hint"
+                    android:inputType="textPersonName" />
 
-                <Button
-                    android:id="@+id/save_button"
-                    android:layout_width="wrap_content"
+                <EditText
+                    android:id="@+id/progress_description"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/small_padding"
-                    android:text="@string/save_button" />
+                    android:ems="10"
+                    android:hint="@string/description_hint"
+                    android:inputType="textMultiLine" />
+
+
+                <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/big_image"
+                    android:src="@drawable/ic_baseline_image_135" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal">
+
+                    <Button
+                        android:id="@+id/camera_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/small_padding"
+                        android:drawableLeft="@drawable/ic_baseline_photo_camera_24"
+                        android:text="@string/camera_button" />
+
+                    <Button
+                        android:id="@+id/save_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/small_padding"
+                        android:text="@string/save_button" />
+                </LinearLayout>
+
             </LinearLayout>
+        </ScrollView>
 
-        </LinearLayout>
-    </ScrollView>
+    </LinearLayout>
 
-</LinearLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

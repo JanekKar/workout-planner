@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -28,7 +29,6 @@ import com.example.workoutplanner.database.models.Set;
 import com.example.workoutplanner.database.models.Workout;
 import com.example.workoutplanner.database.models.WorkoutSet;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -172,6 +172,7 @@ public class WorkoutActivity extends AppCompatActivity {
         private final TextView exerciseName;
         private final TextView secondaryInfo;
         private final ProgressBar progressBar;
+        private final LinearLayout layout;
         private Exercise exercise;
 
         private ArrayList<Set> exerciseSetList;
@@ -183,6 +184,7 @@ public class WorkoutActivity extends AppCompatActivity {
             progressBar = itemView.findViewById(R.id.progressBar);
             exerciseName = itemView.findViewById(R.id.exercise_name);
             secondaryInfo = itemView.findViewById(R.id.secondary_info);
+            layout = itemView.findViewById(R.id.layout);
         }
 
         public void bind(Exercise e) {
@@ -217,23 +219,28 @@ public class WorkoutActivity extends AppCompatActivity {
 
                     exerciseSetList = setList;
 
-                    secondaryInfo.setText(getResources().getString(R.string.sets_to_do, exerciseSetList.size()));
+                    if (exerciseSetList.size() != 0)
+                        secondaryInfo.setText(getResources().getString(R.string.sets_to_do, exerciseSetList.size()));
+                    else
+                        secondaryInfo.setText(getResources().getString(R.string.all_sets_done));
+
 
                 }
             });
         }
 
         private void setEnabled(boolean b) {
+            if (!b)
+                layout.setBackgroundColor(getResources().getColor(R.color.done_workout));
             itemView.setEnabled(b);
         }
 
         @Override
         public void onClick(View v) {
-//            ArrayList<Set> exerciseSetList = getExerciseSetList(exercise.getExerciseId());
             Intent intent = new Intent(WorkoutActivity.this, TrainingActivity.class);
             intent.putParcelableArrayListExtra(EXERCISE_SET_LIST_EXTRA, exerciseSetList);
             intent.putExtra(EXERCISE_NAME_EXTRA, exercise.getName());
-            intent.putExtra(WORKOUT_ID_EXTRA, (Serializable) workout);
+            intent.putExtra(WORKOUT_ID_EXTRA, workout);
             startActivity(intent);
         }
 

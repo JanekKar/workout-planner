@@ -68,16 +68,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onChanged(List<Workout> workouts) {
                 adapter.setWorkouts(workouts);
-
-                List<Integer> numberOfExercises = new ArrayList<>();
-                for (Workout w : workouts) {
-                    List<Long> temp = ws.getAllExercises(w.getWorkoutId()).getValue();
-                    if (temp != null)
-                        numberOfExercises.add(temp.size());
-                    else
-                        numberOfExercises.add(0);
-                }
-                adapter.setExerciseList(numberOfExercises);
             }
         });
 
@@ -155,7 +145,7 @@ public class MainActivity extends AppCompatActivity {
             layout = itemView.findViewById(R.id.layout);
         }
 
-        public void bind(Workout workout, int num) {
+        public void bind(Workout workout) {
             this.workout = workout;
 
             nameTextView.setText(workout.getName());
@@ -164,6 +154,7 @@ public class MainActivity extends AppCompatActivity {
             Calendar cal = Calendar.getInstance();
 
             int currentDayNumber = getCurrentDay(cal);
+
             if (workout.getWeekDay() == currentDayNumber) {
                 layout.setBackgroundColor(getResources().getColor(R.color.todays_workout));
             }
@@ -171,39 +162,33 @@ public class MainActivity extends AppCompatActivity {
             Log.d("MainActivity", "Day of week " + currentDayNumber + "");
 
 
-            ws.getAllSets(workout.getWorkoutId()).observe(owner, new Observer<List<WorkoutSet>>() {
-                @Override
-                public void onChanged(List<WorkoutSet> workoutSets) {
-                    int max = workoutSets.size();
+            ws.getAllSets(workout.getWorkoutId()).observe(owner, workoutSets -> {
+                int max = workoutSets.size();
 
-                    Calendar cal = Calendar.getInstance();
-                    cal.add(Calendar.DAY_OF_MONTH, -6);
+                Calendar cal1 = Calendar.getInstance();
+                cal1.add(Calendar.DAY_OF_MONTH, -6);
 
-                    Date beginning = cal.getTime();
-                    Date now = new Date();
+                Date beginning = cal1.getTime();
+                Date now = new Date();
 
-                    dsvm.get(beginning, now, workout.getWorkoutId()).observe(owner, new Observer<List<DoneSet>>() {
-                        @Override
-                        public void onChanged(List<DoneSet> doneSets) {
-                            int done = 0;
-                            for (DoneSet ds : doneSets) {
-                                for (WorkoutSet ws : workoutSets) {
-                                    if (ws.getSetId() == ds.getSet().getSetId()) {
-                                        done++;
-                                    }
-                                }
+                dsvm.get(beginning, now, workout.getWorkoutId()).observe(owner, doneSets -> {
+                    int done = 0;
+                    for (DoneSet ds : doneSets) {
+                        for (WorkoutSet ws : workoutSets) {
+                            if (ws.getSetId() == ds.getSet().getSetId()) {
+                                done++;
                             }
-
-                            progressBar.setMax(max);
-                            progressBar.setProgress(done);
-
-                            if (done == max) {
-                                layout.setBackgroundColor(getResources().getColor(R.color.done_workout));
-                            }
-
                         }
-                    });
-                }
+                    }
+
+                    progressBar.setMax(max);
+                    progressBar.setProgress(done);
+
+                    if (done >= max) {
+                        layout.setBackgroundColor(getResources().getColor(R.color.done_workout));
+                    }
+
+                });
             });
 
         }
@@ -248,7 +233,6 @@ public class MainActivity extends AppCompatActivity {
 
     private class WorkoutAdapter extends RecyclerView.Adapter<WorkoutHolder> {
         private List<Workout> workouts;
-        private List<Integer> numOfEx;
 
         @NonNull
         @Override
@@ -258,10 +242,9 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public void onBindViewHolder(@NonNull WorkoutHolder holder, int position) {
-            if (workouts != null && numOfEx != null) {
+            if (workouts != null) {
                 Workout workout = workouts.get(position);
-                int num = numOfEx.get(position);
-                holder.bind(workout, num);
+                holder.bind(workout);
             } else {
                 Log.d("MainActivity", "No workouts");
             }
@@ -278,11 +261,6 @@ public class MainActivity extends AppCompatActivity {
 
         void setWorkouts(List<Workout> workouts) {
             this.workouts = workouts;
-            notifyDataSetChanged();
-        }
-
-        void setExerciseList(List<Integer> numberOfExercises) {
-            this.numOfEx = numberOfExercises;
             notifyDataSetChanged();
         }
 

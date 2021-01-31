@@ -127,7 +127,7 @@ public class NewWorkoutActivity extends AppCompatActivity implements AdapterView
             WorkoutViewModel wvm = ViewModelProviders.of(this).get(WorkoutViewModel.class);
             wvm.addWorkout(w);
 
-            // TODO Synchronizacja wontków - do poprawy jak bedzie czas
+            //Synchronizacja wontków - do poprawy jak bedzie czas
             while (workoutID == -1) {
             }
             saveSetsInWorkout();

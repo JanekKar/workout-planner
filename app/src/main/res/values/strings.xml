@@ -1,5 +1,11 @@
 <resources>
-    <string name="app_name">WorkoutPlanner</string>
+
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+
+
+    <string name="app_name">Workout Planner</string>
     <string-array name="days_of_week">
         <item>Monday</item>
         <item>Tuesday</item>
@@ -51,7 +57,7 @@
     <string name="no_exercises">No exercises found.</string>
     <string name="progress">See progress</string>
     <string name="set_count_details">Number of sets: %d</string>
-    <string name="set_details">ToDo: %d, Done: %d, Weight %d kg</string>
+    <string name="set_details">ToDo: %d, Done: %d, Weight %d</string>
     <string name="dialog_message">Do you want to delete \"%s\" workout?</string>
     <string name="dialog_title">Delete?</string>
     <string name="ok">OK</string>
@@ -77,8 +83,8 @@
     <string name="no_name">No name was added.</string>
 
 
-    <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">First Fragment</string>
-    <string name="second_fragment_label">Second Fragment</string>
+    <string name="add_name">Add name.</string>
+    <string name="add_description">Add description</string>
+    <string name="all_sets_done">All sets are done</string>
 
 </resources>

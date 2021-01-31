@@ -14,10 +14,7 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:text="EXERCISE NAME"
-        android:textAlignment="center"
-        android:textAllCaps="true"
-        android:textSize="35sp"
-        android:textStyle="bold" />
+        style="@style/workout_label_name"/>
 
     <TextView
         android:id="@+id/set_number"
@@ -25,20 +22,14 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:text="@string/set_number"
-        android:textAlignment="center"
-        android:textAllCaps="true"
-        android:textSize="30sp"
-        android:textStyle="bold" />
+        style="@style/workout_label_sets"/>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:text="@string/reps_to_do_label"
-        android:textAlignment="center"
-        android:textAllCaps="true"
-        android:textSize="40sp"
-        android:textStyle="bold" />
+        style="@style/workout_label"/>
 
     <TextView
         android:id="@+id/reps_to_do"
@@ -46,20 +37,14 @@
         android:layout_height="0dp"
         android:layout_weight="2"
         android:text="23"
-        android:textAlignment="center"
-        android:textAllCaps="true"
-        android:textSize="80sp"
-        android:textStyle="bold" />
+        style="@style/big_letters_workout" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:text="@string/reps_done_label"
-        android:textAlignment="center"
-        android:textAllCaps="true"
-        android:textSize="40sp"
-        android:textStyle="bold" />
+        style="@style/workout_label"/>
 
     <EditText
         android:id="@+id/reps_done"
@@ -68,10 +53,7 @@
         android:layout_weight="2"
         android:inputType="number"
         android:text="23"
-        android:textAlignment="center"
-        android:textAllCaps="true"
-        android:textSize="80sp"
-        android:textStyle="bold" />
+        style="@style/big_letters_workout"/>
 
     <Button
         android:id="@+id/next_set_button"
@@ -79,9 +61,7 @@
         android:layout_height="0dp"
         android:layout_weight="2"
         android:text="@string/next_set"
-        android:textAllCaps="true"
-        android:textSize="50sp"
-        android:textStyle="bold" />
+        style="@style/next_set_button"/>
 
     <!--    TODO editText style, change text color to main for visability, change all text clolor to back-->
 
