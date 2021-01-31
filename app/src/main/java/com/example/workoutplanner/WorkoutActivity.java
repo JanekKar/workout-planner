@@ -29,7 +29,6 @@ import com.example.workoutplanner.database.models.Workout;
 import com.example.workoutplanner.database.models.WorkoutSet;
 
 import java.io.Serializable;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -135,7 +134,7 @@ public class WorkoutActivity extends AppCompatActivity {
                         exerciseNumOfSets.put(set.getExerciseId(), 1);
                     }
                 }
-                totalNumberOfSets.setText(getResources().getString(R.string.total_sets_label, sets.size()));
+                totalNumberOfSets.setText(getResources().getString(R.string.number_of_sets, sets.size()));
                 Log.d("MainActivity", exerciseNumOfSets + "");
 
                 getAllExercises(new ArrayList<Long>(exerciseNumOfSets.keySet()));
@@ -153,7 +152,7 @@ public class WorkoutActivity extends AppCompatActivity {
                     Log.d("MainActivity", e + "");
                 }
 
-                totalNumberOfExercises.setText(getResources().getString(R.string.total_exercise_label, exercises.size()));
+                totalNumberOfExercises.setText(getResources().getString(R.string.number_of_exercise, exercises.size()));
                 adapter.setExercises(exercises);
             }
         });
@@ -171,6 +170,7 @@ public class WorkoutActivity extends AppCompatActivity {
 
     private class ExerciseHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private final TextView exerciseName;
+        private final TextView secondaryInfo;
         private final ProgressBar progressBar;
         private Exercise exercise;
 
@@ -182,6 +182,7 @@ public class WorkoutActivity extends AppCompatActivity {
 
             progressBar = itemView.findViewById(R.id.progressBar);
             exerciseName = itemView.findViewById(R.id.exercise_name);
+            secondaryInfo = itemView.findViewById(R.id.secondary_info);
         }
 
         public void bind(Exercise e) {
@@ -216,6 +217,8 @@ public class WorkoutActivity extends AppCompatActivity {
 
                     exerciseSetList = setList;
 
+                    secondaryInfo.setText(getResources().getString(R.string.sets_to_do, exerciseSetList.size()));
+
                 }
             });
         }
@@ -226,7 +229,7 @@ public class WorkoutActivity extends AppCompatActivity {
 
         @Override
         public void onClick(View v) {
-            ArrayList<Set> exerciseSetList = getExerciseSetList(exercise.getExerciseId());
+//            ArrayList<Set> exerciseSetList = getExerciseSetList(exercise.getExerciseId());
             Intent intent = new Intent(WorkoutActivity.this, TrainingActivity.class);
             intent.putParcelableArrayListExtra(EXERCISE_SET_LIST_EXTRA, exerciseSetList);
             intent.putExtra(EXERCISE_NAME_EXTRA, exercise.getName());

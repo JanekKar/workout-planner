@@ -12,26 +12,29 @@
     <string name="workout_name_hint">Workout name</string>
     <string name="reps_hint">Repetitions</string>
     <string name="weight_hint">Weight</string>
+    <string name="exercise_name_hint">Exercise name</string>
+    <string name="exercise_type_hint">Type</string>
+    <string name="name_hint">Name</string>
+    <string name="description_hint">Description</string>
+
+
+
     <string name="exercise_list">All exercises</string>
     <string name="save_button">Save</string>
     <string name="start_training_button">Start training</string>
     <string name="delete_button">Delete</string>
     <string name="choose_day">Choose day:</string>
-    <string name="no_name">NO_NAME</string>
-    <string name="choose_exercise">Choose exercise</string>
-    <string name="total_exercise_label">Number of exercises: %d</string>
-    <string name="total_sets_label">Number of sets: %d</string>
-    <string name="exercise_label">Exercises:</string>
+    <string name="choose_exercise">Choose exercise:</string>
+    <string name="number_of_exercise">Number of exercises: %d</string>
+    <string name="number_of_sets">Number of sets: %d</string>
+    <string name="exercises">Exercises:</string>
     <string name="weight_checkbox">Is additional weight needed?</string>
-    <string name="exercise_name_hint">Exercise name</string>
-    <string name="exercise_type_hint">Type</string>
-    <string name="exercise_list_label">Exercises:</string>
     <string name="add_exercise">Add exercise to workout</string>
-    <string name="exercise_deleted">Exercise %s deleted</string>
+    <string name="exercise_deleted">Exercise %s deleted.</string>
     <string name="set_deleted">Set deleted</string>
     <string name="add_set_snack_info">Add at least one exercise to training.</string>
     <string name="enter_workout_name">Enter workout name</string>
-    <string name="exercise_set_deleted">Exercise  %s and its sets deleted from workout</string>
+    <string name="exercise_set_deleted">Exercise %s and its sets deleted from workout</string>
     <string name="workout_info">Tap exercise to start workout</string>
     <string name="reps_to_do_label">REPETITIONS TO DO</string>
     <string name="reps_done_label">REPETITIONS DONE</string>
@@ -43,15 +46,10 @@
     <string name="to_editText_hint">To:</string>
     <string name="search">Search</string>
     <string name="workout_count">"Workouts done - %d"</string>
-    <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">First Fragment</string>
-    <string name="second_fragment_label">Second Fragment</string>
 
     <string name="camera_button">Take picture</string>
     <string name="no_exercises">No exercises found.</string>
     <string name="progress">See progress</string>
-    <string name="name_hint">Name</string>
-    <string name="description">Description</string>
     <string name="set_count_details">Number of sets: %d</string>
     <string name="set_details">ToDo: %d, Done: %d, Weight %d kg</string>
     <string name="dialog_message">Do you want to delete \"%s\" workout?</string>
@@ -68,7 +66,19 @@
     <string name="new_exercise_set_subtitle">Add sets to exercise</string>
     <string name="new_workout_subtitle">Create new workout</string>
     <string name="past_trainings_subtitle">Your past workouts</string>
-    <string name="past_trainings_details">All worouts done on %s</string>
+    <string name="past_trainings_details">All workouts done on %s</string>
     <string name="workout_subtitle">Time to do some workout</string>
+
+    <string name="sets_to_do" type="id">Sets to do: %d</string>
+    <string name="exercise_type" type="id">Type: %s</string>
+
+    <string name="date_label">"Date of workout: %s"</string>
+    <string name="no_description">No description.</string>
+    <string name="no_name">No name was added.</string>
+
+
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
 
 </resources>

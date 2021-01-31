@@ -24,7 +24,7 @@ public class ProgressActivity extends AppCompatActivity {
         Fragment fr = fragmentManager.findFragmentById(R.id.fragment_container);
 
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.add(R.id.fragment_container, new ListFragment(), TAG_LIST);
+        ft.add(R.id.fragment_container, new ProgressListFragment(), TAG_LIST);
 //        ft.add(R.id.fragment_container, new AddProgressFragment(), TAG_NEW_PROGRESS);
         ft.commit();
         getSupportFragmentManager().executePendingTransactions();

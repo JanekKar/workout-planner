@@ -40,7 +40,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/big_padding"
-            android:text="@string/exercise_list_label" />
+            android:text="@string/exercises" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/exercise_recyclerview"

@@ -31,6 +31,8 @@ import com.example.workoutplanner.database.models.Workout;
 import com.example.workoutplanner.database.models.WorkoutSet;
 import com.google.android.material.snackbar.Snackbar;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -209,6 +211,7 @@ public class NewWorkoutActivity extends AppCompatActivity implements AdapterView
 
     private class ExerciseHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
         private final TextView exerciseName;
+        private final TextView secondaryInfo;
         private Exercise exercise;
 
         public ExerciseHolder(LayoutInflater inflater, ViewGroup parent) {
@@ -217,11 +220,13 @@ public class NewWorkoutActivity extends AppCompatActivity implements AdapterView
             itemView.setOnLongClickListener(this);
 
             exerciseName = itemView.findViewById(R.id.exercise_name);
+            secondaryInfo = itemView.findViewById(R.id.secondary_info);
         }
 
         public void bind(Exercise e) {
             this.exercise = e;
             this.exerciseName.setText(e.getName());
+            this.secondaryInfo.setText(getResources().getString(R.string.exercise_type, e.getType()));
         }
 
         @Override

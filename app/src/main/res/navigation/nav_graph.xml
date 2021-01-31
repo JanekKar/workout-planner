@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/FirstFragment"
-        android:name="com.example.workoutplanner.ListFragment"
+        android:name="com.example.workoutplanner.ProgressListFragment"
         android:label="@string/first_fragment_label"
         tools:layout="@layout/fragment_progress_list">
 

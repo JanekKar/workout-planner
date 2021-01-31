@@ -62,7 +62,7 @@ public class PastTrainingsActivity extends AppCompatActivity {
         endEditText = findViewById(R.id.to_editTextDate);
         searchButton = findViewById(R.id.search_button);
 
-        dsvm = new ViewModelProviders().of(this).get(DoneSetViewModel.class);
+        dsvm = ViewModelProviders.of(this).get(DoneSetViewModel.class);
 
 
         sdf = new SimpleDateFormat("dd.MM.yyyy");
@@ -178,7 +178,7 @@ public class PastTrainingsActivity extends AppCompatActivity {
             this.ids = ids;
             this.date = date;
 
-            this.dateTextView.setText(sdf.format(date) + "");
+            this.dateTextView.setText(getResources().getString(R.string.date_label , sdf.format(date) + ""));
             this.workoutCountTextView.setText(getResources().getString(R.string.workout_count, ids.size()));
         }
 

@@ -33,7 +33,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/exercise_label"
+        android:text="@string/exercises"
         android:textColor="@color/black"
         android:textSize="20dp" />
 

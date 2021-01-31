@@ -1,6 +1,5 @@
 package com.example.workoutplanner;
 
-import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -164,7 +163,7 @@ public class MainActivity extends AppCompatActivity {
 
             Calendar cal = Calendar.getInstance();
 
-            int currentDayNumber = getCUrrentDay(cal);
+            int currentDayNumber = getCurrentDay(cal);
             if (workout.getWeekDay() == currentDayNumber) {
                 layout.setBackgroundColor(getResources().getColor(R.color.todays_workout));
             }
@@ -222,19 +221,15 @@ public class MainActivity extends AppCompatActivity {
             AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
             builder.setMessage(getResources().getString(R.string.dialog_message, workout.getName()))
                     .setTitle(R.string.dialog_title);
-            builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int id) {
-                    // User clicked OK button
-                    Log.d("MainActivity", "Ok, delete");
-                    workout.setDeleted(true);
-                    wvm.update(workout);
+            builder.setPositiveButton(R.string.ok, (dialog, id) -> {
+                // User clicked OK button
+                Log.d("MainActivity", "Ok, delete");
+                workout.setDeleted(true);
+                wvm.update(workout);
 
-                }
             });
-            builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int id) {
-                    // User cancelled the dialog
-                }
+            builder.setNegativeButton(R.string.cancel, (dialog, id) -> {
+                // User cancelled the dialog
             });
 
             builder.create();
@@ -244,7 +239,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private int getCUrrentDay(Calendar cal) {
+    private int getCurrentDay(Calendar cal) {
         int temp = (cal.get(Calendar.DAY_OF_WEEK) - cal.getFirstDayOfWeek())-1;
         if(temp<0)
             return 6;

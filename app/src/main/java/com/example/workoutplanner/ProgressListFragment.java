@@ -25,7 +25,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
-public class ListFragment extends Fragment {
+public class ProgressListFragment extends Fragment {
 
 
     private WorkoutAdapter adapter = null;
@@ -131,10 +131,17 @@ public class ListFragment extends Fragment {
 
         public void bind(Progress progress) {
             Log.d("MainActivity", "Bind");
+            if(!progress.getName().isEmpty())
+                name.setText(progress.getName());
+            else
+                name.setText(R.string.no_name);
+            if(!progress.getDescription().isEmpty())
+                description.setText(progress.getDescription());
+            else
+                description.setText(R.string.no_description);
+
+            doneSets.setText(getResources().getString(R.string.set_count_details, progress.getDoneSets()));
             date.setText(sdf.format(progress.getDate()));
-            description.setText(progress.getDescription());
-            name.setText(progress.getName());
-            doneSets.setText(progress.getDoneSets() + "");
 
             if (progress.getPhotoUri() != null)
                 setPic(progress.getPhotoUri());
