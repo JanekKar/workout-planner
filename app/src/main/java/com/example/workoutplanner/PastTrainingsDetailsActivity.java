@@ -20,6 +20,7 @@ import com.example.workoutplanner.database.models.DoneSet;
 import com.example.workoutplanner.database.models.Exercise;
 import com.example.workoutplanner.database.models.Workout;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -46,6 +47,8 @@ public class PastTrainingsDetailsActivity extends AppCompatActivity {
         evm = ViewModelProviders.of(this).get(ExerciseViewModel.class);
 
         Date date = new Date(getIntent().getLongExtra(PastTrainingsActivity.WORKOUT_IDS_EXTRA, 0));
+
+        this.getSupportActionBar().setSubtitle(getResources().getString(R.string.past_trainings_details, new SimpleDateFormat("dd.MM.yyyy").format(date)));
 
         DoneSetViewModel dsvm = ViewModelProviders.of(this).get(DoneSetViewModel.class);
         dsvm.get(date, date).observe(this, new Observer<List<DoneSet>>() {

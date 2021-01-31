@@ -58,6 +58,9 @@ public class NewWorkoutActivity extends AppCompatActivity implements AdapterView
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_workout);
 
+        this.getSupportActionBar().setSubtitle(R.string.new_workout_subtitle);
+
+
         RecyclerView recyclerView = findViewById(R.id.exercise_recyclerview);
         adapter = new ExerciseAdapter();
         recyclerView.setAdapter(adapter);

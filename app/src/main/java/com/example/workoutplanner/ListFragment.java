@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
@@ -59,13 +60,22 @@ public class ListFragment extends Fragment {
 
         sdf = new SimpleDateFormat("dd.MM.yyyy");
 
+        updateSubtitle();;
+
         return view;
+    }
+
+
+    private void updateSubtitle(){
+        AppCompatActivity appCompatActivity = (AppCompatActivity) getActivity();
+        appCompatActivity.getSupportActionBar().setSubtitle(R.string.progress_list_subtitle);
     }
 
     @Override
     public void onResume() {
         adapter.clear();
         updateView();
+        updateSubtitle();
         super.onResume();
     }
 

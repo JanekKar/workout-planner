@@ -29,6 +29,7 @@ import com.example.workoutplanner.database.models.Workout;
 import com.example.workoutplanner.database.models.WorkoutSet;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -55,6 +56,9 @@ public class WorkoutActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_workout);
+
+
+        this.getSupportActionBar().setSubtitle(getResources().getString(R.string.workout_subtitle));
 
         workoutName = findViewById(R.id.workout_name);
         totalNumberOfExercises = findViewById(R.id.exercise_count);

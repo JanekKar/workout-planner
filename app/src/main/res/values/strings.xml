@@ -59,4 +59,16 @@
     <string name="ok">OK</string>
     <string name="cancel">Cancel</string>
 
+
+
+    <string name="exercise_list_subtitle" type="id">All exercises</string>
+    <string name="progress_list_subtitle">Your progress</string>
+    <string name="new_progress_subtitle">New milestone</string>
+    <string name="new_exercise_subtitle">Create new exercise</string>
+    <string name="new_exercise_set_subtitle">Add sets to exercise</string>
+    <string name="new_workout_subtitle">Create new workout</string>
+    <string name="past_trainings_subtitle">Your past workouts</string>
+    <string name="past_trainings_details">All worouts done on %s</string>
+    <string name="workout_subtitle">Time to do some workout</string>
+
 </resources>

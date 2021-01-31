@@ -55,6 +55,9 @@ public class NewExerciseActivity extends AppCompatActivity {
                 }
             }
         });
+
+        this.getSupportActionBar().setSubtitle(R.string.new_exercise_subtitle);
+
     }
 
 }

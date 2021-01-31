@@ -53,6 +53,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        this.getSupportActionBar().setSubtitle("");
+
         RecyclerView recyclerView = findViewById(R.id.recyclerview);
         final WorkoutAdapter adapter = new WorkoutAdapter();
         recyclerView.setAdapter(adapter);
@@ -162,7 +164,7 @@ public class MainActivity extends AppCompatActivity {
 
             Calendar cal = Calendar.getInstance();
 
-            int currentDayNumber = (cal.get(Calendar.DAY_OF_WEEK) - cal.getFirstDayOfWeek()) - 1;
+            int currentDayNumber = getCUrrentDay(cal);
             if (workout.getWeekDay() == currentDayNumber) {
                 layout.setBackgroundColor(getResources().getColor(R.color.todays_workout));
             }
@@ -240,6 +242,13 @@ public class MainActivity extends AppCompatActivity {
 
             return true;
         }
+    }
+
+    private int getCUrrentDay(Calendar cal) {
+        int temp = (cal.get(Calendar.DAY_OF_WEEK) - cal.getFirstDayOfWeek())-1;
+        if(temp<0)
+            return 6;
+        return temp;
     }
 
     private class WorkoutAdapter extends RecyclerView.Adapter<WorkoutHolder> {

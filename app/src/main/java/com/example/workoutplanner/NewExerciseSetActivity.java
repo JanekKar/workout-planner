@@ -47,6 +47,9 @@ public class NewExerciseSetActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_exercise_set);
 
+        this.getSupportActionBar().setSubtitle(R.string.new_exercise_set_subtitle);
+
+
         RecyclerView recyclerView = findViewById(R.id.set_recyclerview);
         adapter = new SetAdapter();
         recyclerView.setAdapter(adapter);

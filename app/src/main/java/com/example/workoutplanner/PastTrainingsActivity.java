@@ -53,6 +53,9 @@ public class PastTrainingsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_past_training);
 
+        this.getSupportActionBar().setSubtitle(R.string.past_trainings_subtitle);
+
+
         dateWorkoutMap = new HashMap<>();
 
         startEditText = findViewById(R.id.from_editTextDate);

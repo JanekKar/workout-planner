@@ -17,6 +17,7 @@ import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
@@ -100,6 +101,11 @@ public class AddProgressFragment extends Fragment {
 //                switchToA();
             }
         });
+    }
+
+    private void updateSubtitle(){
+        AppCompatActivity appCompatActivity = (AppCompatActivity) getActivity();
+        appCompatActivity.getSupportActionBar().setSubtitle(R.string.new_progress_subtitle);
     }
 
     private void switchToList() {
