@@ -1,5 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <string-array name="days_of_week">
+        <item>Poniedziałek</item>
+        <item>Wtorek</item>
+        <item>Środa</item>
+        <item>Czwartek</item>
+        <item>Piątek</item>
+        <item>Sobota</item>
+        <item>Niedziela</item>
+    </string-array>
+
     <string name="first_fragment_label">Pierwszy fragment</string>
     <string name="second_fragment_label">Drugi Fragment</string>
     <string name="app_name">Workout Planner</string>
