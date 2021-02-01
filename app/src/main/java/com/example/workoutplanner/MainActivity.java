@@ -226,8 +226,6 @@ public class MainActivity extends AppCompatActivity {
 
     private int getCurrentDay(Calendar cal) {
         int temp = (cal.get(Calendar.DAY_OF_WEEK) - cal.getFirstDayOfWeek())-1;
-        if(temp<0)
-            return 6;
         return temp;
     }
 
