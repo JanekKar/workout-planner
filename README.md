@@ -1,3 +1,12 @@
 # Workout Planner
 
-Workout planner to aplikacja stworzona na platformę android (Java). Służy ona do tworzenia, śledzenia i wykonywania planów treningowych.
+Android application designed to plan and track workout.
+
+## Stack:
+- Java Android
+- Project Lombok
+- RoomDB ORM
+- SQLite local Database
+
+
+MVC architecture 
